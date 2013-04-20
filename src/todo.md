@@ -22,7 +22,7 @@ if(!(Object.prototype.defineProperty instanceof Function)
 
 Remove b2Distance.b2_gjkCalls and b2Distance.b2_gjkIters and b2Distance.b2_gjkMaxIters ??
 
-
+Replace b2Math.Max and b2Math.Min and b2Math.Abs
 
 
 # Changes
