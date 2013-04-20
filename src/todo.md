@@ -1,3 +1,5 @@
+# Todos
+
 Fix Number.MAX_VALUE
 
 Find b2Bound.value setter and try to get rid of that bitwise for a !
@@ -19,3 +21,10 @@ if(!(Object.prototype.defineProperty instanceof Function)
 ```
 
 Remove b2Distance.b2_gjkCalls and b2Distance.b2_gjkIters and b2Distance.b2_gjkMaxIters ??
+
+
+
+
+# Changes
+
+Deleted b2Point as it was unused
