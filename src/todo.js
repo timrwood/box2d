@@ -116,10 +116,6 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 
 
 
-	function b2Settings() {
-		b2Settings.b2Settings.apply(this, arguments);
-	};
-	Box2D.Common.b2Settings = b2Settings;
 
 	function b2Mat22() {
 		b2Mat22.b2Mat22.apply(this, arguments);
@@ -683,48 +679,6 @@ Box2D.postDefs = [];
 		b2Vec2 = Box2D.Common.Math.b2Vec2,
 		b2Vec3 = Box2D.Common.Math.b2Vec3;
 
-	
-	b2Settings.b2Settings = function () {};
-	b2Settings.b2MixFriction = function (friction1, friction2) {
-		if (friction1 === undefined) friction1 = 0;
-		if (friction2 === undefined) friction2 = 0;
-		return Math.sqrt(friction1 * friction2);
-	}
-	b2Settings.b2MixRestitution = function (restitution1, restitution2) {
-		if (restitution1 === undefined) restitution1 = 0;
-		if (restitution2 === undefined) restitution2 = 0;
-		return restitution1 > restitution2 ? restitution1 : restitution2;
-	}
-	b2Settings.b2Assert = function (a) {
-		if (!a) {
-			throw "Assertion Failed";
-		}
-	}
-	Box2D.postDefs.push(function () {
-		Box2D.Common.b2Settings.VERSION = "2.1alpha";
-		Box2D.Common.b2Settings.USHRT_MAX = 0x0000ffff;
-		Box2D.Common.b2Settings.b2_pi = Math.PI;
-		Box2D.Common.b2Settings.b2_maxManifoldPoints = 2;
-		Box2D.Common.b2Settings.b2_aabbExtension = 0.1;
-		Box2D.Common.b2Settings.b2_aabbMultiplier = 2.0;
-		Box2D.Common.b2Settings.b2_polygonRadius = 2.0 * b2Settings.b2_linearSlop;
-		Box2D.Common.b2Settings.b2_linearSlop = 0.005;
-		Box2D.Common.b2Settings.b2_angularSlop = 2.0 / 180.0 * b2Settings.b2_pi;
-		Box2D.Common.b2Settings.b2_toiSlop = 8.0 * b2Settings.b2_linearSlop;
-		Box2D.Common.b2Settings.b2_maxTOIContactsPerIsland = 32;
-		Box2D.Common.b2Settings.b2_maxTOIJointsPerIsland = 32;
-		Box2D.Common.b2Settings.b2_velocityThreshold = 1.0;
-		Box2D.Common.b2Settings.b2_maxLinearCorrection = 0.2;
-		Box2D.Common.b2Settings.b2_maxAngularCorrection = 8.0 / 180.0 * b2Settings.b2_pi;
-		Box2D.Common.b2Settings.b2_maxTranslation = 2.0;
-		Box2D.Common.b2Settings.b2_maxTranslationSquared = b2Settings.b2_maxTranslation * b2Settings.b2_maxTranslation;
-		Box2D.Common.b2Settings.b2_maxRotation = 0.5 * b2Settings.b2_pi;
-		Box2D.Common.b2Settings.b2_maxRotationSquared = b2Settings.b2_maxRotation * b2Settings.b2_maxRotation;
-		Box2D.Common.b2Settings.b2_contactBaumgarte = 0.2;
-		Box2D.Common.b2Settings.b2_timeToSleep = 0.5;
-		Box2D.Common.b2Settings.b2_linearSleepTolerance = 0.01;
-		Box2D.Common.b2Settings.b2_angularSleepTolerance = 2.0 / 180.0 * b2Settings.b2_pi;
-	});
 })();
 (function () {
 	var b2AABB = Box2D.Collision.b2AABB,
