@@ -107,15 +107,7 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 
 
 	
-	function b2SimplexCache() {
-		b2SimplexCache.b2SimplexCache.apply(this, arguments);
-	};
-	Box2D.Collision.b2SimplexCache = b2SimplexCache;
 
-	function b2SimplexVertex() {
-		b2SimplexVertex.b2SimplexVertex.apply(this, arguments);
-	};
-	Box2D.Collision.b2SimplexVertex = b2SimplexVertex;
 
 	function b2TimeOfImpact() {
 		b2TimeOfImpact.b2TimeOfImpact.apply(this, arguments);
@@ -658,19 +650,7 @@ Box2D.postDefs = [];
 	
 	
 	
-	b2SimplexCache.b2SimplexCache = function () {
-		this.indexA = new Vector_a2j_Number(3);
-		this.indexB = new Vector_a2j_Number(3);
-	};
-	b2SimplexVertex.b2SimplexVertex = function () {};
-	b2SimplexVertex.prototype.Set = function (other) {
-		this.wA.SetV(other.wA);
-		this.wB.SetV(other.wB);
-		this.w.SetV(other.w);
-		this.a = other.a;
-		this.indexA = other.indexA;
-		this.indexB = other.indexB;
-	}
+	
 	b2TimeOfImpact.b2TimeOfImpact = function () {};
 	b2TimeOfImpact.TimeOfImpact = function (input) {
 		++b2TimeOfImpact.b2_toiCalls;
