@@ -1,6 +1,6 @@
 # Todos
 
-Fix Number.MAX_VALUE
+Fix Number.MAX_VALUE and Number.POSITIVE_INFINITY
 
 Find b2Bound.value setter and try to get rid of that bitwise for a !
 
