@@ -87,11 +87,6 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 
 
 
-	function b2ContactID() {
-		b2ContactID.b2ContactID.apply(this, arguments);
-		if (this.constructor === b2ContactID) this.b2ContactID.apply(this, arguments);
-	};
-	Box2D.Collision.b2ContactID = b2ContactID;
 
 	function b2ContactPoint() {
 		b2ContactPoint.b2ContactPoint.apply(this, arguments);
@@ -690,39 +685,6 @@ Box2D.postDefs = [];
 		Box2D.Collision.b2Collision.s_v12 = new b2Vec2();
 		Box2D.Collision.b2Collision.b2CollidePolyTempVec = new b2Vec2();
 		Box2D.Collision.b2Collision.b2_nullFeature = 0x000000ff;
-	});
-	b2ContactID.b2ContactID = function () {
-		this.features = new Features();
-	};
-	b2ContactID.prototype.b2ContactID = function () {
-		this.features._m_id = this;
-	}
-	b2ContactID.prototype.Set = function (id) {
-		this.key = id._key;
-	}
-	b2ContactID.prototype.Copy = function () {
-		var id = new b2ContactID();
-		id.key = this.key;
-		return id;
-	}
-	Object.defineProperty(b2ContactID.prototype, 'key', {
-		enumerable: false,
-		configurable: true,
-		get: function () {
-			return this._key;
-		}
-	});
-	Object.defineProperty(b2ContactID.prototype, 'key', {
-		enumerable: false,
-		configurable: true,
-		set: function (value) {
-			if (value === undefined) value = 0;
-			this._key = value;
-			this.features._referenceEdge = this._key & 0x000000ff;
-			this.features._incidentEdge = ((this._key & 0x0000ff00) >> 8) & 0x000000ff;
-			this.features._incidentVertex = ((this._key & 0x00ff0000) >> 16) & 0x000000ff;
-			this.features._flip = ((this._key & 0xff000000) >> 24) & 0x000000ff;
-		}
 	});
 	b2ContactPoint.b2ContactPoint = function () {
 		this.position = new b2Vec2();
