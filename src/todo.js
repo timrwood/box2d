@@ -90,17 +90,7 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 
 
 
-	function b2Manifold() {
-		b2Manifold.b2Manifold.apply(this, arguments);
-		if (this.constructor === b2Manifold) this.b2Manifold.apply(this, arguments);
-	};
-	Box2D.Collision.b2Manifold = b2Manifold;
 
-	function b2ManifoldPoint() {
-		b2ManifoldPoint.b2ManifoldPoint.apply(this, arguments);
-		if (this.constructor === b2ManifoldPoint) this.b2ManifoldPoint.apply(this, arguments);
-	};
-	Box2D.Collision.b2ManifoldPoint = b2ManifoldPoint;
 
 	function b2Point() {
 		b2Point.b2Point.apply(this, arguments);
@@ -651,65 +641,6 @@ Box2D.postDefs = [];
 	Box2D.postDefs.push(function () {
 		Box2D.Collision.b2Distance.s_simplex = new b2Simplex();
 	});
-
-	b2Manifold.b2Manifold = function () {
-		this.m_pointCount = 0;
-	};
-	b2Manifold.prototype.b2Manifold = function () {
-		this.m_points = new Vector(b2Settings.b2_maxManifoldPoints);
-		for (var i = 0; i < b2Settings.b2_maxManifoldPoints; i++) {
-			this.m_points[i] = new b2ManifoldPoint();
-		}
-		this.m_localPlaneNormal = new b2Vec2();
-		this.m_localPoint = new b2Vec2();
-	}
-	b2Manifold.prototype.Reset = function () {
-		for (var i = 0; i < b2Settings.b2_maxManifoldPoints; i++) {
-			((this.m_points[i] instanceof b2ManifoldPoint ? this.m_points[i] : null)).Reset();
-		}
-		this.m_localPlaneNormal.SetZero();
-		this.m_localPoint.SetZero();
-		this.m_type = 0;
-		this.m_pointCount = 0;
-	}
-	b2Manifold.prototype.Set = function (m) {
-		this.m_pointCount = m.m_pointCount;
-		for (var i = 0; i < b2Settings.b2_maxManifoldPoints; i++) {
-			((this.m_points[i] instanceof b2ManifoldPoint ? this.m_points[i] : null)).Set(m.m_points[i]);
-		}
-		this.m_localPlaneNormal.SetV(m.m_localPlaneNormal);
-		this.m_localPoint.SetV(m.m_localPoint);
-		this.m_type = m.m_type;
-	}
-	b2Manifold.prototype.Copy = function () {
-		var copy = new b2Manifold();
-		copy.Set(this);
-		return copy;
-	}
-	Box2D.postDefs.push(function () {
-		Box2D.Collision.b2Manifold.e_circles = 0x0001;
-		Box2D.Collision.b2Manifold.e_faceA = 0x0002;
-		Box2D.Collision.b2Manifold.e_faceB = 0x0004;
-	});
-	b2ManifoldPoint.b2ManifoldPoint = function () {
-		this.m_localPoint = new b2Vec2();
-		this.m_id = new b2ContactID();
-	};
-	b2ManifoldPoint.prototype.b2ManifoldPoint = function () {
-		this.Reset();
-	}
-	b2ManifoldPoint.prototype.Reset = function () {
-		this.m_localPoint.SetZero();
-		this.m_normalImpulse = 0.0;
-		this.m_tangentImpulse = 0.0;
-		this.m_id.key = 0;
-	}
-	b2ManifoldPoint.prototype.Set = function (m) {
-		this.m_localPoint.SetV(m.m_localPoint);
-		this.m_normalImpulse = m.m_normalImpulse;
-		this.m_tangentImpulse = m.m_tangentImpulse;
-		this.m_id.Set(m.m_id);
-	}
 	b2Point.b2Point = function () {
 		this.p = new b2Vec2();
 	};
