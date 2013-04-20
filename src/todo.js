@@ -109,10 +109,6 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 
 
 
-	function b2TOIInput() {
-		b2TOIInput.b2TOIInput.apply(this, arguments);
-	};
-	Box2D.Collision.b2TOIInput = b2TOIInput;
 
 	function b2WorldManifold() {
 		b2WorldManifold.b2WorldManifold.apply(this, arguments);
@@ -655,12 +651,6 @@ Box2D.postDefs = [];
 		Box2D.Collision.b2TimeOfImpact.s_fcn = new b2SeparationFunction();
 		Box2D.Collision.b2TimeOfImpact.s_distanceOutput = new b2DistanceOutput();
 	});
-	b2TOIInput.b2TOIInput = function () {
-		this.proxyA = new b2DistanceProxy();
-		this.proxyB = new b2DistanceProxy();
-		this.sweepA = new b2Sweep();
-		this.sweepB = new b2Sweep();
-	};
 	b2WorldManifold.b2WorldManifold = function () {
 		this.m_normal = new b2Vec2();
 	};
