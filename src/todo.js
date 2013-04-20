@@ -82,6 +82,7 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 //pre-definitions
 (function () {
 	Box2D.Collision.IBroadPhase = 'Box2D.Collision.IBroadPhase';
+	Box2D.Common.b2internal = 'Box2D.Common.b2internal';
 
 	
 
@@ -114,13 +115,6 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 
 
 
-	Box2D.Common.b2internal = 'Box2D.Common.b2internal';
-
-	function b2Color() {
-		b2Color.b2Color.apply(this, arguments);
-		if (this.constructor === b2Color) this.b2Color.apply(this, arguments);
-	};
-	Box2D.Common.b2Color = b2Color;
 
 	function b2Settings() {
 		b2Settings.b2Settings.apply(this, arguments);
@@ -689,58 +683,7 @@ Box2D.postDefs = [];
 		b2Vec2 = Box2D.Common.Math.b2Vec2,
 		b2Vec3 = Box2D.Common.Math.b2Vec3;
 
-	b2Color.b2Color = function () {
-		this._r = 0;
-		this._g = 0;
-		this._b = 0;
-	};
-	b2Color.prototype.b2Color = function (rr, gg, bb) {
-		if (rr === undefined) rr = 0;
-		if (gg === undefined) gg = 0;
-		if (bb === undefined) bb = 0;
-		this._r = Box2D.parseUInt(255 * b2Math.Clamp(rr, 0.0, 1.0));
-		this._g = Box2D.parseUInt(255 * b2Math.Clamp(gg, 0.0, 1.0));
-		this._b = Box2D.parseUInt(255 * b2Math.Clamp(bb, 0.0, 1.0));
-	}
-	b2Color.prototype.Set = function (rr, gg, bb) {
-		if (rr === undefined) rr = 0;
-		if (gg === undefined) gg = 0;
-		if (bb === undefined) bb = 0;
-		this._r = Box2D.parseUInt(255 * b2Math.Clamp(rr, 0.0, 1.0));
-		this._g = Box2D.parseUInt(255 * b2Math.Clamp(gg, 0.0, 1.0));
-		this._b = Box2D.parseUInt(255 * b2Math.Clamp(bb, 0.0, 1.0));
-	}
-	Object.defineProperty(b2Color.prototype, 'r', {
-		enumerable: false,
-		configurable: true,
-		set: function (rr) {
-			if (rr === undefined) rr = 0;
-			this._r = Box2D.parseUInt(255 * b2Math.Clamp(rr, 0.0, 1.0));
-		}
-	});
-	Object.defineProperty(b2Color.prototype, 'g', {
-		enumerable: false,
-		configurable: true,
-		set: function (gg) {
-			if (gg === undefined) gg = 0;
-			this._g = Box2D.parseUInt(255 * b2Math.Clamp(gg, 0.0, 1.0));
-		}
-	});
-	Object.defineProperty(b2Color.prototype, 'b', {
-		enumerable: false,
-		configurable: true,
-		set: function (bb) {
-			if (bb === undefined) bb = 0;
-			this._b = Box2D.parseUInt(255 * b2Math.Clamp(bb, 0.0, 1.0));
-		}
-	});
-	Object.defineProperty(b2Color.prototype, 'color', {
-		enumerable: false,
-		configurable: true,
-		get: function () {
-			return (this._r << 16) | (this._g << 8) | (this._b);
-		}
-	});
+	
 	b2Settings.b2Settings = function () {};
 	b2Settings.b2MixFriction = function (friction1, friction2) {
 		if (friction1 === undefined) friction1 = 0;
