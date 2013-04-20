@@ -1,5 +1,5 @@
 function b2CircleShape (radius) {
-	b2Shape.apply(this);
+	b2Shape.apply(this, arguments);
 	this.m_p = new b2Vec2();
 	this.m_type = b2Shape.e_circleShape;
 	this.m_radius = radius || 0;
