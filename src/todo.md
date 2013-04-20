@@ -4,7 +4,7 @@ Fix Number.MAX_VALUE and Number.POSITIVE_INFINITY
 
 Find b2Bound.value setter and try to get rid of that bitwise for a !
 
-Add `defineProperty` to the start.js file. See b2ContactID for its use. Consider switching to proper getter/setter?
+Add `defineProperty` to the start.js file. See b2ContactID, Features for its use. Consider switching to proper getter/setter?
 
 ```javascript
 if(!(Object.prototype.defineProperty instanceof Function)

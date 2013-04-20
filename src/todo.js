@@ -110,15 +110,6 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 
 
 
-	function ClipVertex() {
-		ClipVertex.ClipVertex.apply(this, arguments);
-	};
-	Box2D.Collision.ClipVertex = ClipVertex;
-
-	function Features() {
-		Features.Features.apply(this, arguments);
-	};
-	Box2D.Collision.Features = Features;
 
 	function b2CircleShape() {
 		b2CircleShape.b2CircleShape.apply(this, arguments);
@@ -646,79 +637,6 @@ Box2D.postDefs = [];
 		Box2D.Collision.b2TimeOfImpact.s_distanceOutput = new b2DistanceOutput();
 	});
 	
-	ClipVertex.ClipVertex = function () {
-		this.v = new b2Vec2();
-		this.id = new b2ContactID();
-	};
-	ClipVertex.prototype.Set = function (other) {
-		this.v.SetV(other.v);
-		this.id.Set(other.id);
-	}
-	Features.Features = function () {};
-	Object.defineProperty(Features.prototype, 'referenceEdge', {
-		enumerable: false,
-		configurable: true,
-		get: function () {
-			return this._referenceEdge;
-		}
-	});
-	Object.defineProperty(Features.prototype, 'referenceEdge', {
-		enumerable: false,
-		configurable: true,
-		set: function (value) {
-			if (value === undefined) value = 0;
-			this._referenceEdge = value;
-			this._m_id._key = (this._m_id._key & 0xffffff00) | (this._referenceEdge & 0x000000ff);
-		}
-	});
-	Object.defineProperty(Features.prototype, 'incidentEdge', {
-		enumerable: false,
-		configurable: true,
-		get: function () {
-			return this._incidentEdge;
-		}
-	});
-	Object.defineProperty(Features.prototype, 'incidentEdge', {
-		enumerable: false,
-		configurable: true,
-		set: function (value) {
-			if (value === undefined) value = 0;
-			this._incidentEdge = value;
-			this._m_id._key = (this._m_id._key & 0xffff00ff) | ((this._incidentEdge << 8) & 0x0000ff00);
-		}
-	});
-	Object.defineProperty(Features.prototype, 'incidentVertex', {
-		enumerable: false,
-		configurable: true,
-		get: function () {
-			return this._incidentVertex;
-		}
-	});
-	Object.defineProperty(Features.prototype, 'incidentVertex', {
-		enumerable: false,
-		configurable: true,
-		set: function (value) {
-			if (value === undefined) value = 0;
-			this._incidentVertex = value;
-			this._m_id._key = (this._m_id._key & 0xff00ffff) | ((this._incidentVertex << 16) & 0x00ff0000);
-		}
-	});
-	Object.defineProperty(Features.prototype, 'flip', {
-		enumerable: false,
-		configurable: true,
-		get: function () {
-			return this._flip;
-		}
-	});
-	Object.defineProperty(Features.prototype, 'flip', {
-		enumerable: false,
-		configurable: true,
-		set: function (value) {
-			if (value === undefined) value = 0;
-			this._flip = value;
-			this._m_id._key = (this._m_id._key & 0x00ffffff) | ((this._flip << 24) & 0xff000000);
-		}
-	});
 })();
 (function () {
 	var b2Color = Box2D.Common.b2Color,
