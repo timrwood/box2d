@@ -124,11 +124,7 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 
 
 
-	function b2Transform() {
-		b2Transform.b2Transform.apply(this, arguments);
-		if (this.constructor === b2Transform) this.b2Transform.apply(this, arguments);
-	};
-	Box2D.Common.Math.b2Transform = b2Transform;
+
 
 	function b2Vec2() {
 		b2Vec2.b2Vec2.apply(this, arguments);
@@ -674,33 +670,6 @@ Box2D.postDefs = [];
 	});
 	
 
-	b2Transform.b2Transform = function () {
-		this.position = new b2Vec2;
-		this.R = new b2Mat22();
-	};
-	b2Transform.prototype.b2Transform = function (pos, r) {
-		if (pos === undefined) pos = null;
-		if (r === undefined) r = null;
-		if (pos) {
-			this.position.SetV(pos);
-			this.R.SetM(r);
-		}
-	}
-	b2Transform.prototype.Initialize = function (pos, r) {
-		this.position.SetV(pos);
-		this.R.SetM(r);
-	}
-	b2Transform.prototype.SetIdentity = function () {
-		this.position.SetZero();
-		this.R.SetIdentity();
-	}
-	b2Transform.prototype.Set = function (x) {
-		this.position.SetV(x.position);
-		this.R.SetM(x.R);
-	}
-	b2Transform.prototype.GetAngle = function () {
-		return Math.atan2(this.R.col1.y, this.R.col1.x);
-	}
 	b2Vec2.b2Vec2 = function () {};
 	b2Vec2.prototype.b2Vec2 = function (x_, y_) {
 		if (x_ === undefined) x_ = 0;
