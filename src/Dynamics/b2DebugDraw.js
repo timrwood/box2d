@@ -10,6 +10,8 @@ b2DebugDraw.e_controllerBit   = 16;
 b2DebugDraw.e_centerOfMassBit = 32;
 
 b2DebugDraw.prototype = {
+	Clear : function () {},
+
 	SetFlags : function (flags) {},
 	GetFlags : function () {},
 	AppendFlags : function (flags) {},

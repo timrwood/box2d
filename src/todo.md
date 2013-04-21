@@ -32,6 +32,10 @@ Find a better solution for b2ContactManager.FindNewContacts (function.bind) ?
 
 Move number values from constructor to prototype on b2Fixture ?
 
+Move b2World joint and controller methods outside b2World.js to better modularize the library?
+
+Make debugDraw colors configurable
+
 
 # Changes
 
