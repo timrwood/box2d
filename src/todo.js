@@ -1,141 +1,7 @@
-/*
-* Copyright (c) 2006-2007 Erin Catto http://www.gphysics.com
-*
-* This software is provided 'as-is', without any express or implied
-* warranty.  In no event will the authors be held liable for any damages
-* arising from the use of this software.
-* Permission is granted to anyone to use this software for any purpose,
-* including commercial applications, and to alter it and redistribute it
-* freely, subject to the following restrictions:
-* 1. The origin of this software must not be misrepresented; you must not
-* claim that you wrote the original software. If you use this software
-* in a product, an acknowledgment in the product documentation would be
-* appreciated but is not required.
-* 2. Altered source versions must be plainly marked as such, and must not be
-* misrepresented as being the original software.
-* 3. This notice may not be removed or altered from any source distribution.
-*/
-var Box2D = {};
-
-(function (a2j, undefined) {
-
-	if(!(Object.prototype.defineProperty instanceof Function)
-		&& Object.prototype.__defineGetter__ instanceof Function
-		&& Object.prototype.__defineSetter__ instanceof Function)
-	{
-		Object.defineProperty = function(obj, p, cfg) {
-			if(cfg.get instanceof Function)
-				obj.__defineGetter__(p, cfg.get);
-			if(cfg.set instanceof Function)
-				obj.__defineSetter__(p, cfg.set);
-		}
-	}
-
-	function emptyFn() {};
-	a2j.inherit = function(cls, base) {
-		var tmpCtr = cls;
-		emptyFn.prototype = base.prototype;
-		cls.prototype = new emptyFn;
-		cls.prototype.constructor = tmpCtr;
-	};
-
-	a2j.generateCallback = function generateCallback(context, cb) {
-		return function () {
-			cb.apply(context, arguments);
-		};
-	};
-
-	a2j.NVector = function NVector(length) {
-		if (length === undefined) length = 0;
-		var tmp = new Array(length || 0);
-		for (var i = 0; i < length; ++i)
-		tmp[i] = 0;
-		return tmp;
-	};
-
-	a2j.is = function is(o1, o2) {
-		if (o1 === null) return false;
-		if ((o2 instanceof Function) && (o1 instanceof o2)) return true;
-		if ((o1.constructor.__implements != undefined) && (o1.constructor.__implements[o2])) return true;
-		return false;
-	};
-
-	a2j.parseUInt = function(v) {
-		return Math.abs(parseInt(v));
-	}
-
-})(Box2D);
-
-//#TODO remove assignments from global namespace
-var Vector = Array;
-var Vector_a2j_Number = Box2D.NVector;
-//package structure
-if (typeof(Box2D) === "undefined") Box2D = {};
-if (typeof(Box2D.Collision) === "undefined") Box2D.Collision = {};
-if (typeof(Box2D.Collision.Shapes) === "undefined") Box2D.Collision.Shapes = {};
-if (typeof(Box2D.Common) === "undefined") Box2D.Common = {};
-if (typeof(Box2D.Common.Math) === "undefined") Box2D.Common.Math = {};
-if (typeof(Box2D.Dynamics) === "undefined") Box2D.Dynamics = {};
-if (typeof(Box2D.Dynamics.Contacts) === "undefined") Box2D.Dynamics.Contacts = {};
-if (typeof(Box2D.Dynamics.Controllers) === "undefined") Box2D.Dynamics.Controllers = {};
-if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
-//pre-definitions
-(function () {
-	Box2D.Collision.IBroadPhase = 'Box2D.Collision.IBroadPhase';
-	Box2D.Common.b2internal = 'Box2D.Common.b2internal';
-
-	
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	function b2ContactListener() {
-		b2ContactListener.b2ContactListener.apply(this, arguments);
-	};
-	Box2D.Dynamics.b2ContactListener = b2ContactListener;
-
-	function b2ContactManager() {
-		b2ContactManager.b2ContactManager.apply(this, arguments);
-		if (this.constructor === b2ContactManager) this.b2ContactManager.apply(this, arguments);
-	};
-	Box2D.Dynamics.b2ContactManager = b2ContactManager;
 
 	function b2DebugDraw() {
 		b2DebugDraw.b2DebugDraw.apply(this, arguments);
@@ -181,6 +47,10 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 		if (this.constructor === b2World) this.b2World.apply(this, arguments);
 	};
 	Box2D.Dynamics.b2World = b2World;
+
+
+/* Contacts */
+
 
 	function b2CircleContact() {
 		b2CircleContact.b2CircleContact.apply(this, arguments);
@@ -263,6 +133,10 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 	};
 	Box2D.Dynamics.Contacts.b2PositionSolverManifold = b2PositionSolverManifold;
 
+
+/* Controllers */
+
+
 	function b2BuoyancyController() {
 		b2BuoyancyController.b2BuoyancyController.apply(this, arguments);
 	};
@@ -297,6 +171,10 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 		b2TensorDampingController.b2TensorDampingController.apply(this, arguments);
 	};
 	Box2D.Dynamics.Controllers.b2TensorDampingController = b2TensorDampingController;
+
+
+/* Joints */
+
 
 	function b2DistanceJoint() {
 		b2DistanceJoint.b2DistanceJoint.apply(this, arguments);
@@ -473,155 +351,8 @@ Box2D.postDefs = [];
 
 
 	
-	b2ContactListener.b2ContactListener = function () {};
-	b2ContactListener.prototype.BeginContact = function (contact) {}
-	b2ContactListener.prototype.EndContact = function (contact) {}
-	b2ContactListener.prototype.PreSolve = function (contact, oldManifold) {}
-	b2ContactListener.prototype.PostSolve = function (contact, impulse) {}
-	Box2D.postDefs.push(function () {
-		Box2D.Dynamics.b2ContactListener.b2_defaultListener = new b2ContactListener();
-	});
-	b2ContactManager.b2ContactManager = function () {};
-	b2ContactManager.prototype.b2ContactManager = function () {
-		this.m_world = null;
-		this.m_contactCount = 0;
-		this.m_contactFilter = b2ContactFilter.b2_defaultFilter;
-		this.m_contactListener = b2ContactListener.b2_defaultListener;
-		this.m_contactFactory = new b2ContactFactory(this.m_allocator);
-		this.m_broadPhase = new b2DynamicTreeBroadPhase();
-	}
-	b2ContactManager.prototype.AddPair = function (proxyUserDataA, proxyUserDataB) {
-		var fixtureA = (proxyUserDataA instanceof b2Fixture ? proxyUserDataA : null);
-		var fixtureB = (proxyUserDataB instanceof b2Fixture ? proxyUserDataB : null);
-		var bodyA = fixtureA.GetBody();
-		var bodyB = fixtureB.GetBody();
-		if (bodyA == bodyB) return;
-		var edge = bodyB.GetContactList();
-		while (edge) {
-			if (edge.other == bodyA) {
-				var fA = edge.contact.GetFixtureA();
-				var fB = edge.contact.GetFixtureB();
-				if (fA == fixtureA && fB == fixtureB) return;
-				if (fA == fixtureB && fB == fixtureA) return;
-			}
-			edge = edge.next;
-		}
-		if (bodyB.ShouldCollide(bodyA) == false) {
-			return;
-		}
-		if (this.m_contactFilter.ShouldCollide(fixtureA, fixtureB) == false) {
-			return;
-		}
-		var c = this.m_contactFactory.Create(fixtureA, fixtureB);
-		fixtureA = c.GetFixtureA();
-		fixtureB = c.GetFixtureB();
-		bodyA = fixtureA.m_body;
-		bodyB = fixtureB.m_body;
-		c.m_prev = null;
-		c.m_next = this.m_world.m_contactList;
-		if (this.m_world.m_contactList != null) {
-			this.m_world.m_contactList.m_prev = c;
-		}
-		this.m_world.m_contactList = c;
-		c.m_nodeA.contact = c;
-		c.m_nodeA.other = bodyB;
-		c.m_nodeA.prev = null;
-		c.m_nodeA.next = bodyA.m_contactList;
-		if (bodyA.m_contactList != null) {
-			bodyA.m_contactList.prev = c.m_nodeA;
-		}
-		bodyA.m_contactList = c.m_nodeA;
-		c.m_nodeB.contact = c;
-		c.m_nodeB.other = bodyA;
-		c.m_nodeB.prev = null;
-		c.m_nodeB.next = bodyB.m_contactList;
-		if (bodyB.m_contactList != null) {
-			bodyB.m_contactList.prev = c.m_nodeB;
-		}
-		bodyB.m_contactList = c.m_nodeB;
-		++this.m_world.m_contactCount;
-		return;
-	}
-	b2ContactManager.prototype.FindNewContacts = function () {
-		this.m_broadPhase.UpdatePairs(Box2D.generateCallback(this, this.AddPair));
-	}
-	b2ContactManager.prototype.Destroy = function (c) {
-		var fixtureA = c.GetFixtureA();
-		var fixtureB = c.GetFixtureB();
-		var bodyA = fixtureA.GetBody();
-		var bodyB = fixtureB.GetBody();
-		if (c.IsTouching()) {
-			this.m_contactListener.EndContact(c);
-		}
-		if (c.m_prev) {
-			c.m_prev.m_next = c.m_next;
-		}
-		if (c.m_next) {
-			c.m_next.m_prev = c.m_prev;
-		}
-		if (c == this.m_world.m_contactList) {
-			this.m_world.m_contactList = c.m_next;
-		}
-		if (c.m_nodeA.prev) {
-			c.m_nodeA.prev.next = c.m_nodeA.next;
-		}
-		if (c.m_nodeA.next) {
-			c.m_nodeA.next.prev = c.m_nodeA.prev;
-		}
-		if (c.m_nodeA == bodyA.m_contactList) {
-			bodyA.m_contactList = c.m_nodeA.next;
-		}
-		if (c.m_nodeB.prev) {
-			c.m_nodeB.prev.next = c.m_nodeB.next;
-		}
-		if (c.m_nodeB.next) {
-			c.m_nodeB.next.prev = c.m_nodeB.prev;
-		}
-		if (c.m_nodeB == bodyB.m_contactList) {
-			bodyB.m_contactList = c.m_nodeB.next;
-		}
-		this.m_contactFactory.Destroy(c);
-		--this.m_contactCount;
-	}
-	b2ContactManager.prototype.Collide = function () {
-		var c = this.m_world.m_contactList;
-		while (c) {
-			var fixtureA = c.GetFixtureA();
-			var fixtureB = c.GetFixtureB();
-			var bodyA = fixtureA.GetBody();
-			var bodyB = fixtureB.GetBody();
-			if (bodyA.IsAwake() == false && bodyB.IsAwake() == false) {
-				c = c.GetNext();
-				continue;
-			}
-			if (c.m_flags & b2Contact.e_filterFlag) {
-				if (bodyB.ShouldCollide(bodyA) == false) {
-					var cNuke = c;
-					c = cNuke.GetNext();
-					this.Destroy(cNuke);
-					continue;
-				}
-				if (this.m_contactFilter.ShouldCollide(fixtureA, fixtureB) == false) {
-					cNuke = c;
-					c = cNuke.GetNext();
-					this.Destroy(cNuke);
-					continue;
-				}
-				c.m_flags &= ~b2Contact.e_filterFlag;
-			}
-			var proxyA = fixtureA.m_proxy;
-			var proxyB = fixtureB.m_proxy;
-			var overlap = this.m_broadPhase.TestOverlap(proxyA, proxyB);
-			if (overlap == false) {
-				cNuke = c;
-				c = cNuke.GetNext();
-				this.Destroy(cNuke);
-				continue;
-			}
-			c.Update(this.m_contactListener);
-			c = c.GetNext();
-		}
-	}
+	
+	
 	Box2D.postDefs.push(function () {
 		Box2D.Dynamics.b2ContactManager.s_evalCP = new b2ContactPoint();
 	});
@@ -6103,3 +5834,78 @@ Box2D.postDefs = [];
 var i;
 for (i = 0; i < Box2D.postDefs.length; ++i) Box2D.postDefs[i]();
 delete Box2D.postDefs;
+
+
+
+
+
+var Box2D = {};
+
+(function (a2j, undefined) {
+
+	if(!(Object.prototype.defineProperty instanceof Function)
+		&& Object.prototype.__defineGetter__ instanceof Function
+		&& Object.prototype.__defineSetter__ instanceof Function)
+	{
+		Object.defineProperty = function(obj, p, cfg) {
+			if(cfg.get instanceof Function)
+				obj.__defineGetter__(p, cfg.get);
+			if(cfg.set instanceof Function)
+				obj.__defineSetter__(p, cfg.set);
+		}
+	}
+
+	function emptyFn() {};
+	a2j.inherit = function(cls, base) {
+		var tmpCtr = cls;
+		emptyFn.prototype = base.prototype;
+		cls.prototype = new emptyFn;
+		cls.prototype.constructor = tmpCtr;
+	};
+
+	a2j.generateCallback = function generateCallback(context, cb) {
+		return function () {
+			cb.apply(context, arguments);
+		};
+	};
+
+	a2j.NVector = function NVector(length) {
+		if (length === undefined) length = 0;
+		var tmp = new Array(length || 0);
+		for (var i = 0; i < length; ++i)
+		tmp[i] = 0;
+		return tmp;
+	};
+
+	a2j.is = function is(o1, o2) {
+		if (o1 === null) return false;
+		if ((o2 instanceof Function) && (o1 instanceof o2)) return true;
+		if ((o1.constructor.__implements != undefined) && (o1.constructor.__implements[o2])) return true;
+		return false;
+	};
+
+	a2j.parseUInt = function(v) {
+		return Math.abs(parseInt(v));
+	}
+
+})(Box2D);
+
+//#TODO remove assignments from global namespace
+var Vector = Array;
+var Vector_a2j_Number = Box2D.NVector;
+//package structure
+if (typeof(Box2D) === "undefined") Box2D = {};
+if (typeof(Box2D.Collision) === "undefined") Box2D.Collision = {};
+if (typeof(Box2D.Collision.Shapes) === "undefined") Box2D.Collision.Shapes = {};
+if (typeof(Box2D.Common) === "undefined") Box2D.Common = {};
+if (typeof(Box2D.Common.Math) === "undefined") Box2D.Common.Math = {};
+if (typeof(Box2D.Dynamics) === "undefined") Box2D.Dynamics = {};
+if (typeof(Box2D.Dynamics.Contacts) === "undefined") Box2D.Dynamics.Contacts = {};
+if (typeof(Box2D.Dynamics.Controllers) === "undefined") Box2D.Dynamics.Controllers = {};
+if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
+//pre-definitions
+(function () {
+	Box2D.Collision.IBroadPhase = 'Box2D.Collision.IBroadPhase';
+	Box2D.Common.b2internal = 'Box2D.Common.b2internal';
+
+	

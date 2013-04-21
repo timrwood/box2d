@@ -28,6 +28,8 @@ Add extend method to merge objects
 
 See if we can remove b2PolygonShape.prototype.SetAsVector and b2PolygonShape.AsVector
 
+Find a better solution for b2ContactManager.FindNewContacts (function.bind) ?
+
 
 # Changes
 
