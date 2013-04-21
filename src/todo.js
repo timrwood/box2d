@@ -4,10 +4,6 @@
 
 
 
-	function b2TimeStep() {
-		b2TimeStep.b2TimeStep.apply(this, arguments);
-	};
-	Box2D.Dynamics.b2TimeStep = b2TimeStep;
 
 	function b2World() {
 		b2World.b2World.apply(this, arguments);
@@ -329,14 +325,7 @@ Box2D.postDefs = [];
 	
 	
 	
-	b2TimeStep.b2TimeStep = function () {};
-	b2TimeStep.prototype.Set = function (step) {
-		this.dt = step.dt;
-		this.inv_dt = step.inv_dt;
-		this.positionIterations = step.positionIterations;
-		this.velocityIterations = step.velocityIterations;
-		this.warmStarting = step.warmStarting;
-	}
+	
 	b2World.b2World = function () {
 		this.s_stack = new Vector();
 		this.m_contactManager = new b2ContactManager();
