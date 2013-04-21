@@ -76,6 +76,17 @@ function b2Body() {
 	this.m_fixtureCount = 0;
 }
 
+b2Body.e_awakeFlag         =  1;
+b2Body.e_islandFlag        =  2;
+b2Body.e_bulletFlag        =  4;
+b2Body.e_activeFlag        =  8;
+b2Body.e_allowSleepFlag    = 16;
+b2Body.e_fixedRotationFlag = 32;
+
+b2Body.b2_staticBody    = 0;
+b2Body.b2_dynamicBody   = 2;
+b2Body.b2_kinematicBody = 1;
+
 b2Body.prototype = {
 	connectEdges : function (s1, s2, angle1) {
 		angle1 = angle1 || 0;
