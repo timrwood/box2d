@@ -126,11 +126,6 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 
 
 
-	function b2ContactImpulse() {
-		b2ContactImpulse.b2ContactImpulse.apply(this, arguments);
-	};
-	Box2D.Dynamics.b2ContactImpulse = b2ContactImpulse;
-
 	function b2ContactListener() {
 		b2ContactListener.b2ContactListener.apply(this, arguments);
 	};
@@ -477,10 +472,7 @@ Box2D.postDefs = [];
 
 
 
-	b2ContactImpulse.b2ContactImpulse = function () {
-		this.normalImpulses = new Vector_a2j_Number(b2Settings.b2_maxManifoldPoints);
-		this.tangentImpulses = new Vector_a2j_Number(b2Settings.b2_maxManifoldPoints);
-	};
+	
 	b2ContactListener.b2ContactListener = function () {};
 	b2ContactListener.prototype.BeginContact = function (contact) {}
 	b2ContactListener.prototype.EndContact = function (contact) {}
