@@ -30,6 +30,8 @@ See if we can remove b2PolygonShape.prototype.SetAsVector and b2PolygonShape.AsV
 
 Find a better solution for b2ContactManager.FindNewContacts (function.bind) ?
 
+Move number values from constructor to prototype on b2Fixture ?
+
 
 # Changes
 
