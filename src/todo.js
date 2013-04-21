@@ -126,15 +126,6 @@ if (typeof(Box2D.Dynamics.Joints) === "undefined") Box2D.Dynamics.Joints = {};
 
 
 
-
-
-
-
-	function b2ContactFilter() {
-		b2ContactFilter.b2ContactFilter.apply(this, arguments);
-	};
-	Box2D.Dynamics.b2ContactFilter = b2ContactFilter;
-
 	function b2ContactImpulse() {
 		b2ContactImpulse.b2ContactImpulse.apply(this, arguments);
 	};
@@ -486,46 +477,6 @@ Box2D.postDefs = [];
 
 
 
-
-
-	
-	b2BodyDef.b2BodyDef = function () {
-		this.position = new b2Vec2();
-		this.linearVelocity = new b2Vec2();
-	};
-	b2BodyDef.prototype.b2BodyDef = function () {
-		this.userData = null;
-		this.position.Set(0.0, 0.0);
-		this.angle = 0.0;
-		this.linearVelocity.Set(0, 0);
-		this.angularVelocity = 0.0;
-		this.linearDamping = 0.0;
-		this.angularDamping = 0.0;
-		this.allowSleep = true;
-		this.awake = true;
-		this.fixedRotation = false;
-		this.bullet = false;
-		this.type = b2Body.b2_staticBody;
-		this.active = true;
-		this.inertiaScale = 1.0;
-	}
-	b2ContactFilter.b2ContactFilter = function () {};
-	b2ContactFilter.prototype.ShouldCollide = function (fixtureA, fixtureB) {
-		var filter1 = fixtureA.GetFilterData();
-		var filter2 = fixtureB.GetFilterData();
-		if (filter1.groupIndex == filter2.groupIndex && filter1.groupIndex != 0) {
-			return filter1.groupIndex > 0;
-		}
-		var collide = (filter1.maskBits & filter2.categoryBits) != 0 && (filter1.categoryBits & filter2.maskBits) != 0;
-		return collide;
-	}
-	b2ContactFilter.prototype.RayCollide = function (userData, fixture) {
-		if (!userData) return true;
-		return this.ShouldCollide((userData instanceof b2Fixture ? userData : null), fixture);
-	}
-	Box2D.postDefs.push(function () {
-		Box2D.Dynamics.b2ContactFilter.b2_defaultFilter = new b2ContactFilter();
-	});
 	b2ContactImpulse.b2ContactImpulse = function () {
 		this.normalImpulses = new Vector_a2j_Number(b2Settings.b2_maxManifoldPoints);
 		this.tangentImpulses = new Vector_a2j_Number(b2Settings.b2_maxManifoldPoints);
