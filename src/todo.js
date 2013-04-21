@@ -1,11 +1,6 @@
 
 
 
-	function b2DestructionListener() {
-		b2DestructionListener.b2DestructionListener.apply(this, arguments);
-	};
-	Box2D.Dynamics.b2DestructionListener = b2DestructionListener;
-
 	function b2FilterData() {
 		b2FilterData.b2FilterData.apply(this, arguments);
 	};
@@ -349,9 +344,6 @@ Box2D.postDefs = [];
 		Box2D.Dynamics.b2ContactManager.s_evalCP = new b2ContactPoint();
 	});
 	
-	b2DestructionListener.b2DestructionListener = function () {};
-	b2DestructionListener.prototype.SayGoodbyeJoint = function (joint) {}
-	b2DestructionListener.prototype.SayGoodbyeFixture = function (fixture) {}
 	b2FilterData.b2FilterData = function () {
 		this.categoryBits = 0x0001;
 		this.maskBits = 0xFFFF;
