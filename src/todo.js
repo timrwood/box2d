@@ -11,31 +11,8 @@
 
 
 
-	function b2EdgeAndCircleContact() {
-		b2EdgeAndCircleContact.b2EdgeAndCircleContact.apply(this, arguments);
-	};
-	Box2D.Dynamics.Contacts.b2EdgeAndCircleContact = b2EdgeAndCircleContact;
 
-	function b2NullContact() {
-		b2NullContact.b2NullContact.apply(this, arguments);
-		if (this.constructor === b2NullContact) this.b2NullContact.apply(this, arguments);
-	};
-	Box2D.Dynamics.Contacts.b2NullContact = b2NullContact;
 
-	function b2PolyAndCircleContact() {
-		b2PolyAndCircleContact.b2PolyAndCircleContact.apply(this, arguments);
-	};
-	Box2D.Dynamics.Contacts.b2PolyAndCircleContact = b2PolyAndCircleContact;
-
-	function b2PolyAndEdgeContact() {
-		b2PolyAndEdgeContact.b2PolyAndEdgeContact.apply(this, arguments);
-	};
-	Box2D.Dynamics.Contacts.b2PolyAndEdgeContact = b2PolyAndEdgeContact;
-
-	function b2PolygonContact() {
-		b2PolygonContact.b2PolygonContact.apply(this, arguments);
-	};
-	Box2D.Dynamics.Contacts.b2PolygonContact = b2PolygonContact;
 
 	function b2PositionSolverManifold() {
 		b2PositionSolverManifold.b2PositionSolverManifold.apply(this, arguments);
@@ -280,93 +257,6 @@ Box2D.postDefs = [];
 })();
 (function () {
 
-
-
-
-
-	Box2D.inherit(b2EdgeAndCircleContact, Box2D.Dynamics.Contacts.b2Contact);
-	b2EdgeAndCircleContact.prototype.__super = Box2D.Dynamics.Contacts.b2Contact.prototype;
-	b2EdgeAndCircleContact.b2EdgeAndCircleContact = function () {
-		Box2D.Dynamics.Contacts.b2Contact.b2Contact.apply(this, arguments);
-	};
-	b2EdgeAndCircleContact.Create = function (allocator) {
-		return new b2EdgeAndCircleContact();
-	}
-	b2EdgeAndCircleContact.Destroy = function (contact, allocator) {}
-	b2EdgeAndCircleContact.prototype.Reset = function (fixtureA, fixtureB) {
-		this.__super.Reset.call(this, fixtureA, fixtureB);
-	}
-	b2EdgeAndCircleContact.prototype.Evaluate = function () {
-		var bA = this.m_fixtureA.GetBody();
-		var bB = this.m_fixtureB.GetBody();
-		this.b2CollideEdgeAndCircle(this.m_manifold, (this.m_fixtureA.GetShape() instanceof b2EdgeShape ? this.m_fixtureA.GetShape() : null), bA.m_xf, (this.m_fixtureB.GetShape() instanceof b2CircleShape ? this.m_fixtureB.GetShape() : null), bB.m_xf);
-	}
-	b2EdgeAndCircleContact.prototype.b2CollideEdgeAndCircle = function (manifold, edge, xf1, circle, xf2) {}
-	Box2D.inherit(b2NullContact, Box2D.Dynamics.Contacts.b2Contact);
-	b2NullContact.prototype.__super = Box2D.Dynamics.Contacts.b2Contact.prototype;
-	b2NullContact.b2NullContact = function () {
-		Box2D.Dynamics.Contacts.b2Contact.b2Contact.apply(this, arguments);
-	};
-	b2NullContact.prototype.b2NullContact = function () {
-		this.__super.b2Contact.call(this);
-	}
-	b2NullContact.prototype.Evaluate = function () {}
-	Box2D.inherit(b2PolyAndCircleContact, Box2D.Dynamics.Contacts.b2Contact);
-	b2PolyAndCircleContact.prototype.__super = Box2D.Dynamics.Contacts.b2Contact.prototype;
-	b2PolyAndCircleContact.b2PolyAndCircleContact = function () {
-		Box2D.Dynamics.Contacts.b2Contact.b2Contact.apply(this, arguments);
-	};
-	b2PolyAndCircleContact.Create = function (allocator) {
-		return new b2PolyAndCircleContact();
-	}
-	b2PolyAndCircleContact.Destroy = function (contact, allocator) {}
-	b2PolyAndCircleContact.prototype.Reset = function (fixtureA, fixtureB) {
-		this.__super.Reset.call(this, fixtureA, fixtureB);
-		b2Settings.b2Assert(fixtureA.GetType() == b2Shape.e_polygonShape);
-		b2Settings.b2Assert(fixtureB.GetType() == b2Shape.e_circleShape);
-	}
-	b2PolyAndCircleContact.prototype.Evaluate = function () {
-		var bA = this.m_fixtureA.m_body;
-		var bB = this.m_fixtureB.m_body;
-		b2Collision.CollidePolygonAndCircle(this.m_manifold, (this.m_fixtureA.GetShape() instanceof b2PolygonShape ? this.m_fixtureA.GetShape() : null), bA.m_xf, (this.m_fixtureB.GetShape() instanceof b2CircleShape ? this.m_fixtureB.GetShape() : null), bB.m_xf);
-	}
-	Box2D.inherit(b2PolyAndEdgeContact, Box2D.Dynamics.Contacts.b2Contact);
-	b2PolyAndEdgeContact.prototype.__super = Box2D.Dynamics.Contacts.b2Contact.prototype;
-	b2PolyAndEdgeContact.b2PolyAndEdgeContact = function () {
-		Box2D.Dynamics.Contacts.b2Contact.b2Contact.apply(this, arguments);
-	};
-	b2PolyAndEdgeContact.Create = function (allocator) {
-		return new b2PolyAndEdgeContact();
-	}
-	b2PolyAndEdgeContact.Destroy = function (contact, allocator) {}
-	b2PolyAndEdgeContact.prototype.Reset = function (fixtureA, fixtureB) {
-		this.__super.Reset.call(this, fixtureA, fixtureB);
-		b2Settings.b2Assert(fixtureA.GetType() == b2Shape.e_polygonShape);
-		b2Settings.b2Assert(fixtureB.GetType() == b2Shape.e_edgeShape);
-	}
-	b2PolyAndEdgeContact.prototype.Evaluate = function () {
-		var bA = this.m_fixtureA.GetBody();
-		var bB = this.m_fixtureB.GetBody();
-		this.b2CollidePolyAndEdge(this.m_manifold, (this.m_fixtureA.GetShape() instanceof b2PolygonShape ? this.m_fixtureA.GetShape() : null), bA.m_xf, (this.m_fixtureB.GetShape() instanceof b2EdgeShape ? this.m_fixtureB.GetShape() : null), bB.m_xf);
-	}
-	b2PolyAndEdgeContact.prototype.b2CollidePolyAndEdge = function (manifold, polygon, xf1, edge, xf2) {}
-	Box2D.inherit(b2PolygonContact, Box2D.Dynamics.Contacts.b2Contact);
-	b2PolygonContact.prototype.__super = Box2D.Dynamics.Contacts.b2Contact.prototype;
-	b2PolygonContact.b2PolygonContact = function () {
-		Box2D.Dynamics.Contacts.b2Contact.b2Contact.apply(this, arguments);
-	};
-	b2PolygonContact.Create = function (allocator) {
-		return new b2PolygonContact();
-	}
-	b2PolygonContact.Destroy = function (contact, allocator) {}
-	b2PolygonContact.prototype.Reset = function (fixtureA, fixtureB) {
-		this.__super.Reset.call(this, fixtureA, fixtureB);
-	}
-	b2PolygonContact.prototype.Evaluate = function () {
-		var bA = this.m_fixtureA.GetBody();
-		var bB = this.m_fixtureB.GetBody();
-		b2Collision.CollidePolygons(this.m_manifold, (this.m_fixtureA.GetShape() instanceof b2PolygonShape ? this.m_fixtureA.GetShape() : null), bA.m_xf, (this.m_fixtureB.GetShape() instanceof b2PolygonShape ? this.m_fixtureB.GetShape() : null), bB.m_xf);
-	}
 	b2PositionSolverManifold.b2PositionSolverManifold = function () {};
 	b2PositionSolverManifold.prototype.b2PositionSolverManifold = function () {
 		this.m_normal = new b2Vec2();

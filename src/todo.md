@@ -42,9 +42,13 @@ Clean up b2ContactFactory.Create to remove b2CircleContact.Create / b2CircleCont
 
 Remove this.m_nodeA and this.m_nodeB from b2Contact ?
 
+Find out what b2EdgeAndCircleContact.prototype.b2CollideEdgeAndCircle should be
+
 
 # Changes
 
 Deleted b2Point as it was unused
 
 Deleted b2ContactRegister as it was no longer needed
+
+Deleted b2NullContact

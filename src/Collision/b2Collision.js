@@ -2,7 +2,6 @@ var b2Collision = {
 	s_edgeAO : [0],
 	s_edgeBO : [0],
 
-
 	ClipSegmentToLine : function (vOut, vIn, normal, offset) {
 		offset = offset || 0;
 		var interp, tVec,
@@ -146,7 +145,7 @@ var b2Collision = {
 			return s;
 		}
 		while (true) {
-			if (increment == -1) {
+			if (increment === -1) {
 				edge = bestEdge - 1 >= 0 ? bestEdge - 1 : count1 - 1;
 			} else {
 				edge = bestEdge + 1 < count1 ? bestEdge + 1 : 0;
@@ -531,4 +530,4 @@ var b2Collision = {
 		}
 		return true;
 	}
-}
+};
