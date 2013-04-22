@@ -12,12 +12,6 @@
 
 
 
-
-	function b2ContactRegister() {
-		b2ContactRegister.b2ContactRegister.apply(this, arguments);
-	};
-	Box2D.Dynamics.Contacts.b2ContactRegister = b2ContactRegister;
-
 	function b2ContactResult() {
 		b2ContactResult.b2ContactResult.apply(this, arguments);
 	};
@@ -296,7 +290,6 @@ Box2D.postDefs = [];
 	
 	
 	
-	b2ContactRegister.b2ContactRegister = function () {};
 	b2ContactResult.b2ContactResult = function () {
 		this.position = new b2Vec2();
 		this.normal = new b2Vec2();

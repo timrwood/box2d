@@ -46,3 +46,5 @@ Remove this.m_nodeA and this.m_nodeB from b2Contact ?
 # Changes
 
 Deleted b2Point as it was unused
+
+Deleted b2ContactRegister as it was no longer needed
