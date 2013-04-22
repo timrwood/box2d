@@ -44,6 +44,8 @@ Remove this.m_nodeA and this.m_nodeB from b2Contact ?
 
 Find out what b2EdgeAndCircleContact.prototype.b2CollideEdgeAndCircle should be
 
+Make sure the while loop in b2Controller.prototype.RemoveBody was translated correctly
+
 
 # Changes
 
@@ -52,3 +54,14 @@ Deleted b2Point as it was unused
 Deleted b2ContactRegister as it was no longer needed
 
 Deleted b2NullContact
+
+
+# Replace
+
+= function
+: function
+
+\}\n	b2\w+\.prototype\.
+},
+
+	|
