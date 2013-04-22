@@ -40,6 +40,8 @@ Add b2ContactEdge null objects to the prototype ?
 
 Clean up b2ContactFactory.Create to remove b2CircleContact.Create / b2CircleContact.Destroy methods
 
+Remove this.m_nodeA and this.m_nodeB from b2Contact ?
+
 
 # Changes
 

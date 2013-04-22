@@ -2,12 +2,6 @@ function b2CircleContact() {
 	b2Contact.apply(this, arguments);
 }
 
-b2CircleContact.Create = function (allocator) {
-	return new b2CircleContact();
-};
-
-b2CircleContact.Destroy = function (contact, allocator) {};
-
 b2CircleContact.prototype = extend(new b2Contact(), {
 	Evaluate : function () {
 		b2Collision.CollideCircles(
