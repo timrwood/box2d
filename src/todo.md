@@ -36,6 +36,10 @@ Move b2World joint and controller methods outside b2World.js to better modulariz
 
 Make debugDraw colors configurable
 
+Add b2ContactEdge null objects to the prototype ?
+
+Clean up b2ContactFactory.Create to remove b2CircleContact.Create / b2CircleContact.Destroy methods
+
 
 # Changes
 
