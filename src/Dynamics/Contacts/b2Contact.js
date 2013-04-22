@@ -133,6 +133,7 @@ b2Contact.prototype = {
 
 		this.m_oldManifold = this.m_manifold;
 		this.m_manifold = tManifold;
+
 		this.m_flags |= b2Contact.e_enabledFlag;
 
 		if (this.m_flags & b2Contact.e_sensorFlag) {

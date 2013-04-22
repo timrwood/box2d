@@ -9,17 +9,8 @@
 /* Contacts */
 
 
-	function b2CircleContact() {
-		b2CircleContact.b2CircleContact.apply(this, arguments);
-	};
-	Box2D.Dynamics.Contacts.b2CircleContact = b2CircleContact;
 
 
-	function b2ContactConstraint() {
-		b2ContactConstraint.b2ContactConstraint.apply(this, arguments);
-		if (this.constructor === b2ContactConstraint) this.b2ContactConstraint.apply(this, arguments);
-	};
-	Box2D.Dynamics.Contacts.b2ContactConstraint = b2ContactConstraint;
 
 	function b2ContactConstraintPoint() {
 		b2ContactConstraintPoint.b2ContactConstraintPoint.apply(this, arguments);
@@ -318,42 +309,13 @@ Box2D.postDefs = [];
 })();
 (function () {
 	
-	Box2D.inherit(b2CircleContact, Box2D.Dynamics.Contacts.b2Contact);
-	b2CircleContact.prototype.__super = Box2D.Dynamics.Contacts.b2Contact.prototype;
-	b2CircleContact.b2CircleContact = function () {
-		Box2D.Dynamics.Contacts.b2Contact.b2Contact.apply(this, arguments);
-	};
-	b2CircleContact.Create = function (allocator) {
-		return new b2CircleContact();
-	}
-	b2CircleContact.Destroy = function (contact, allocator) {}
-	b2CircleContact.prototype.Reset = function (fixtureA, fixtureB) {
-		this.__super.Reset.call(this, fixtureA, fixtureB);
-	}
-	b2CircleContact.prototype.Evaluate = function () {
-		var bA = this.m_fixtureA.GetBody();
-		var bB = this.m_fixtureB.GetBody();
-		b2Collision.CollideCircles(this.m_manifold, (this.m_fixtureA.GetShape() instanceof b2CircleShape ? this.m_fixtureA.GetShape() : null), bA.m_xf, (this.m_fixtureB.GetShape() instanceof b2CircleShape ? this.m_fixtureB.GetShape() : null), bB.m_xf);
-	}
 	
-	b2ContactConstraint.b2ContactConstraint = function () {
-		this.localPlaneNormal = new b2Vec2();
-		this.localPoint = new b2Vec2();
-		this.normal = new b2Vec2();
-		this.normalMass = new b2Mat22();
-		this.K = new b2Mat22();
-	};
-	b2ContactConstraint.prototype.b2ContactConstraint = function () {
-		this.points = new Vector(b2Settings.b2_maxManifoldPoints);
-		for (var i = 0; i < b2Settings.b2_maxManifoldPoints; i++) {
-			this.points[i] = new b2ContactConstraintPoint();
-		}
-	}
 	b2ContactConstraintPoint.b2ContactConstraintPoint = function () {
 		this.localPoint = new b2Vec2();
 		this.rA = new b2Vec2();
 		this.rB = new b2Vec2();
 	};
+	
 	b2ContactEdge.b2ContactEdge = function () {};
 	b2ContactFactory.b2ContactFactory = function () {};
 	b2ContactFactory.prototype.b2ContactFactory = function (allocator) {
