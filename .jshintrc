@@ -1,0 +1,154 @@
+{
+    "bitwise"       : false,    // Prohibit bitwise operators (&, |, ^, etc.).
+    "curly"         : true,     // Require {} for every new block or scope.
+    "eqeqeq"        : true,     // Require triple equals i.e. `===`.
+    "forin"         : true,     // Tolerate `for in` loops without `hasOwnPrototype`.
+    "immed"         : true,     // Require immediate invocations to be wrapped in parens e.g. `( function(){}() );`
+    "indent"        : 4,        // Enforce specific tab width for your code.
+    "latedef"       : true,     // Prohibit variable use before definition.
+    "newcap"        : false,    // Require capitalization of all constructor functions e.g. `new F()`.
+    "noarg"         : true,     // Prohibit use of `arguments.caller` and `arguments.callee`.
+    "noempty"       : true,     // Prohibit use of empty blocks.
+    "nonew"         : true,     // Prohibit use of constructors for side-effects.
+    "plusplus"      : false,    // Prohibit use of `++` & `--`.
+    "regexp"        : true,     // Prohibit `.` and `[^...]` in regular expressions.
+    "undef"         : true,     // Require all non-global variables be declared before they are used.
+    "unused"        : false,    // This option prohibits the use of explicitly undeclared variables.
+    "strict"        : false,    // Require `use strict` pragma in every file.
+    "trailing"      : true,     // Prohibit trailing whitespaces.
+
+    "asi"           : false,    // Tolerate Automatic Semicolon Insertion (no semicolons).
+    "boss"          : false,    // Tolerate assignments inside if, for & while. Usually conditions & loops are for comparison, not assignments.
+    "debug"         : false,    // Allow debugger statements e.g. browser breakpoints.
+    "eqnull"        : false,    // Tolerate use of `== null`.
+    "es5"           : false,    // Allow EcmaScript 5 syntax.
+    "esnext"        : false,    // Allow ES.next specific features such as `const` and `let`.
+    "evil"          : false,    // Tolerate use of `eval`.
+    "expr"          : false,    // Tolerate `ExpressionStatement` as Programs.
+    "funcscope"     : false,    // Tolerate declarations of variables inside of control structures while accessing them later from the outside.
+    "globalstrict"  : false,    // Allow global "use strict" (also enables 'strict').
+    "iterator"      : false,    // Allow usage of __iterator__ property.
+    "lastsemic"     : false,    // Tolerat missing semicolons when the it is omitted for the last statement in a one-line block.
+    "laxbreak"      : false,    // Tolerate unsafe line breaks e.g. `return [\n] x` without semicolons.
+    "laxcomma"      : false,    // Suppress warnings about comma-first coding style.
+    "loopfunc"      : false,    // Allow functions to be defined within loops.
+    "multistr"      : false,    // Tolerate multi-line strings.
+    "onecase"       : false,    // Tolerate switches with just one case.
+    "proto"         : false,    // Tolerate __proto__ property. This property is deprecated.
+    "regexdash"     : false,    // Tolerate unescaped last dash i.e. `[-...]`.
+    "scripturl"     : false,    // Tolerate script-targeted URLs.
+    "smarttabs"     : false,    // Tolerate mixed tabs and spaces when the latter are used for alignmnent only.
+    "shadow"        : false,    // Allows re-define variables later in code e.g. `var x=1; x=2;`.
+    "sub"           : false,    // Tolerate all forms of subscript notation besides dot notation e.g. `dict['key']` instead of `dict.key`.
+    "supernew"      : false,    // Tolerate `new function () { ... };` and `new Object;`.
+    "validthis"     : false,    // Tolerate strict violations when the code is running in strict mode and you use this in a non-constructor function.
+
+    "browser"       : true,     // Standard browser globals e.g. `window`, `document`.
+    "node"          : false,    // Enable globals available when code is running inside of the NodeJS runtime environment.
+
+    "nomen"         : false,    // Prohibit use of initial or trailing underbars in names.
+    "onevar"        : true,    // Allow only one `var` statement per function.
+    "passfail"      : false,    // Stop on first error.
+    "white"         : true,    // Check against strict whitespace and indentation rules.
+
+    "globals"        : {
+        "b2AABB" : false,
+        "b2Bound" : false,
+        "b2BoundValues" : false,
+        "b2ContactID" : false,
+        "b2ContactPoint" : false,
+        "b2DistanceInput" : false,
+        "b2DistanceOutput" : false,
+        "b2DistanceProxy" : false,
+        "b2DynamicTree" : false,
+        "b2DynamicTreeNode" : false,
+        "b2DynamicTreePair" : false,
+        "b2DynamicTreeBroadPhase" : false,
+        "b2Manifold" : false,
+        "b2ManifoldPoint" : false,
+        "b2RayCastInput" : false,
+        "b2RayCastOutput" : false,
+        "b2Segment" : false,
+        "b2SeparationFunction" : false,
+        "b2Simplex" : false,
+        "b2SimplexCache" : false,
+        "b2SimplexVertex" : false,
+        "b2TOIInput" : false,
+        "b2WorldManifold" : false,
+        "ClipVertex" : false,
+        "Features" : false,
+        "b2CircleShape" : false,
+        "b2EdgeChainDef" : false,
+        "b2EdgeShape" : false,
+        "b2MassData" : false,
+        "b2PolygonShape" : false,
+        "b2Shape" : false,
+        "b2Color" : false,
+        "b2Mat22" : false,
+        "b2Mat33" : false,
+        "b2Sweep" : false,
+        "b2Transform" : false,
+        "b2Vec2" : false,
+        "b2Vec3" : false,
+        "b2Body" : false,
+        "b2BodyDef" : false,
+        "b2ContactFilter" : false,
+        "b2ContactImpulse" : false,
+        "b2ContactListener" : false,
+        "b2ContactManager" : false,
+        "b2DebugDraw" : false,
+        "b2DestructionListener" : false,
+        "b2FilterData" : false,
+        "b2Fixture" : false,
+        "b2FixtureDef" : false,
+        "b2Island" : false,
+        "b2TimeStep" : false,
+        "b2World" : false,
+        "b2CircleContact" : false,
+        "b2Contact" : false,
+        "b2ContactConstraint" : false,
+        "b2ContactConstraintPoint" : false,
+        "b2ContactEdge" : false,
+        "b2ContactFactory" : false,
+        "b2ContactResult" : false,
+        "b2ContactSolver" : false,
+        "b2EdgeAndCircleContact" : false,
+        "b2PolyAndCircleContact" : false,
+        "b2PolyAndEdgeContact" : false,
+        "b2PolygonContact" : false,
+        "b2PositionSolverManifold" : false,
+        "b2BuoyancyController" : false,
+        "b2Controller" : false,
+        "b2ControllerEdge" : false,
+        "b2ConstantAccelController" : false,
+        "b2ConstantForceController" : false,
+        "b2GravityController" : false,
+        "b2TensorDampingController" : false,
+        "b2DistanceJoint" : false,
+        "b2DistanceJointDef" : false,
+        "b2FrictionJoint" : false,
+        "b2FrictionJointDef" : false,
+        "b2GearJoint" : false,
+        "b2GearJointDef" : false,
+        "b2Jacobian" : false,
+        "b2Joint" : false,
+        "b2JointDef" : false,
+        "b2JointEdge" : false,
+        "b2LineJoint" : false,
+        "b2LineJointDef" : false,
+        "b2MouseJoint" : false,
+        "b2MouseJointDef" : false,
+        "b2PrismaticJoint" : false,
+        "b2PrismaticJointDef" : false,
+        "b2PulleyJoint" : false,
+        "b2PulleyJointDef" : false,
+        "b2RevoluteJoint" : false,
+        "b2RevoluteJointDef" : false,
+        "b2WeldJoint" : false,
+        "b2WeldJointDef" : false,
+        "b2Settings" : false,
+        "b2Math" : false,
+        "Box2D" : false,
+        "extend" : false
+    }
+}

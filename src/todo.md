@@ -46,6 +46,8 @@ Find out what b2EdgeAndCircleContact.prototype.b2CollideEdgeAndCircle should be
 
 Make sure the while loop in b2Controller.prototype.RemoveBody was translated correctly
 
+Double check `if (this.useDensity) {` in b2BuoyancyController.Step
+
 
 # Changes
 
