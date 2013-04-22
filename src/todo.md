@@ -11,7 +11,7 @@ if(!(Object.prototype.defineProperty instanceof Function)
 		&& Object.prototype.__defineGetter__ instanceof Function
 		&& Object.prototype.__defineSetter__ instanceof Function)
 	{
-		Object.defineProperty = function(obj, p, cfg) {
+		Object.defineProperty=function(obj, p, cfg) {
 			if(cfg.get instanceof Function)
 				obj.__defineGetter__(p, cfg.get);
 			if(cfg.set instanceof Function)
@@ -66,4 +66,10 @@ Deleted b2NullContact
 \}\n	b2\w+\.prototype\.
 },
 
+	|
+
+,
+,
+
+var |
 	|
