@@ -1,12 +1,6 @@
 
 /* Joints */
 
-	function b2GearJointDef() {
-		b2GearJointDef.b2GearJointDef.apply(this, arguments);
-		if (this.constructor === b2GearJointDef) this.b2GearJointDef.apply(this, arguments);
-	};
-	Box2D.Dynamics.Joints.b2GearJointDef = b2GearJointDef;
-
 	function b2Jacobian() {
 		b2Jacobian.b2Jacobian.apply(this, arguments);
 	};
@@ -170,19 +164,6 @@ Box2D.postDefs = [];
 (function () {
 
 
-
-	Box2D.inherit(b2GearJointDef, Box2D.Dynamics.Joints.b2JointDef);
-	b2GearJointDef.prototype.__super = Box2D.Dynamics.Joints.b2JointDef.prototype;
-	b2GearJointDef.b2GearJointDef = function () {
-		Box2D.Dynamics.Joints.b2JointDef.b2JointDef.apply(this, arguments);
-	};
-	b2GearJointDef.prototype.b2GearJointDef = function () {
-		this.__super.b2JointDef.call(this);
-		this.type = b2Joint.e_gearJoint;
-		this.joint1 = null;
-		this.joint2 = null;
-		this.ratio = 1.0;
-	}
 	b2Jacobian.b2Jacobian = function () {
 		this.linearA = new b2Vec2();
 		this.linearB = new b2Vec2();
