@@ -6,6 +6,9 @@ Find b2Bound.value setter and try to get rid of that bitwise for a !
 
 Add `defineProperty` to the start.js file. See b2ContactID, Features, b2Color for its use. Consider switching to proper getter/setter?
 
+Object.defineProperty is not supported in IE7, FF 3.6, Safari 4, Opera 11.50
+
+
 ```javascript
 if(!(Object.prototype.defineProperty instanceof Function)
 		&& Object.prototype.__defineGetter__ instanceof Function
