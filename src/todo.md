@@ -48,6 +48,8 @@ Make sure the while loop in b2Controller.prototype.RemoveBody was translated cor
 
 Double check `if (this.useDensity) {` in b2BuoyancyController.Step
 
+Remove b2Joint.Destroy ?
+
 
 # Changes
 
