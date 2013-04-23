@@ -5,3 +5,5 @@ function b2GearJointDef() {
 	this.joint2 = null;
 	this.ratio = 1;
 }
+
+b2GearJointDef.prototype = new b2JointDef();
