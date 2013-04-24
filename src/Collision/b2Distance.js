@@ -1,4 +1,4 @@
-b2Distance = {
+var b2Distance = {
 	s_saveA : [],
 	s_saveB : [],
 
@@ -75,7 +75,7 @@ b2Distance = {
 
 			duplicate = false;
 			for (i = 0; i < saveCount; i++) {
-				if (vertex.indexA == saveA[i] && vertex.indexB == saveB[i]) {
+				if (vertex.indexA === saveA[i] && vertex.indexB === saveB[i]) {
 					duplicate = true;
 					break;
 				}
@@ -111,7 +111,7 @@ b2Distance = {
 				p.y = 0.5 * (output.pointA.y + output.pointB.y);
 				output.pointA.x = output.pointB.x = p.x;
 				output.pointA.y = output.pointB.y = p.y;
-				output.distance = 0.0;
+				output.distance = 0;
 			}
 		}
 	}
@@ -124,3 +124,8 @@ function b2DistanceOutput() {
 	this.pointA = new b2Vec2();
 	this.pointB = new b2Vec2();
 }
+
+
+whenReady(function () {
+	b2Distance.s_simplex = new b2Simplex();
+});

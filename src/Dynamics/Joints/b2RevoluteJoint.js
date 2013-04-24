@@ -494,3 +494,8 @@ b2RevoluteJoint.prototype = extend(new b2Joint(), {
 		return positionError <= b2Settings.b2_linearSlop && angularError <= b2Settings.b2_angularSlop;
 	}
 });
+
+
+whenReady(function () {
+	b2RevoluteJoint.tImpulse = new b2Vec2();
+});

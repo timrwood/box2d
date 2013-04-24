@@ -43,20 +43,22 @@
     "supernew"      : false,    // Tolerate `new function () { ... };` and `new Object;`.
     "validthis"     : false,    // Tolerate strict violations when the code is running in strict mode and you use this in a non-constructor function.
 
-    "browser"       : true,     // Standard browser globals e.g. `window`, `document`.
+    "browser"       : false,    // Standard browser globals e.g. `window`, `document`.
     "node"          : false,    // Enable globals available when code is running inside of the NodeJS runtime environment.
 
     "nomen"         : false,    // Prohibit use of initial or trailing underbars in names.
-    "onevar"        : true,    // Allow only one `var` statement per function.
+    "onevar"        : true,     // Allow only one `var` statement per function.
     "passfail"      : false,    // Stop on first error.
-    "white"         : true,    // Check against strict whitespace and indentation rules.
+    "white"         : true,     // Check against strict whitespace and indentation rules.
 
     "globals"        : {
         "b2AABB" : false,
         "b2Bound" : false,
         "b2BoundValues" : false,
+        "b2Collision" : false,
         "b2ContactID" : false,
         "b2ContactPoint" : false,
+        "b2Distance" : false,
         "b2DistanceInput" : false,
         "b2DistanceOutput" : false,
         "b2DistanceProxy" : false,
@@ -73,6 +75,7 @@
         "b2Simplex" : false,
         "b2SimplexCache" : false,
         "b2SimplexVertex" : false,
+        "b2TimeOfImpact" : false,
         "b2TOIInput" : false,
         "b2WorldManifold" : false,
         "ClipVertex" : false,
@@ -149,6 +152,8 @@
         "b2Settings" : false,
         "b2Math" : false,
         "Box2D" : false,
-        "extend" : false
+        "extend" : false,
+        "whenReady" : false,
+        "defineProperty" : false
     }
 }

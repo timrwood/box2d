@@ -1,4 +1,3 @@
-
 function b2Island() {
 	this.m_bodies = [];
 	this.m_contacts = [];
@@ -278,3 +277,7 @@ b2Island.prototype = {
 		this.m_joints[this.m_jointCount++] = joint;
 	}
 };
+
+whenReady(function () {
+	b2Island.s_impulse = new b2ContactImpulse();
+});

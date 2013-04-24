@@ -611,3 +611,8 @@ b2ContactSolver.prototype = {
 		return minSeparation > -1.5 * b2Settings.b2_linearSlop;
 	}
 };
+
+whenReady(function () {
+	b2ContactSolver.s_worldManifold = new b2WorldManifold();
+	b2ContactSolver.s_psm = new b2PositionSolverManifold();
+});

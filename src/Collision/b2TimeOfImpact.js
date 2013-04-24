@@ -116,7 +116,7 @@ var b2TimeOfImpact = {
 			alpha = newAlpha;
 			iter++;
 			b2TimeOfImpact.b2_toiIters++;
-			if (iter == k_maxIterations) {
+			if (iter === k_maxIterations) {
 				break;
 			}
 		}
@@ -124,3 +124,12 @@ var b2TimeOfImpact = {
 		return alpha;
 	}
 };
+
+whenReady(function () {
+	b2TimeOfImpact.s_cache = new b2SimplexCache();
+	b2TimeOfImpact.s_distanceInput = new b2DistanceInput();
+	b2TimeOfImpact.s_xfA = new b2Transform();
+	b2TimeOfImpact.s_xfB = new b2Transform();
+	b2TimeOfImpact.s_fcn = new b2SeparationFunction();
+	b2TimeOfImpact.s_distanceOutput = new b2DistanceOutput();
+});

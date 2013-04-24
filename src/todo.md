@@ -53,6 +53,11 @@ Double check `if (this.useDensity) {` in b2BuoyancyController.Step
 
 Remove b2Joint.Destroy ?
 
+Remove whenReady calls for direct object creation?
+
+Assign classes to Box2D object
+
+
 
 # Changes
 

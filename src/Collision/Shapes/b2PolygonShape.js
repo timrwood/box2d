@@ -172,7 +172,7 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 			tX = tVec.x - p1X;
 			tY = tVec.y - p1Y;
 			tVec = this.m_normals[i];
-			
+
 			numerator = (tVec.x * tX + tVec.y * tY);
 			denominator = (tVec.x * dX + tVec.y * dY);
 
@@ -453,7 +453,7 @@ b2PolygonShape.ComputeOBB = function (obb, vs, count) {
 	var i, j,
 		p = [],
 		minArea = Number.MAX_VALUE,
-		roo,
+		root,
 		uxX, uxY,
 		uyX, uyY,
 		length,
@@ -555,3 +555,7 @@ b2PolygonShape.AsOrientedBox = function (hx, hy, center, angle) {
 	polygonShape.SetAsOrientedBox(hx, hy, center, angle);
 	return polygonShape;
 };
+
+whenReady(function () {
+	b2PolygonShape.s_mat = new b2Mat22();
+});

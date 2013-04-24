@@ -1,5 +1,4 @@
-
-function b2Body() {
+function b2Body(bd) {
 	var tMat, tVec;
 
 	this.m_xf = new b2Transform();
@@ -776,3 +775,8 @@ b2Body.prototype = {
 		this.SynchronizeTransform();
 	}
 };
+
+
+whenReady(function () {
+	b2Body.s_xf1 = new b2Transform();
+});

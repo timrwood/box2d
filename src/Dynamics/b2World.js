@@ -1105,7 +1105,7 @@ b2World.prototype = {
 			);
 			break;
 		case b2Shape.e_polygonShape:
-			localVertices = poly.GetVertices();
+			localVertices = shape.GetVertices();
 			vertices = [];
 			for (i = 0; i < localVertices.length; i++) {
 				vertices[i] = b2Math.MulX(xf, localVertices[i]);
@@ -1113,8 +1113,18 @@ b2World.prototype = {
 			debugDraw.DrawSolidPolygon(vertices, localVertices.length, color);
 			break;
 		case b2Shape.e_edgeShape:
-			m_debugDraw.DrawSegment(b2Math.MulX(xf, shape.GetVertex1()), b2Math.MulX(xf, shape.GetVertex2()), color);
+			debugDraw.DrawSegment(b2Math.MulX(xf, shape.GetVertex1()), b2Math.MulX(xf, shape.GetVertex2()), color);
 			break;
 		}
 	}
 };
+
+whenReady(function () {
+	b2World.s_timestep2 = new b2TimeStep();
+	b2World.s_xf = new b2Transform();
+	b2World.s_backupA = new b2Sweep();
+	b2World.s_backupB = new b2Sweep();
+	b2World.s_timestep = new b2TimeStep();
+	b2World.s_queue = [];
+	b2World.s_jointColor = new b2Color(0.5, 0.8, 0.8);
+});

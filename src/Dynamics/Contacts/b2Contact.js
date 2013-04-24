@@ -220,3 +220,7 @@ b2Contact.prototype = {
 		return b2TimeOfImpact.TimeOfImpact(b2Contact.s_input);
 	}
 };
+
+whenReady(function () {
+	b2Contact.s_input = new b2TOIInput();
+});

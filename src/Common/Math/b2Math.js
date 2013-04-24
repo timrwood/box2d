@@ -153,3 +153,10 @@ var b2Math = {
 		return x > 0 && (x & (x - 1)) === 0;
 	}
 };
+
+
+whenReady(function () {
+	b2Math.b2Vec2_zero = new b2Vec2(0.0, 0.0);
+	b2Math.b2Mat22_identity = b2Mat22.FromVV(new b2Vec2(1.0, 0.0), new b2Vec2(0.0, 1.0));
+	b2Math.b2Transform_identity = new b2Transform(b2Math.b2Vec2_zero, b2Math.b2Mat22_identity);
+});
