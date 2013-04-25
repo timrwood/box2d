@@ -1,4 +1,4 @@
-function b2CircleShape (radius) {
+function b2CircleShape(radius) {
 	b2Shape.apply(this, arguments);
 	this.m_p = new b2Vec2();
 	this.m_type = b2Shape.e_circleShape;
@@ -81,7 +81,7 @@ b2CircleShape.prototype = extend(new b2Shape(), {
 			r2, l2,
 			area, com;
 
-		if (l < Number.MIN_VALUE -this.m_radius) {
+		if (l < Number.MIN_VALUE - this.m_radius) {
 			return 0;
 		}
 		if (l > this.m_radius) {

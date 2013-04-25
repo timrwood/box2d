@@ -18,7 +18,7 @@ b2SeparationFunction.prototype = {
 			s = 0,
 			sgn = 0,
 			pA, dA, pB, dB,
-			a, e, r, c, f, b, denom;
+			a, e, r, c, f, b, t, denom;
 
 		this.m_proxyA = proxyA;
 		this.m_proxyB = proxyB;
@@ -126,7 +126,9 @@ b2SeparationFunction.prototype = {
 			if (denom !== 0) {
 				s = b2Math.Clamp((b * f - c * e) / denom, 0, 1);
 			}
+
 			t = (b * s + f) / e;
+
 			if (t < 0) {
 				t = 0;
 				s = b2Math.Clamp((b - c) / a, 0, 1);

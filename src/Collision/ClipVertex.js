@@ -3,7 +3,7 @@ function ClipVertex() {
 	this.id = new b2ContactID();
 }
 
-ClipVertex.prototype ={
+ClipVertex.prototype = {
 	Set : function (other) {
 		this.v.SetV(other.v);
 		this.id.Set(other.id);

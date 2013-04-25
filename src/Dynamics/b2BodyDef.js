@@ -1,4 +1,4 @@
-function b2BodyDef () {
+function b2BodyDef() {
 	this.position = new b2Vec2();
 	this.linearVelocity = new b2Vec2();
 }

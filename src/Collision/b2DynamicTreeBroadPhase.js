@@ -42,6 +42,10 @@ b2DynamicTreeBroadPhase.prototype = {
 		return this.m_proxyCount;
 	},
 
+	__Query : function () {
+
+	},
+
 	UpdatePairs : function (callback) {
 		var __this = this,
 			m_pairBuffer = this.m_pairBuffer,
@@ -57,15 +61,16 @@ b2DynamicTreeBroadPhase.prototype = {
 
 		this.m_pairCount = 0;
 
-		for (i = 0; i < m_moveBuffer.length; ++i) {
+		/*jshint loopfunc: true */
+		for (i = 0; i < m_moveBuffer.length; i++) {
 			queryProxy = m_moveBuffer[i];
 			fatAABB = m_tree.GetFatAABB(queryProxy);
 			m_tree.Query(function (proxy) {
 				var pair;
-				if (proxy == queryProxy) {
+				if (proxy === queryProxy) {
 					return true;
 				}
-				if (__this.m_pairCount == m_pairBuffer.length) {
+				if (__this.m_pairCount === m_pairBuffer.length) {
 					m_pairBuffer[__this.m_pairCount] = new b2DynamicTreePair();
 				}
 				pair = m_pairBuffer[__this.m_pairCount];
@@ -85,7 +90,7 @@ b2DynamicTreeBroadPhase.prototype = {
 			callback(userDataA, userDataB);
 			while (i < this.m_pairCount) {
 				pair = m_pairBuffer[i];
-				if (pair.proxyA != primaryPair.proxyA || pair.proxyB != primaryPair.proxyB) {
+				if (pair.proxyA !== primaryPair.proxyA || pair.proxyB !== primaryPair.proxyB) {
 					break;
 				}
 				i++;

@@ -7,7 +7,6 @@ b2DistanceProxy.prototype = {
 	Set : function (shape) {
 		switch (shape.GetType()) {
 		case b2Shape.e_circleShape :
-			circle = (shape instanceof b2CircleShape ? shape : null);
 			this.m_vertices = [shape.m_p];
 			this.m_count = 1;
 			this.m_radius = shape.m_radius;

@@ -8,8 +8,8 @@ function b2ManifoldPoint() {
 b2ManifoldPoint.prototype = {
 	Reset : function () {
 		this.m_localPoint.SetZero();
-		this.m_normalImpulse = 0.0;
-		this.m_tangentImpulse = 0.0;
+		this.m_normalImpulse = 0;
+		this.m_tangentImpulse = 0;
 		this.m_id.key = 0;
 	},
 
@@ -19,4 +19,4 @@ b2ManifoldPoint.prototype = {
 		this.m_tangentImpulse = m.m_tangentImpulse;
 		this.m_id.Set(m.m_id);
 	}
-}
+};

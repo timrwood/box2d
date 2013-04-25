@@ -20,7 +20,7 @@ b2WorldManifold.prototype = {
 			clipPointY = 0,
 			pointAX, pointAY,
 			pointBX, pointBY,
-			dX, dY, d2,
+			dX, dY, d, d2,
 			cAX, cAY, cBX, cBY;
 
 		radiusA = radiusA || 0;

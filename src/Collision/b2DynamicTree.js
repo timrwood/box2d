@@ -83,7 +83,7 @@ b2DynamicTree.prototype = {
 		stack[count++] = this.m_root;
 
 		while (count > 0) {
-			 node = stack[--count];
+			node = stack[--count];
 			if (node.aabb.TestOverlap(aabb)) {
 				if (node.IsLeaf()) {
 					proceed = callback(node);
@@ -168,6 +168,7 @@ b2DynamicTree.prototype = {
 	},
 
 	AllocateNode : function () {
+		var node;
 		if (this.m_freeList) {
 			node = this.m_freeList;
 			this.m_freeList = node.parent;
@@ -220,7 +221,7 @@ b2DynamicTree.prototype = {
 		node2.aabb.Combine(leaf.aabb, sibling.aabb);
 
 		if (node1) {
-			if (sibling.parent.child1 == sibling) {
+			if (sibling.parent.child1 === sibling) {
 				node1.child1 = node2;
 			} else {
 				node1.child2 = node2;
@@ -251,7 +252,7 @@ b2DynamicTree.prototype = {
 			sibling,
 			oldAABB;
 
-		if (leaf == this.m_root) {
+		if (leaf === this.m_root) {
 			this.m_root = null;
 			return;
 		}
@@ -259,14 +260,14 @@ b2DynamicTree.prototype = {
 		node2 = leaf.parent;
 		node1 = node2.parent;
 
-		if (node2.child1 == leaf) {
+		if (node2.child1 === leaf) {
 			sibling = node2.child2;
 		} else {
 			sibling = node2.child1;
 		}
 
 		if (node1) {
-			if (node1.child1 == node2) {
+			if (node1.child1 === node2) {
 				node1.child1 = sibling;
 			} else {
 				node1.child2 = sibling;

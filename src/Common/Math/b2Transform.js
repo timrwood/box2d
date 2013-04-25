@@ -1,4 +1,4 @@
-function b2Transform (pos, r) {
+function b2Transform(pos, r) {
 	this.position = new b2Vec2();
 	this.R = new b2Mat22();
 	this.Initialize(pos, r);

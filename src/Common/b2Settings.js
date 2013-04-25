@@ -27,6 +27,7 @@ var b2Settings = {
 
 	b2Assert : function (a) {
 		if (!a) {
+			/*global console:false */
 			if (typeof console !== 'undefined') {
 				console.error("Assertion Failed");
 			} else {

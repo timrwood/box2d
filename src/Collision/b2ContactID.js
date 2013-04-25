@@ -1,4 +1,4 @@
-function b2ContactID () {
+function b2ContactID() {
 	this.features = new Features();
 }
 
@@ -19,22 +19,15 @@ b2ContactID.prototype = {
 };
 
 
-defineProperty(b2ContactID.prototype, 'key', {
-	enumerable: false,
-	configurable: true,
-	get: function () {
+defineProperty(b2ContactID.prototype, 'key',
+	function () {
 		return this._key;
-	}
-});
-
-defineProperty(b2ContactID.prototype, 'key', {
-	enumerable: false,
-	configurable: true,
-	set: function (value) {
+	},
+	function (value) {
 		this._key = value || 0;
 		this.features._referenceEdge = this._key & 0x000000ff;
 		this.features._incidentEdge = ((this._key & 0x0000ff00) >> 8) & 0x000000ff;
 		this.features._incidentVertex = ((this._key & 0x00ff0000) >> 16) & 0x000000ff;
 		this.features._flip = ((this._key & 0xff000000) >> 24) & 0x000000ff;
 	}
-});
+);

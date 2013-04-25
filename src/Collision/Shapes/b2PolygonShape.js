@@ -17,22 +17,24 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 		var i;
 		b2Shape.prototype.Set.call(this, other);
 		if (other instanceof b2PolygonShape) {
-			this.m_centroid.SetV(other2.m_centroid);
-			this.m_vertexCount = other2.m_vertexCount;
+			this.m_centroid.SetV(other.m_centroid);
+			this.m_vertexCount = other.m_vertexCount;
 			this.Reserve(this.m_vertexCount);
 			for (i = 0; i < this.m_vertexCount; i++) {
-				this.m_vertices[i].SetV(other2.m_vertices[i]);
-				this.m_normals[i].SetV(other2.m_normals[i]);
+				this.m_vertices[i].SetV(other.m_vertices[i]);
+				this.m_normals[i].SetV(other.m_normals[i]);
 			}
 		}
 	},
 
-	SetAsArray : function (vertices, vertexCount) {
+	SetAsArray : function (newVertices, vertexCount) {
 		var i,
 			i2,
-			edge;
+			edge,
+			vertices = this.m_vertices,
+			normals = this.m_normals;
 
-		vertexCount = vertexCount || vertices.length;
+		vertexCount = vertexCount || newVertices.length;
 
 		b2Settings.b2Assert(vertexCount > 1);
 
@@ -40,16 +42,16 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 		this.Reserve(vertexCount);
 
 		for (i = 0; i < vertexCount; i++) {
-			this.m_vertices[i].SetV(vertices[i]);
+			vertices[i].SetV(newVertices[i]);
 		}
 		for (i = 0; i < vertexCount; i++) {
 			i2 = (i + 1) % vertexCount;
-			edge = b2Math.SubtractVV(this.m_vertices[i2], this.m_vertices[i]); // TODO b2Vec2 reuse?
+			edge = b2Math.SubtractVV(vertices[i2], vertices[i]); // TODO b2Vec2 reuse?
 			b2Settings.b2Assert(edge.LengthSquared() > Number.MIN_VALUE);
-			this.m_normals[i].SetV(b2Math.CrossVF(edge, 1));
-			this.m_normals[i].Normalize();
+			normals[i].SetV(b2Math.CrossVF(edge, 1));
+			normals[i].Normalize();
 		}
-		this.m_centroid = b2PolygonShape.ComputeCentroid(this.m_vertices, this.m_vertexCount);
+		this.m_centroid = b2PolygonShape.ComputeCentroid(vertices, vertexCount);
 	},
 
 	SetAsBox : function (hx, hy) {
@@ -60,14 +62,14 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 		this.Reserve(4);
 
 		this.m_vertices[0].Set(-hx, -hy);
-		this.m_vertices[1].Set( hx, -hy);
-		this.m_vertices[2].Set( hx,  hy);
-		this.m_vertices[3].Set(-hx,  hy);
+		this.m_vertices[1].Set(hx, -hy);
+		this.m_vertices[2].Set(hx, hy);
+		this.m_vertices[3].Set(-hx, hy);
 
-		this.m_normals[0].Set( 0, -1);
-		this.m_normals[1].Set( 1,  0);
-		this.m_normals[2].Set( 0,  1);
-		this.m_normals[3].Set(-1,  0);
+		this.m_normals[0].Set(0, -1);
+		this.m_normals[1].Set(1, 0);
+		this.m_normals[2].Set(0, 1);
+		this.m_normals[3].Set(-1, 0);
 
 		this.m_centroid.SetZero();
 	},
@@ -84,14 +86,14 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 		this.Reserve(4);
 
 		this.m_vertices[0].Set(-hx, -hy);
-		this.m_vertices[1].Set( hx, -hy);
-		this.m_vertices[2].Set( hx,  hy);
-		this.m_vertices[3].Set(-hx,  hy);
+		this.m_vertices[1].Set(hx, -hy);
+		this.m_vertices[2].Set(hx, hy);
+		this.m_vertices[3].Set(-hx, hy);
 
-		this.m_normals[0].Set( 0, -1);
-		this.m_normals[1].Set( 1,  0);
-		this.m_normals[2].Set( 0,  1);
-		this.m_normals[3].Set(-1,  0);
+		this.m_normals[0].Set(0, -1);
+		this.m_normals[1].Set(1, 0);
+		this.m_normals[2].Set(0, 1);
+		this.m_normals[3].Set(-1, 0);
 
 		this.m_centroid.Set(center.x, center.y);
 
@@ -114,7 +116,7 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 		this.m_centroid.x = 0.5 * (v1.x + v2.x);
 		this.m_centroid.y = 0.5 * (v1.y + v2.y);
 
-		this.m_normals[0] = b2Math.CrossVF(b2Math.SubtractVV(v2, v1), 1.0); // TODO: Reuse b2Vec2?
+		this.m_normals[0] = b2Math.CrossVF(b2Math.SubtractVV(v2, v1), 1); // TODO: Reuse b2Vec2?
 		this.m_normals[0].Normalize();
 		this.m_normals[1].x = -this.m_normals[0].x;
 		this.m_normals[1].y = -this.m_normals[0].y;
@@ -153,7 +155,7 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 			p1Y = (tX * tMat.col2.x + tY * tMat.col2.y),
 			p2X, p2Y,
 			dX, dY,
-			index,
+			index, i,
 			numerator,
 			denominator;
 
@@ -176,7 +178,7 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 			numerator = (tVec.x * tX + tVec.y * tY);
 			denominator = (tVec.x * dX + tVec.y * dY);
 
-			if (denominator === 0) {
+			if (!denominator) {
 				if (numerator < 0) {
 					return false;
 				}
@@ -238,6 +240,7 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 			k_inv3 = 1 / 3,
 			p2, p3,
 			i,
+			p1X, p1Y,
 			e1X, e1Y,
 			e2X, e2Y, D,
 			triangleArea,
@@ -355,7 +358,7 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 
 		while (i !== outoIndex2) {
 			i = (i + 1) % this.m_vertexCount;
-			if (i == outoIndex2) {
+			if (i === outoIndex2) {
 				p3 = outoVec;
 			} else {
 				p3 = this.m_vertices[i];

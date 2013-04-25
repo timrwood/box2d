@@ -18,20 +18,14 @@ b2AABB.prototype = {
 	},
 
 	GetCenter : function (out) {
-		if (!out) {
-			console.error("TODO:out vec2");
-			out = new b2Vec2(0, 0);
-		}
+		out = out || new b2Vec2(); // TODO: b2Vec2 reuse?
 		out.x = (this.lowerBound.x + this.upperBound.x) / 2;
 		out.y = (this.lowerBound.y + this.upperBound.y) / 2;
 		return out;
 	},
 
 	GetExtents : function (out) {
-		if (!out) {
-			console.error("TODO:out vec2");
-			out = new b2Vec2(0, 0);
-		}
+		out = out || new b2Vec2(); // TODO: b2Vec2 reuse?
 		out.x = (this.upperBound.x - this.lowerBound.x) / 2;
 		out.y = (this.upperBound.y - this.lowerBound.y) / 2;
 		return out;

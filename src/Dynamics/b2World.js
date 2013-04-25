@@ -227,7 +227,7 @@ b2World.prototype = {
 			j.m_next.m_prev = j.m_prev;
 		}
 
-		if (j == this.m_jointList) {
+		if (j === this.m_jointList) {
 			this.m_jointList = j.m_next;
 		}
 
@@ -239,7 +239,7 @@ b2World.prototype = {
 			j.m_edgeA.next.prev = j.m_edgeA.prev;
 		}
 
-		if (j.m_edgeA == bodyA.m_jointList) {
+		if (j.m_edgeA === bodyA.m_jointList) {
 			bodyA.m_jointList = j.m_edgeA.next;
 		}
 
@@ -254,7 +254,7 @@ b2World.prototype = {
 			j.m_edgeB.next.prev = j.m_edgeB.prev;
 		}
 
-		if (j.m_edgeB == bodyB.m_jointList) {
+		if (j.m_edgeB === bodyB.m_jointList) {
 			bodyB.m_jointList = j.m_edgeB.next;
 		}
 

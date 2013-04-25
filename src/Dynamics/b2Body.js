@@ -1,4 +1,4 @@
-function b2Body(bd) {
+function b2Body(bd, world) {
 	var tMat, tVec;
 
 	this.m_xf = new b2Transform();
@@ -33,7 +33,7 @@ function b2Body(bd) {
 	this.m_xf.R.Set(bd.angle);
 
 	this.m_sweep.localCenter.SetZero();
-	this.m_sweep.t0 = 1.0;
+	this.m_sweep.t0 = 1;
 	this.m_sweep.a0 = this.m_sweep.a = bd.angle;
 
 	tMat = this.m_xf.R;
@@ -59,7 +59,7 @@ function b2Body(bd) {
 	this.m_sleepTime = 0;
 
 	this.m_type = bd.type;
-	if (this.m_type == b2Body.b2_dynamicBody) {
+	if (this.m_type === b2Body.b2_dynamicBody) {
 		this.m_mass = 1;
 		this.m_invMass = 1;
 	} else {
@@ -311,7 +311,7 @@ b2Body.prototype = {
 	},
 
 	ApplyImpulse : function (impulse, point) {
-		if (this.m_type != b2Body.b2_dynamicBody) {
+		if (this.m_type !== b2Body.b2_dynamicBody) {
 			return;
 		}
 		this.SetAwake(true);
@@ -383,7 +383,7 @@ b2Body.prototype = {
 			f.m_next = this.m_fixtureList;
 			this.m_fixtureList = f;
 			this.m_fixtureCount++;
-			f.m_body = body2;
+			f.m_body = other;
 			f = next;
 		}
 

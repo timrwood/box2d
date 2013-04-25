@@ -1,4 +1,4 @@
-function b2Vec2 (x, y) {
+function b2Vec2(x, y) {
 	this.x = x || 0;
 	this.y = y || 0;
 }

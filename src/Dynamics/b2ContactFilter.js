@@ -7,7 +7,7 @@ b2ContactFilter.prototype = {
 		var filter1 = fixtureA.GetFilterData(),
 			filter2 = fixtureB.GetFilterData();
 
-		if (filter1.groupIndex == filter2.groupIndex && filter1.groupIndex !== 0) {
+		if (filter1.groupIndex === filter2.groupIndex && filter1.groupIndex !== 0) {
 			return filter1.groupIndex > 0;
 		}
 

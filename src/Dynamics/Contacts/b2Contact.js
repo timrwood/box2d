@@ -44,7 +44,7 @@ b2Contact.prototype = {
 	},
 
 	IsSensor : function () {
-		return (this.m_flags & b2Contact.e_sensorFlag) == b2Contact.e_sensorFlag;
+		return (this.m_flags & b2Contact.e_sensorFlag) === b2Contact.e_sensorFlag;
 	},
 
 	SetEnabled : function (flag) {
@@ -56,7 +56,7 @@ b2Contact.prototype = {
 	},
 
 	IsEnabled : function () {
-		return (this.m_flags & b2Contact.e_enabledFlag) == b2Contact.e_enabledFlag;
+		return (this.m_flags & b2Contact.e_enabledFlag) === b2Contact.e_enabledFlag;
 	},
 
 	GetNext : function () {
@@ -170,7 +170,7 @@ b2Contact.prototype = {
 					for (j = 0; j < this.m_oldManifold.m_pointCount; j++) {
 						mp1 = this.m_oldManifold.m_points[j];
 
-						if (mp1.m_id.key == id2.key) {
+						if (mp1.m_id.key === id2.key) {
 							mp2.m_normalImpulse = mp1.m_normalImpulse;
 							mp2.m_tangentImpulse = mp1.m_tangentImpulse;
 							break;

@@ -55,10 +55,10 @@
         "b2AABB" : false,
         "b2Bound" : false,
         "b2BoundValues" : false,
-        "b2Collision" : false,
+        "b2Collision" : true,
         "b2ContactID" : false,
         "b2ContactPoint" : false,
-        "b2Distance" : false,
+        "b2Distance" : true,
         "b2DistanceInput" : false,
         "b2DistanceOutput" : false,
         "b2DistanceProxy" : false,
@@ -75,7 +75,7 @@
         "b2Simplex" : false,
         "b2SimplexCache" : false,
         "b2SimplexVertex" : false,
-        "b2TimeOfImpact" : false,
+        "b2TimeOfImpact" : true,
         "b2TOIInput" : false,
         "b2WorldManifold" : false,
         "ClipVertex" : false,
@@ -149,11 +149,12 @@
         "b2RevoluteJointDef" : false,
         "b2WeldJoint" : false,
         "b2WeldJointDef" : false,
-        "b2Settings" : false,
-        "b2Math" : false,
-        "Box2D" : false,
+        "b2Settings" : true,
+        "b2Math" : true,
+        "Box2D" : true,
         "extend" : false,
         "whenReady" : false,
-        "defineProperty" : false
+        "defineProperty" : false,
+        "ready" : false
     }
 }

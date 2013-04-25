@@ -11,8 +11,7 @@ defineProperty(Features.prototype, 'referenceEdge',
 		return this._referenceEdge;
 	},
 	function (value) {
-		if (value === undefined) value = 0;
-		this._referenceEdge = value;
+		this._referenceEdge = value || 0;
 		this._m_id._key = (this._m_id._key & 0xffffff00) | (this._referenceEdge & 0x000000ff);
 	}
 );
@@ -22,8 +21,7 @@ defineProperty(Features.prototype, 'incidentEdge',
 		return this._incidentEdge;
 	},
 	function (value) {
-		if (value === undefined) value = 0;
-		this._incidentEdge = value;
+		this._incidentEdge = value || 0;
 		this._m_id._key = (this._m_id._key & 0xffff00ff) | ((this._incidentEdge << 8) & 0x0000ff00);
 	}
 );
@@ -33,8 +31,7 @@ defineProperty(Features.prototype, 'incidentVertex',
 		return this._incidentVertex;
 	},
 	function (value) {
-		if (value === undefined) value = 0;
-		this._incidentVertex = value;
+		this._incidentVertex = value || 0;
 		this._m_id._key = (this._m_id._key & 0xff00ffff) | ((this._incidentVertex << 16) & 0x00ff0000);
 	}
 );
@@ -44,8 +41,7 @@ defineProperty(Features.prototype, 'flip',
 		return this._flip;
 	},
 	function (value) {
-		if (value === undefined) value = 0;
-		this._flip = value;
+		this._flip = value || 0;
 		this._m_id._key = (this._m_id._key & 0x00ffffff) | ((this._flip << 24) & 0xff000000);
 	}
 );

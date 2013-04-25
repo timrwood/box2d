@@ -26,7 +26,7 @@ var b2Math = {
 	},
 
 	MulTMV : function (A, v) {
-		return new b2Vec2(b2Math.Dot(v, A.col1), Dot(v, A.col2));
+		return new b2Vec2(b2Math.Dot(v, A.col1), b2Math.Dot(v, A.col2));
 	},
 
 	MulX : function (T, v) {
@@ -80,10 +80,9 @@ var b2Math = {
 	},
 
 	MulTMM : function (A, B) {
-		var c1 = new b2Vec2(b2Math.Dot(A.col1, B.col1), b2Math.Dot(A.col2, B.col1));
-		var c2 = new b2Vec2(b2Math.Dot(A.col1, B.col2), b2Math.Dot(A.col2, B.col2));
-		var C = b2Mat22.FromVV(c1, c2);
-		return C;
+		var c1 = new b2Vec2(b2Math.Dot(A.col1, B.col1), b2Math.Dot(A.col2, B.col1)),
+			c2 = new b2Vec2(b2Math.Dot(A.col1, B.col2), b2Math.Dot(A.col2, B.col2));
+		return b2Mat22.FromVV(c1, c2);
 	},
 
 	Abs : function (a) {
@@ -156,7 +155,7 @@ var b2Math = {
 
 
 whenReady(function () {
-	b2Math.b2Vec2_zero = new b2Vec2(0.0, 0.0);
-	b2Math.b2Mat22_identity = b2Mat22.FromVV(new b2Vec2(1.0, 0.0), new b2Vec2(0.0, 1.0));
+	b2Math.b2Vec2_zero = new b2Vec2();
+	b2Math.b2Mat22_identity = b2Mat22.FromVV(new b2Vec2(1, 0), new b2Vec2(0, 1));
 	b2Math.b2Transform_identity = new b2Transform(b2Math.b2Vec2_zero, b2Math.b2Mat22_identity);
 });
