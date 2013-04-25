@@ -55,28 +55,33 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 	},
 
 	SetAsBox : function (hx, hy) {
+		var vertices = this.m_vertices,
+			normals = this.m_normals;
+
 		hx = hx || 0;
 		hy = hy || 0;
 
 		this.m_vertexCount = 4;
 		this.Reserve(4);
 
-		this.m_vertices[0].Set(-hx, -hy);
-		this.m_vertices[1].Set(hx, -hy);
-		this.m_vertices[2].Set(hx, hy);
-		this.m_vertices[3].Set(-hx, hy);
+		vertices[0].Set(-hx, -hy);
+		vertices[1].Set(hx, -hy);
+		vertices[2].Set(hx, hy);
+		vertices[3].Set(-hx, hy);
 
-		this.m_normals[0].Set(0, -1);
-		this.m_normals[1].Set(1, 0);
-		this.m_normals[2].Set(0, 1);
-		this.m_normals[3].Set(-1, 0);
+		normals[0].Set(0, -1);
+		normals[1].Set(1, 0);
+		normals[2].Set(0, 1);
+		normals[3].Set(-1, 0);
 
 		this.m_centroid.SetZero();
 	},
 
 	SetAsOrientedBox : function (hx, hy, center, angle) {
 		var xf = new b2Transform(),
-			i;
+			i,
+			vertices = this.m_vertices,
+			normals = this.m_normals;
 
 		hx = hx || 0;
 		hy = hy || 0;
@@ -85,15 +90,15 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 		this.m_vertexCount = 4;
 		this.Reserve(4);
 
-		this.m_vertices[0].Set(-hx, -hy);
-		this.m_vertices[1].Set(hx, -hy);
-		this.m_vertices[2].Set(hx, hy);
-		this.m_vertices[3].Set(-hx, hy);
+		vertices[0].Set(-hx, -hy);
+		vertices[1].Set(hx, -hy);
+		vertices[2].Set(hx, hy);
+		vertices[3].Set(-hx, hy);
 
-		this.m_normals[0].Set(0, -1);
-		this.m_normals[1].Set(1, 0);
-		this.m_normals[2].Set(0, 1);
-		this.m_normals[3].Set(-1, 0);
+		normals[0].Set(0, -1);
+		normals[1].Set(1, 0);
+		normals[2].Set(0, 1);
+		normals[3].Set(-1, 0);
 
 		this.m_centroid.Set(center.x, center.y);
 
@@ -101,8 +106,8 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 		xf.R.Set(angle);
 
 		for (i = 0; i < 4; i++) {
-			this.m_vertices[i] = b2Math.MulX(xf, this.m_vertices[i]); // TODO: Reuse b2Vec2?
-			this.m_normals[i] = b2Math.MulMV(xf.R, this.m_normals[i]); // TODO: Reuse b2Vec2?
+			vertices[i] = b2Math.MulX(xf, vertices[i]); // TODO: Reuse b2Vec2?
+			normals[i] = b2Math.MulMV(xf.R, normals[i]); // TODO: Reuse b2Vec2?
 		}
 	},
 
