@@ -14,7 +14,18 @@ module.exports = function (grunt) {
 				stripBanners: true
 			},
 			dist: {
-				src: ['src/start.js', "src/**/*.js", "src/end.js"],
+				src: [
+					"src/start.js",
+					"src/Common/*.js",
+					"src/Common/Math/*.js",
+					"src/Collision/*.js",
+					"src/Collision/Shapes/*.js",
+					"src/Dynamics/*.js",
+					"src/Dynamics/Contacts/*.js",
+					"src/Dynamics/Controllers/*.js",
+					"src/Dynamics/Joints/*.js",
+					"src/end.js"
+				],
 				dest: 'dist/<%= pkg.name %>.js'
 			}
 		},

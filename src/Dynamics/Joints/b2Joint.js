@@ -1,4 +1,5 @@
 function b2Joint(def) {
+	def = def || {};
 	b2Settings.b2Assert(def.bodyA !== def.bodyB);
 	this.m_type = def.type;
 	this.m_prev = null;

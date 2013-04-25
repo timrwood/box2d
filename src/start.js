@@ -1,17 +1,15 @@
-var Box2D = {
-	Collision : {
-		Shapes : {}
-	},
-	Common : {
+var Box2D = {},
+	Collision = Box2D.Collision = {},
+	Shapes = Collision.Shapes = {},
+	Common = Box2D.Common = {
 		Math : {}
 	},
-	Dynamics : {
-		Contacts : {},
-		Controllers : {},
-		Joints : {}
-	}
-},
-callbacks = [];
+	Dynamics = Box2D.Dynamics = {},
+	Contacts = Dynamics.Contacts = {},
+	Controllers = Dynamics.Controllers = {},
+	Joints = Dynamics.Joints = {},
+
+	callbacks = [];
 
 function generateCallback(context, cb) {
 	return function () {
@@ -21,8 +19,8 @@ function generateCallback(context, cb) {
 
 // TODO: Remove in favor of proper getter/setter methods
 function defineProperty(obj, p, get, set) {
-	obj.__defineGetter__(p, get);
-	obj.__defineSetter__(p, set);
+	// obj.__defineGetter__(p, get);
+	// obj.__defineSetter__(p, set);
 }
 
 function whenReady(cb) {
@@ -33,4 +31,8 @@ function ready() {
 	while (callbacks.length) {
 		callbacks.pop()();
 	}
+}
+
+function extend (a, b) {
+	return b;
 }
