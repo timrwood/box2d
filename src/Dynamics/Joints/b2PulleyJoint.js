@@ -27,9 +27,13 @@ function b2PulleyJoint(def) {
 	this.m_limitImpulse2 = 0;
 }
 
+Box2D.b2PulleyJoint = b2PulleyJoint;
+
+inherit(b2Joint, b2PulleyJoint);
+
 b2PulleyJoint.b2_minPulleyLength = 2;
 
-b2PulleyJoint.prototype = extend(new b2Joint(), {
+b2PulleyJoint.prototype = {
 	GetAnchorA : function () {
 		return this.m_bodyA.GetWorldPoint(this.m_localAnchor1);
 	},
@@ -488,4 +492,4 @@ b2PulleyJoint.prototype = extend(new b2Joint(), {
 		}
 		return linearError < b2Settings.b2_linearSlop;
 	}
-});
+};

@@ -12,7 +12,9 @@ function b2RevoluteJointDef() {
 	this.enableMotor = false;
 }
 
-b2RevoluteJointDef.prototype = extend(new b2JointDef(), {
+Box2D.b2RevoluteJointDef = b2RevoluteJointDef;
+
+b2RevoluteJointDef.prototype = {
 	Initialize : function (bA, bB, anchor) {
 		this.bodyA = bA;
 		this.bodyB = bB;
@@ -20,4 +22,4 @@ b2RevoluteJointDef.prototype = extend(new b2JointDef(), {
 		this.localAnchorB.SetV(bB.GetLocalPoint(anchor));
 		this.referenceAngle = bB.GetAngle() - bA.GetAngle();
 	}
-});
+};

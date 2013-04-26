@@ -3,6 +3,8 @@ function b2AABB() {
 	this.upperBound = new b2Vec2();
 }
 
+Box2D.b2AABB = b2AABB;
+
 b2AABB.Combine = function (aabb1, aabb2) {
 	var aabb = new b2AABB();
 	aabb.Combine(aabb1, aabb2);

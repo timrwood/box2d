@@ -13,6 +13,7 @@ b2Contact.e_enabledFlag    = 16;
 b2Contact.e_touchingFlag   = 32;
 b2Contact.e_continuousFlag = 64;
 
+Box2D.b2Contact = b2Contact;
 
 b2Contact.prototype = {
 	GetManifold : function () {

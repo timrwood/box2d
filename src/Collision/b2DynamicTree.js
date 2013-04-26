@@ -5,6 +5,8 @@ function b2DynamicTree() {
 	this.m_insertionCount = 0;
 }
 
+Box2D.b2DynamicTree = b2DynamicTree;
+
 b2DynamicTree.prototype = {
 	CreateProxy : function (aabb, userData) {
 		var node = this.AllocateNode(),

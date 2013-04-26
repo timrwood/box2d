@@ -2,6 +2,8 @@ function b2Color() {
 	this.Set.apply(this, arguments);
 }
 
+Box2D.b2Color = b2Color;
+
 b2Color.prototype = {
 	Set : function (rr, gg, bb) {
 		this._r = ~~(255 * b2Math.Clamp(rr || 0, 0, 1));

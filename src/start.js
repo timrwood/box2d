@@ -1,14 +1,4 @@
 var Box2D = {},
-	Collision = Box2D.Collision = {},
-	Shapes = Collision.Shapes = {},
-	Common = Box2D.Common = {
-		Math : {}
-	},
-	Dynamics = Box2D.Dynamics = {},
-	Contacts = Dynamics.Contacts = {},
-	Controllers = Dynamics.Controllers = {},
-	Joints = Dynamics.Joints = {},
-
 	callbacks = [];
 
 function generateCallback(context, cb) {
@@ -33,6 +23,15 @@ function ready() {
 	}
 }
 
-function extend (a, b) {
-	return b;
+function inherit(a, b) {
+	whenReady(function () {
+		var name,
+			ap = a.prototype,
+			bp = b.prototype;
+		for (name in ap) {
+			if (ap.hasOwnProperty(name) && !bp.hasOwnProperty(name)) {
+				bp[name] = ap[name];
+			}
+		}
+	});
 }

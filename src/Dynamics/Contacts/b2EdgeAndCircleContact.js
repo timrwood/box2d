@@ -2,7 +2,11 @@ function b2EdgeAndCircleContact() {
 	b2Contact.apply(this, arguments);
 }
 
-b2EdgeAndCircleContact.prototype = extend(new b2Contact(), {
+Box2D.b2EdgeAndCircleContact = b2EdgeAndCircleContact;
+
+inherit(b2Contact, b2EdgeAndCircleContact);
+
+b2EdgeAndCircleContact.prototype = {
 	Evaluate : function () {
 		var fA = this.m_fixtureA,
 			fB = this.m_fixtureB;
@@ -17,4 +21,4 @@ b2EdgeAndCircleContact.prototype = extend(new b2Contact(), {
 	},
 
 	b2CollideEdgeAndCircle : function (manifold, edge, xf1, circle, xf2) {}
-});
+};

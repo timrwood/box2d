@@ -5,7 +5,11 @@ function b2CircleShape(radius) {
 	this.m_radius = radius || 0;
 }
 
-b2CircleShape.prototype = extend(new b2Shape(), {
+Box2D.b2CircleShape = b2CircleShape;
+
+inherit(b2Shape, b2CircleShape);
+
+b2CircleShape.prototype = {
 	Copy : function () {
 		var s = new b2CircleShape();
 		s.Set(this);
@@ -113,4 +117,4 @@ b2CircleShape.prototype = extend(new b2Shape(), {
 	SetRadius : function (radius) {
 		this.m_radius = radius || 0;
 	}
-});
+};

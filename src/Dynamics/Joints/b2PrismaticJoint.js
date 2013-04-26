@@ -27,7 +27,11 @@ function b2PrismaticJoint(def) {
 	this.m_limitState = b2Joint.e_inactiveLimit;
 }
 
-b2PrismaticJoint.prototype = extend(new b2Joint(), {
+Box2D.b2PrismaticJoint = b2PrismaticJoint;
+
+inherit(b2Joint, b2PrismaticJoint);
+
+b2PrismaticJoint.prototype = {
 	GetAnchorA : function () {
 		return this.m_bodyA.GetWorldPoint(this.m_localAnchor1);
 	},
@@ -565,4 +569,4 @@ b2PrismaticJoint.prototype = extend(new b2Joint(), {
 
 		return linearError <= b2Settings.b2_linearSlop && angularError <= b2Settings.b2_angularSlop;
 	}
-});
+};

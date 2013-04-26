@@ -532,6 +532,8 @@ var b2Collision = {
 	}
 };
 
+Box2D.b2Collision = b2Collision;
+
 whenReady(function () {
 	b2Collision.s_incidentEdge = b2Collision.MakeClipPointVector();
 	b2Collision.s_clipPoints1 = b2Collision.MakeClipPointVector();

@@ -5,6 +5,8 @@ function b2DynamicTreeBroadPhase() {
 	this.m_pairCount = 0;
 }
 
+Box2D.b2DynamicTreeBroadPhase = b2DynamicTreeBroadPhase;
+
 b2DynamicTreeBroadPhase.prototype = {
 
 	CreateProxy : function (aabb, userData) {

@@ -4,6 +4,8 @@ function b2FilterData() {
 	this.groupIndex = 0;
 }
 
+Box2D.b2FilterData = b2FilterData;
+
 b2FilterData.prototype = {
 	Copy : function () {
 		var copy = new b2FilterData();

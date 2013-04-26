@@ -3,6 +3,8 @@ function b2ContactSolver() {
 	this.m_constraints = [];
 }
 
+Box2D.b2ContactSolver = b2ContactSolver;
+
 b2ContactSolver.prototype = {
 	Initialize : function (step, contacts, contactCount) {
 		var contact,

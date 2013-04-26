@@ -3,6 +3,8 @@ function b2Shape() {
 	this.m_radius = b2Settings.b2_linearSlop;
 }
 
+Box2D.b2Shape = b2Shape;
+
 b2Shape.e_unknownShape = -1;
 b2Shape.e_circleShape = 0;
 b2Shape.e_polygonShape = 1;

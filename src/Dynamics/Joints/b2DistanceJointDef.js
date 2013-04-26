@@ -8,7 +8,9 @@ function b2DistanceJointDef(def) {
 	this.localAnchorB = new b2Vec2();
 }
 
-b2DistanceJointDef.prototype = extend(new b2JointDef(), {
+Box2D.b2DistanceJointDef = b2DistanceJointDef;
+
+b2DistanceJointDef.prototype = {
 	Initialize : function (bA, bB, anchorA, anchorB) {
 		var dX = anchorB.x - anchorA.x,
 			dY = anchorB.y - anchorA.y;
@@ -21,4 +23,4 @@ b2DistanceJointDef.prototype = extend(new b2JointDef(), {
 
 		this.length = Math.sqrt(dX * dX + dY * dY);
 	}
-});
+};

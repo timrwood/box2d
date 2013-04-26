@@ -126,6 +126,10 @@ function b2DistanceOutput() {
 }
 
 
+Box2D.b2DistanceOutput = b2DistanceOutput;
+Box2D.b2DistanceInput = b2DistanceInput;
+Box2D.b2Distance = b2Distance;
+
 whenReady(function () {
 	b2Distance.s_simplex = new b2Simplex();
 });

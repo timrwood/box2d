@@ -11,7 +11,11 @@ function b2DistanceJoint(def) {
 	this.m_bias = 0;
 }
 
-b2DistanceJoint.prototype = extend(new b2Joint(), {
+Box2D.b2DistanceJoint = b2DistanceJoint;
+
+inherit(b2Joint, b2DistanceJoint);
+
+b2DistanceJoint.prototype = {
 	GetAnchorA : function () {
 		return this.m_bodyA.GetWorldPoint(this.m_localAnchor1);
 	},
@@ -260,4 +264,4 @@ b2DistanceJoint.prototype = extend(new b2Joint(), {
 
 		return Math.abs(C) < b2Settings.b2_linearSlop;
 	}
-});
+};

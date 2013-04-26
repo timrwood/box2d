@@ -2,7 +2,11 @@ function b2PolyAndCircleContact() {
 	b2Contact.apply(this, arguments);
 }
 
-b2PolyAndCircleContact.prototype = extend(new b2Contact(), {
+Box2D.b2PolyAndCircleContact = b2PolyAndCircleContact;
+
+inherit(b2Contact, b2PolyAndCircleContact);
+
+b2PolyAndCircleContact.prototype = {
 	Evaluate : function () {
 		var fA = this.m_fixtureA,
 			fB = this.m_fixtureB;
@@ -15,4 +19,4 @@ b2PolyAndCircleContact.prototype = extend(new b2Contact(), {
 			fB.GetBody().m_xf
 		);
 	}
-});
+};

@@ -2,7 +2,6 @@ ready();
 
 this.Box2D = Box2D;
 
-
 /*global module:false */
 if (typeof module !== "undefined") {
 	module.exports = Box2D;

@@ -7,3 +7,5 @@ function b2ContactImpulse() {
 		this.normalImpulses[i] = this.tangentImpulses[i] = 0;
 	}
 }
+
+Box2D.b2ContactImpulse = b2ContactImpulse;

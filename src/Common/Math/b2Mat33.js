@@ -13,6 +13,8 @@ function b2Mat33(c1, c2, c3) {
 	}
 }
 
+Box2D.b2Mat33 = b2Mat33;
+
 b2Mat33.prototype = {
 	SetVVV : function (c1, c2, c3) {
 		this.col1.SetV(c1);

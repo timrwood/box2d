@@ -11,7 +11,11 @@ function b2BuoyancyController() {
 	this.gravity = null;
 }
 
-b2BuoyancyController.prototype = extend(new b2Controller(), {
+Box2D.b2BuoyancyController = b2BuoyancyController;
+
+inherit(b2Controller, b2BuoyancyController);
+
+b2BuoyancyController.prototype = {
 	Step : function (step) {
 		var i,
 			body,
@@ -101,4 +105,4 @@ b2BuoyancyController.prototype = extend(new b2Controller(), {
 
 		debugDraw.DrawSegment(p1, p2, new b2Color(0, 0, 1));
 	}
-});
+};

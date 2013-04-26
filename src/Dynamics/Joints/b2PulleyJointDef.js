@@ -17,7 +17,9 @@ function b2PulleyJointDef() {
 	this.collideConnected = true;
 }
 
-b2PulleyJointDef.prototype = extend(new b2JointDef(), {
+Box2D.b2PulleyJointDef = b2PulleyJointDef;
+
+b2PulleyJointDef.prototype = {
 	Initialize : function (bA, bB, gaA, gaB, anchorA, anchorB, r) {
 		var d1X, d1Y,
 			d2X, d2Y,
@@ -48,4 +50,4 @@ b2PulleyJointDef.prototype = extend(new b2JointDef(), {
 		this.maxLengthA = C - this.ratio * b2PulleyJoint.b2_minPulleyLength;
 		this.maxLengthB = (C - b2PulleyJoint.b2_minPulleyLength) / this.ratio;
 	}
-});
+};

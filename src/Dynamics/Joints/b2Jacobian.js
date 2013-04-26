@@ -3,7 +3,9 @@ function b2Jacobian() {
 	this.linearB = new b2Vec2();
 }
 
-b2GearJointDef.prototype = {
+Box2D.b2Jacobian = b2Jacobian;
+
+b2Jacobian.prototype = {
 	SetZero : function () {
 		this.linearA.SetZero();
 		this.linearB.SetZero();

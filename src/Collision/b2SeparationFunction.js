@@ -3,6 +3,8 @@ function b2SeparationFunction() {
 	this.m_axis = new b2Vec2();
 }
 
+Box2D.b2SeparationFunction = b2SeparationFunction;
+
 b2SeparationFunction.prototype = {
 	Initialize : function (cache, proxyA, transformA, proxyB, transformB) {
 		var count = cache.count,

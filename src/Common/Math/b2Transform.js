@@ -4,6 +4,8 @@ function b2Transform(pos, r) {
 	this.Initialize(pos, r);
 }
 
+Box2D.b2Transform = b2Transform;
+
 b2Transform.prototype = {
 	Initialize : function (pos, r) {
 		if (pos) {

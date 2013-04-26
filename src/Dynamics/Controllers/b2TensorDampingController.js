@@ -4,7 +4,11 @@ function b2TensorDampingController() {
 	this.maxTimestep = 0;
 }
 
-b2TensorDampingController.prototype = extend(new b2Controller(), {
+Box2D.b2TensorDampingController = b2TensorDampingController;
+
+inherit(b2Controller, b2TensorDampingController);
+
+b2TensorDampingController.prototype = {
 	SetAxisAligned : function (xDamping, yDamping) {
 		xDamping = xDamping || 0;
 		yDamping = yDamping || 0;
@@ -50,4 +54,4 @@ b2TensorDampingController.prototype = extend(new b2Controller(), {
 			body.SetLinearVelocity(vel);
 		}
 	}
-});
+};

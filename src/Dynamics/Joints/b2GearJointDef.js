@@ -6,4 +6,4 @@ function b2GearJointDef() {
 	this.ratio = 1;
 }
 
-b2GearJointDef.prototype = new b2JointDef();
+Box2D.b2GearJointDef = b2GearJointDef;

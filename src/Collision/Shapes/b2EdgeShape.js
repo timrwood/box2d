@@ -21,7 +21,11 @@ function b2EdgeShape(v1, v2) {
 	this.m_nextEdge = null;
 }
 
-b2EdgeShape.prototype = extend(new b2Shape(), {
+Box2D.b2EdgeShape = b2EdgeShape;
+
+inherit(b2Shape, b2EdgeShape);
+
+b2EdgeShape.prototype = {
 	TestPoint : function (transform, p) {
 		return false;
 	},
@@ -215,4 +219,4 @@ b2EdgeShape.prototype = extend(new b2Shape(), {
 		this.m_cornerDir2 = cornerDir;
 		this.m_cornerConvex2 = convex;
 	}
-});
+};

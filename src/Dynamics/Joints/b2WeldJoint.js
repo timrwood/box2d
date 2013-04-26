@@ -5,10 +5,13 @@ function b2WeldJoint(def) {
 	this.m_impulse = new b2Vec3();
 	this.m_mass = new b2Mat33();
 	this.m_referenceAngle = def.referenceAngle;
-
 }
 
-b2WeldJoint.prototype = extend(new b2Joint(), {
+Box2D.b2WeldJoint = b2WeldJoint;
+
+inherit(b2Joint, b2WeldJoint);
+
+b2WeldJoint.prototype = {
 	GetAnchorA : function () {
 		return this.m_bodyA.GetWorldPoint(this.m_localAnchorA);
 	},
@@ -230,4 +233,4 @@ b2WeldJoint.prototype = extend(new b2Joint(), {
 
 		return positionError <= b2Settings.b2_linearSlop && angularError <= b2Settings.b2_angularSlop;
 	}
-});
+};

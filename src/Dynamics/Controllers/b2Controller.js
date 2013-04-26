@@ -2,6 +2,8 @@ function b2Controller() {
 
 }
 
+Box2D.b2Controller = b2Controller;
+
 b2Controller.prototype = {
 	Step : function (step) {},
 

@@ -5,3 +5,5 @@ function b2JointDef() {
 	this.bodyB = null;
 	this.collideConnected = false;
 }
+
+Box2D.b2JointDef = b2JointDef;

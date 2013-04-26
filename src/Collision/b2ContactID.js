@@ -2,6 +2,8 @@ function b2ContactID() {
 	this.features = new Features();
 }
 
+Box2D.b2ContactID = b2ContactID;
+
 b2ContactID.prototype = {
 	b2ContactID : function () {
 		this.features._m_id = this;

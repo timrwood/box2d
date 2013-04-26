@@ -41,7 +41,11 @@ function b2GearJoint(def) {
 	this.m_impulse = 0;
 }
 
-b2GearJoint.prototype = extend(new b2Joint(), {
+Box2D.b2GearJoint = b2GearJoint;
+
+inherit(b2Joint, b2GearJoint);
+
+b2GearJoint.prototype = {
 	GetAnchorA : function () {
 		return this.m_bodyA.GetWorldPoint(this.m_localAnchor1);
 	},
@@ -225,4 +229,4 @@ b2GearJoint.prototype = extend(new b2Joint(), {
 
 		return linearError < b2Settings.b2_linearSlop;
 	}
-});
+};

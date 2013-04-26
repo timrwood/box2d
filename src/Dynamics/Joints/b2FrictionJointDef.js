@@ -5,14 +5,15 @@ function b2FrictionJointDef(def) {
 	this.type = b2Joint.e_frictionJoint;
 	this.maxForce = 0;
 	this.maxTorque = 0;
-
 }
 
-b2FrictionJointDef.prototype = extend(new b2JointDef(), {
+Box2D.b2FrictionJointDef = b2FrictionJointDef;
+
+b2FrictionJointDef.prototype = {
 	Initialize : function (bA, bB, anchor) {
 		this.bodyA = bA;
 		this.bodyB = bB;
 		this.localAnchorA.SetV(this.bodyA.GetLocalPoint(anchor));
 		this.localAnchorB.SetV(this.bodyB.GetLocalPoint(anchor));
 	}
-});
+};

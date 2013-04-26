@@ -27,7 +27,11 @@ function b2LineJoint(def) {
 	this.m_limitState = b2Joint.e_inactiveLimit;
 }
 
-b2LineJoint.prototype = extend(new b2Joint(), {
+Box2D.b2LineJoint = b2LineJoint;
+
+inherit(b2Joint, b2LineJoint);
+
+b2LineJoint.prototype = {
 	GetAnchorA : function () {
 		return this.m_bodyA.GetWorldPoint(this.m_localAnchor1);
 	},
@@ -554,4 +558,4 @@ b2LineJoint.prototype = extend(new b2Joint(), {
 		return linearError <= b2Settings.b2_linearSlop && angularError <= b2Settings.b2_angularSlop;
 	}
 
-});
+};

@@ -1,6 +1,8 @@
 function b2Joint(def) {
 	def = def || {};
-	b2Settings.b2Assert(def.bodyA !== def.bodyB);
+	if (def.bodyA && def.bodyB) {
+		b2Settings.b2Assert(def.bodyA !== def.bodyB);
+	}
 	this.m_type = def.type;
 	this.m_prev = null;
 	this.m_next = null;
@@ -14,6 +16,8 @@ function b2Joint(def) {
 	this.m_localCenterA = new b2Vec2();
 	this.m_localCenterB = new b2Vec2();
 }
+
+Box2D.b2Joint = b2Joint;
 
 b2Joint.e_unknownJoint   = 0;
 b2Joint.e_revoluteJoint  = 1;

@@ -3,6 +3,8 @@ function b2Vec2(x, y) {
 	this.y = y || 0;
 }
 
+Box2D.b2Vec2 = b2Vec2;
+
 b2Vec2.prototype = {
 	SetZero : function () {
 		this.x = this.y = 0;

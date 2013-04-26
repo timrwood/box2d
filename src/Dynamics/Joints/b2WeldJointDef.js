@@ -6,7 +6,9 @@ function b2WeldJointDef(def) {
 	this.referenceAngle = 0;
 }
 
-b2WeldJointDef.prototype = extend(new b2JointDef(), {
+Box2D.b2WeldJointDef = b2WeldJointDef;
+
+b2WeldJointDef.prototype = {
 	Initialize : function (bA, bB, anchor) {
 		this.bodyA = bA;
 		this.bodyB = bB;
@@ -14,4 +16,4 @@ b2WeldJointDef.prototype = extend(new b2JointDef(), {
 		this.localAnchorB.SetV(bB.GetLocalPoint(anchor));
 		this.referenceAngle = bB.GetAngle() - bA.GetAngle();
 	}
-});
+};

@@ -125,6 +125,8 @@ var b2TimeOfImpact = {
 	}
 };
 
+Box2D.b2TimeOfImpact = b2TimeOfImpact;
+
 whenReady(function () {
 	b2TimeOfImpact.s_cache = new b2SimplexCache();
 	b2TimeOfImpact.s_distanceInput = new b2DistanceInput();

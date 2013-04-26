@@ -32,7 +32,11 @@ function b2RevoluteJoint(def) {
 	this.m_limitState = b2Joint.e_inactiveLimit;
 }
 
-b2RevoluteJoint.prototype = extend(new b2Joint(), {
+Box2D.b2RevoluteJoint = b2RevoluteJoint;
+
+inherit(b2Joint, b2RevoluteJoint);
+
+b2RevoluteJoint.prototype = {
 	GetAnchorA : function () {
 		return this.m_bodyA.GetWorldPoint(this.m_localAnchor1);
 	},
@@ -493,7 +497,7 @@ b2RevoluteJoint.prototype = extend(new b2Joint(), {
 
 		return positionError <= b2Settings.b2_linearSlop && angularError <= b2Settings.b2_angularSlop;
 	}
-});
+};
 
 
 whenReady(function () {

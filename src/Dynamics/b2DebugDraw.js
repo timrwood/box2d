@@ -2,6 +2,8 @@ function b2DebugDraw() {
 
 }
 
+Box2D.b2DebugDraw = b2DebugDraw;
+
 b2DebugDraw.e_aabbBit         = 1;
 b2DebugDraw.e_pairBit         = 2;
 b2DebugDraw.e_shapeBit        = 4;

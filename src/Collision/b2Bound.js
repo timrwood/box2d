@@ -2,6 +2,8 @@ function b2Bound() {
 
 }
 
+Box2D.b2Bound = b2Bound;
+
 b2Bound.prototype = {
 	IsLower : function () {
 		return (this.value & 1) === 0;

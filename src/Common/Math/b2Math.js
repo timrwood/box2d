@@ -153,6 +153,7 @@ var b2Math = {
 	}
 };
 
+Box2D.b2Math = b2Math;
 
 whenReady(function () {
 	b2Math.b2Vec2_zero = new b2Vec2();

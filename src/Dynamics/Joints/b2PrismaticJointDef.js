@@ -16,7 +16,9 @@ function b2PrismaticJointDef() {
 	this.localAxisA = new b2Vec2(1, 0);
 }
 
-b2PrismaticJointDef.prototype = extend(new b2JointDef(), {
+Box2D.b2PrismaticJointDef = b2PrismaticJointDef;
+
+b2PrismaticJointDef.prototype = {
 	Initialize : function (bA, bB, anchor, axis) {
 		this.bodyA = bA;
 		this.bodyB = bB;
@@ -25,4 +27,4 @@ b2PrismaticJointDef.prototype = extend(new b2JointDef(), {
 		this.localAxisA = bA.GetLocalVector(axis);
 		this.referenceAngle = bB.GetAngle() - bA.GetAngle();
 	}
-});
+};

@@ -29,6 +29,8 @@ function b2World(gravity, doSleep) {
 	this.m_groundBody = this.CreateBody(new b2BodyDef());
 }
 
+Box2D.b2World = b2World;
+
 b2World.m_warmStarting = true;
 b2World.m_continuousPhysics = true;
 

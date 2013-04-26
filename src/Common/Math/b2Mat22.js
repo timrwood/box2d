@@ -4,6 +4,7 @@ function b2Mat22() {
 	this.SetIdentity();
 }
 
+Box2D.b2Mat22 = b2Mat22;
 
 b2Mat22.prototype = {
 	Set : function (angle) {

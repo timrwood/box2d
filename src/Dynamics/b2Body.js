@@ -75,6 +75,8 @@ function b2Body(bd, world) {
 	this.m_fixtureCount = 0;
 }
 
+Box2D.b2Body = b2Body;
+
 b2Body.e_awakeFlag         =  1;
 b2Body.e_islandFlag        =  2;
 b2Body.e_bulletFlag        =  4;

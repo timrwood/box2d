@@ -3,6 +3,8 @@ function b2RayCastInput() {
 	this.p2 = new b2Vec2();
 }
 
+Box2D.b2RayCastInput = b2RayCastInput;
+
 b2RayCastInput.prototype = {
 	b2RayCastInput : function (p1, p2, maxFraction) {
 		if (p1) {

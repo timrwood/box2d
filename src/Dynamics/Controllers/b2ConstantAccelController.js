@@ -3,7 +3,11 @@ function b2ConstantAccelController() {
 	this.A = new b2Vec2();
 }
 
-b2ConstantAccelController.prototype = extend(new b2Controller(), {
+Box2D.b2ConstantAccelController = b2ConstantAccelController;
+
+inherit(b2Controller, b2ConstantAccelController);
+
+b2ConstantAccelController.prototype = {
 	Step : function (step) {
 		var vel,
 			smallAX = this.A.x * step.dt,
@@ -25,4 +29,4 @@ b2ConstantAccelController.prototype = extend(new b2Controller(), {
 			body.SetLinearVelocity(vel);
 		}
 	}
-});
+};

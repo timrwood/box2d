@@ -2,6 +2,8 @@ function Features() {
 
 }
 
+Box2D.Features = Features;
+
 Features.prototype = {
 
 };

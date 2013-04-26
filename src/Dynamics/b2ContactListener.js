@@ -2,6 +2,8 @@ function b2ContactListener() {
 
 }
 
+Box2D.b2ContactListener = b2ContactListener;
+
 b2ContactListener.prototype = {
 	BeginContact : function (contact) {},
 	EndContact : function (contact) {},

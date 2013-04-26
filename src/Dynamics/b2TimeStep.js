@@ -2,6 +2,8 @@ function b2TimeStep() {
 
 }
 
+Box2D.b2TimeStep = b2TimeStep;
+
 b2TimeStep.prototype = {
 	Set : function (step) {
 		this.dt = step.dt;

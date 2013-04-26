@@ -6,7 +6,11 @@ function b2PolygonShape() {
 	this.m_normals = [];
 }
 
-b2PolygonShape.prototype = extend(new b2Shape(), {
+Box2D.b2CircleShape = b2CircleShape;
+
+inherit(b2Shape, b2CircleShape);
+
+b2PolygonShape.prototype = {
 	Copy : function () {
 		var s = new b2PolygonShape();
 		s.Set(this);
@@ -423,7 +427,7 @@ b2PolygonShape.prototype = extend(new b2Shape(), {
 			this.m_normals[i] = new b2Vec2();
 		}
 	}
-});
+};
 
 // Aliased method
 b2PolygonShape.prototype.SetAsVector = b2PolygonShape.prototype.SetAsArray;

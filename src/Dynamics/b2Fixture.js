@@ -10,6 +10,8 @@ function b2Fixture() {
 	this.m_restitution = 0;
 }
 
+Box2D.b2Fixture = b2Fixture;
+
 b2Fixture.prototype = {
 	GetType : function () {
 		return this.m_shape.GetType();

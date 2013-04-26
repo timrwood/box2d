@@ -4,7 +4,11 @@ function b2GravityController() {
 	this.invSqr = true;
 }
 
-b2GravityController.prototype = extend(new b2Controller(), {
+Box2D.b2GravityController = b2GravityController;
+
+inherit(b2Controller, b2GravityController);
+
+b2GravityController.prototype = {
 	Step : function (step) {
 		var i, j,
 			body1, body2,
@@ -52,4 +56,4 @@ b2GravityController.prototype = extend(new b2Controller(), {
 			}
 		}
 	}
-});
+};

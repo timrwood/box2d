@@ -14,3 +14,5 @@ function b2ContactConstraint() {
 		this.points[i] = new b2ContactConstraintPoint();
 	}
 }
+
+Box2D.b2ContactConstraint = b2ContactConstraint;

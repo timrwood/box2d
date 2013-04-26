@@ -10,7 +10,11 @@ function b2FrictionJoint(def) {
 	this.m_maxTorque = def.maxTorque;
 }
 
-b2FrictionJoint.prototype = extend(new b2Joint(), {
+Box2D.b2FrictionJoint = b2FrictionJoint;
+
+inherit(b2Joint, b2FrictionJoint);
+
+b2FrictionJoint.prototype = {
 	GetAnchorA : function () {
 		return this.m_bodyA.GetWorldPoint(this.m_localAnchorA);
 	},
@@ -207,4 +211,4 @@ b2FrictionJoint.prototype = extend(new b2Joint(), {
 	SolvePositionConstraints : function (baumgarte) {
 		return true;
 	}
-});
+};

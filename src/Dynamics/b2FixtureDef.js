@@ -2,6 +2,8 @@ function b2FixtureDef() {
 	this.filter = new b2FilterData();
 }
 
+Box2D.b2FixtureDef = b2FixtureDef;
+
 b2FixtureDef.prototype = {
 	shape : null,
 	userData : null,

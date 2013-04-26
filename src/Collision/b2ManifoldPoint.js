@@ -4,6 +4,7 @@ function b2ManifoldPoint() {
 	this.Reset();
 }
 
+Box2D.b2ManifoldPoint = b2ManifoldPoint;
 
 b2ManifoldPoint.prototype = {
 	Reset : function () {

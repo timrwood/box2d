@@ -2,6 +2,8 @@ function b2SimplexVertex() {
 
 }
 
+Box2D.b2SimplexVertex = b2SimplexVertex;
+
 b2SimplexVertex.prototype = {
 	Set : function (other) {
 		this.wA.SetV(other.wA);

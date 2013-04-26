@@ -15,6 +15,8 @@ function b2ContactFactory() {
 	m_registers[e_poly][e_edge] = b2PolyAndEdgeContact;
 }
 
+Box2D.b2ContactFactory = b2ContactFactory;
+
 b2ContactFactory.prototype = {
 	Create : function (fixtureA, fixtureB) {
 		var type1 = fixtureA.GetType(),

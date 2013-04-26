@@ -4,6 +4,8 @@ function b2Sweep() {
 	this.c = new b2Vec2();
 }
 
+Box2D.b2Sweep = b2Sweep;
+
 b2Sweep.prototype = {
 	Set : function (other) {
 		this.localCenter.SetV(other.localCenter);

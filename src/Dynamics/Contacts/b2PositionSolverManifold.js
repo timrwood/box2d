@@ -9,6 +9,8 @@ function b2PositionSolverManifold() {
 	}
 }
 
+Box2D.b2PositionSolverManifold = b2PositionSolverManifold;
+
 b2PositionSolverManifold.prototype = {
 	Initialize : function (cc) {
 		b2Settings.b2Assert(cc.pointCount > 0);

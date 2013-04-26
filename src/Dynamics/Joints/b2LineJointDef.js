@@ -15,7 +15,9 @@ function b2LineJointDef() {
 	this.motorSpeed = 0;
 }
 
-b2LineJointDef.prototype = extend(new b2JointDef(), {
+Box2D.b2LineJointDef = b2LineJointDef;
+
+b2LineJointDef.prototype = {
 	Initialize : function (bA, bB, anchor, axis) {
 		this.bodyA = bA;
 		this.bodyB = bB;
@@ -23,4 +25,4 @@ b2LineJointDef.prototype = extend(new b2JointDef(), {
 		this.localAnchorB = bB.GetLocalPoint(anchor);
 		this.localAxisA = bA.GetLocalVector(axis);
 	}
-});
+};

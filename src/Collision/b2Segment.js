@@ -3,6 +3,8 @@ function b2Segment() {
 	this.p2 = new b2Vec2();
 }
 
+Box2D.b2Segment = b2Segment;
+
 b2Segment.prototype = {
 	TestSegment : function (lambda, normal, segment, maxLambda) {
 		maxLambda = maxLambda || 0;

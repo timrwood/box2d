@@ -7,6 +7,8 @@ function b2ContactManager() {
 	this.m_broadPhase = new b2DynamicTreeBroadPhase();
 }
 
+Box2D.b2ContactManager = b2ContactManager;
+
 b2ContactManager.prototype = {
 	AddPair : function (fixtureA, fixtureB) {
 		if (!fixtureA instanceof b2Fixture || !fixtureB instanceof b2Fixture) {

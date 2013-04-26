@@ -2,6 +2,8 @@ function b2ContactFilter() {
 
 }
 
+Box2D.b2ContactFilter = b2ContactFilter;
+
 b2ContactFilter.prototype = {
 	ShouldCollide : function (fixtureA, fixtureB) {
 		var filter1 = fixtureA.GetFilterData(),

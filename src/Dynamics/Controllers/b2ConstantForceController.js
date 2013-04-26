@@ -3,7 +3,11 @@ function b2ConstantForceController() {
 	this.F = new b2Vec2();
 }
 
-b2ConstantForceController.prototype = extend(new b2Controller(), {
+Box2D.b2ConstantForceController = b2ConstantForceController;
+
+inherit(b2Controller, b2ConstantForceController);
+
+b2ConstantForceController.prototype = {
 	Step : function (step) {
 		var i, body;
 
@@ -17,4 +21,4 @@ b2ConstantForceController.prototype = extend(new b2Controller(), {
 			body.ApplyForce(this.F, body.GetWorldCenter());
 		}
 	}
-});
+};

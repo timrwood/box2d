@@ -45,3 +45,5 @@ b2Settings.b2_maxRotationSquared = b2Settings.b2_maxRotation * b2Settings.b2_max
 b2Settings.b2_maxAngularCorrection = 8 / 180 * b2Settings.b2_pi;
 b2Settings.b2_angularSleepTolerance = 2 / 180 * b2Settings.b2_pi;
 b2Settings.b2_maxTranslationSquared = b2Settings.b2_maxTranslation * b2Settings.b2_maxTranslation;
+
+Box2D.b2Settings = b2Settings;

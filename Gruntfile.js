@@ -3,14 +3,15 @@
 module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: {
-			name: "Box2D"
+			name: "box2d"
 		},
 		clean: {
 			src: ['dist']
 		},
 		concat: {
 			options: {
-				banner: '<%= banner %>',
+				banner: '(function(){\n',
+				footer: "\n}());",
 				stripBanners: true
 			},
 			dist: {
@@ -31,8 +32,7 @@ module.exports = function (grunt) {
 		},
 		uglify: {
 			options: {
-				banner: '<%= banner %>',
-				beautify: true
+				banner: '<%= banner %>'
 			},
 			dist: {
 				src: '<%= concat.dist.dest %>',
@@ -48,9 +48,13 @@ module.exports = function (grunt) {
 			}
 		},
 		watch: {
+			concat: {
+				files: '<%= concat.dist.src %>',
+				tasks: ['concat']
+			},
 			src: {
 				files: '<%= jshint.src.src %>',
-				tasks: ['jshint:src', 'qunit']
+				tasks: ['default']
 			}
 		}
 	});

@@ -3,3 +3,5 @@ function b2ContactConstraintPoint() {
 	this.rA = new b2Vec2();
 	this.rB = new b2Vec2();
 }
+
+Box2D.b2ContactConstraintPoint = b2ContactConstraintPoint;

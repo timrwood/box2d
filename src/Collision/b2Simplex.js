@@ -9,6 +9,7 @@ function b2Simplex() {
 	];
 }
 
+Box2D.b2Simplex = b2Simplex;
 
 b2Simplex.prototype = {
 	ReadCache : function (cache, proxyA, transformA, proxyB, transformB) {

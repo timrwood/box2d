@@ -8,6 +8,8 @@ function b2WorldManifold() {
 	}
 }
 
+Box2D.b2WorldManifold = b2WorldManifold;
+
 b2WorldManifold.prototype = {
 	Initialize : function (manifold, xfA, radiusA, xfB, radiusB) {
 		var i = 0,

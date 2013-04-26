@@ -4,6 +4,8 @@ function b2Island() {
 	this.m_joints = [];
 }
 
+Box2D.b2Island = b2Island;
+
 b2Island.prototype = {
 	Initialize : function (bodyCapacity, contactCapacity, jointCapacity, allocator, listener, contactSolver) {
 		var i;

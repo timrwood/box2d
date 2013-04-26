@@ -9,6 +9,8 @@ function b2Manifold() {
 	this.m_localPoint = new b2Vec2();
 }
 
+Box2D.b2Manifold = b2Manifold;
+
 b2Manifold.prototype = {
 	Reset : function () {
 		var i;

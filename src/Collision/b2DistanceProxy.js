@@ -1,7 +1,8 @@
-
 function b2DistanceProxy() {
 
 }
+
+Box2D.b2DistanceProxy = b2DistanceProxy;
 
 b2DistanceProxy.prototype = {
 	Set : function (shape) {

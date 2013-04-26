@@ -4,3 +4,5 @@ function b2ContactPoint() {
 	this.normal = new b2Vec2();
 	this.id = new b2ContactID();
 }
+
+Box2D.b2ContactPoint = b2ContactPoint;

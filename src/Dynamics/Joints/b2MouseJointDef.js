@@ -9,4 +9,4 @@ function b2MouseJointDef() {
 	this.target = new b2Vec2();
 }
 
-b2MouseJointDef.prototype = new b2JointDef();
+Box2D.b2MouseJointDef = b2MouseJointDef;

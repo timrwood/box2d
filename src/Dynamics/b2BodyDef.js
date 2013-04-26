@@ -3,6 +3,8 @@ function b2BodyDef() {
 	this.linearVelocity = new b2Vec2();
 }
 
+Box2D.b2BodyDef = b2BodyDef;
+
 b2BodyDef.prototype = {
 	userData        : null,
 	angle           : 0,

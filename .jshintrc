@@ -152,7 +152,7 @@
         "b2Settings" : true,
         "b2Math" : true,
         "Box2D" : true,
-        "extend" : false,
+        "inherit" : false,
         "whenReady" : false,
         "defineProperty" : false,
         "ready" : false

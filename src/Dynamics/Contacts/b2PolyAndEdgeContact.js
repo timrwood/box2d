@@ -2,7 +2,11 @@ function b2PolyAndEdgeContact() {
 	b2Contact.apply(this, arguments);
 }
 
-b2PolyAndEdgeContact.prototype = extend(new b2Contact(), {
+Box2D.b2PolyAndEdgeContact = b2PolyAndEdgeContact;
+
+inherit(b2Contact, b2PolyAndEdgeContact);
+
+b2PolyAndEdgeContact.prototype = {
 	Evaluate : function () {
 		var fA = this.m_fixtureA,
 			fB = this.m_fixtureB;
@@ -17,4 +21,4 @@ b2PolyAndEdgeContact.prototype = extend(new b2Contact(), {
 	},
 
 	b2CollidePolyAndEdge : function (manifold, polygon, xf1, edge, xf2) {}
-});
+};

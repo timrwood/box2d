@@ -33,7 +33,11 @@ function b2MouseJoint(def) {
 	this.m_gamma = 0;
 }
 
-b2MouseJoint.prototype = extend(new b2Joint(), {
+Box2D.b2MouseJoint = b2MouseJoint;
+
+inherit(b2Joint, b2MouseJoint);
+
+b2MouseJoint.prototype = {
 	GetAnchorA : function () {
 		return this.m_target;
 	},
@@ -197,4 +201,4 @@ b2MouseJoint.prototype = extend(new b2Joint(), {
 	SolvePositionConstraints : function (baumgarte) {
 		return true;
 	}
-});
+};

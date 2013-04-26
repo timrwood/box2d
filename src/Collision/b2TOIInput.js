@@ -4,3 +4,5 @@ function b2TOIInput() {
 	this.sweepA = new b2Sweep();
 	this.sweepB = new b2Sweep();
 }
+
+Box2D.b2TOIInput = b2TOIInput;
