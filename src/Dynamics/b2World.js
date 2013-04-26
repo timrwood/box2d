@@ -785,16 +785,12 @@ b2World.prototype = {
 			stack[i] = null;
 		}
 
-		b = this.m_bodyList;
-
-		while (b) {
+		for (b = this.m_bodyList; b; b = b.m_next) {
 			if (!b.IsAwake() || !b.IsActive() || b.GetType() === b2Body.b2_staticBody) {
 				continue;
 			}
 
 			b.SynchronizeFixtures();
-
-			b = b.m_next;
 		}
 
 		this.m_contactManager.FindNewContacts();

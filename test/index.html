@@ -6,7 +6,6 @@
 </style>
 <canvas id="canvas" width="600" height="300"></canvas>
 <script src="../dist/box2d.js"></script>
-<script src="./test.js"></script>
    <script type="text/javascript">
    (function(){
          var b2Vec2 = Box2D.b2Vec2,
@@ -154,9 +153,7 @@
             world.Step(1 / 60, 10, 10);
             world.DrawDebugData();
             world.ClearForces();
-
-         	// setTimeout(update, 1000 / 60);
-         };
+         }
          update();
 
          //helpers
