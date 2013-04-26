@@ -6,9 +6,9 @@ function b2PolygonShape() {
 	this.m_normals = [];
 }
 
-Box2D.b2CircleShape = b2CircleShape;
+Box2D.b2PolygonShape = b2PolygonShape;
 
-inherit(b2Shape, b2CircleShape);
+inherit(b2Shape, b2PolygonShape);
 
 b2PolygonShape.prototype = {
 	Copy : function () {

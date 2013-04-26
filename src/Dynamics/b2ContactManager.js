@@ -1,10 +1,16 @@
 function b2ContactManager() {
+	var __this = this;
+
 	this.m_world = null;
 	this.m_contactCount = 0;
 	this.m_contactFilter = b2ContactFilter.b2_defaultFilter;
 	this.m_contactListener = b2ContactListener.b2_defaultListener;
 	this.m_contactFactory = new b2ContactFactory(this.m_allocator);
 	this.m_broadPhase = new b2DynamicTreeBroadPhase();
+
+	this.AddPair = function () {
+		b2ContactManager.prototype.AddPair.apply(__this, arguments);
+	};
 }
 
 Box2D.b2ContactManager = b2ContactManager;
@@ -92,7 +98,7 @@ b2ContactManager.prototype = {
 	},
 
 	FindNewContacts : function () {
-		this.m_broadPhase.UpdatePairs(Box2D.generateCallback(this, this.AddPair));
+		this.m_broadPhase.UpdatePairs(this.AddPair);
 	},
 
 	Destroy : function (c) {

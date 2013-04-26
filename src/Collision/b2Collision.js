@@ -436,6 +436,7 @@ var b2Collision = {
 
 		tMat = xf2.R;
 		tVec = circle.m_p;
+
 		cX = xf2.position.x + (tMat.col1.x * tVec.x + tMat.col2.x * tVec.y);
 		cY = xf2.position.y + (tMat.col1.y * tVec.x + tMat.col2.y * tVec.y);
 		dX = cX - xf1.position.x;

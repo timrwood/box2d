@@ -3,3 +3,5 @@ function b2EdgeChainDef() {
 	this.isALoop = true;
 	this.vertices = [];
 }
+
+Box2D.b2EdgeChainDef = b2EdgeChainDef;

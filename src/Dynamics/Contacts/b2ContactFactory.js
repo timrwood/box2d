@@ -21,14 +21,24 @@ b2ContactFactory.prototype = {
 	Create : function (fixtureA, fixtureB) {
 		var type1 = fixtureA.GetType(),
 			type2 = fixtureB.GetType(),
-			Contact = this.m_registers[type1][type2] || this.m_registers[type2][type1],
+			a = fixtureA,
+			b = fixtureB,
+			Contact = this.m_registers[type1][type2],
 			c;
+
+		if (!Contact) {
+			Contact = this.m_registers[type2][type1];
+			b = fixtureA;
+			a = fixtureB;
+		}
 
 		if (Contact) {
 			c = new Contact();
-			c.Reset(fixtureB, fixtureA);
+			c.Reset(a, b);
 			return c;
 		}
+
+		Contact = this.m_registers[type2][type1];
 	},
 
 	Destroy : function (contact) {
