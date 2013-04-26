@@ -18,7 +18,8 @@
          	,	b2MassData = Box2D.b2MassData
          	,	b2PolygonShape = Box2D.b2PolygonShape
          	,	b2CircleShape = Box2D.b2CircleShape
-         	,	b2DebugDraw = Box2D.b2DebugDrawCanvas
+         	,	b2DebugDraw = Box2D.b2DebugDraw
+         	,	b2DebugDrawCanvas = Box2D.b2DebugDrawCanvas
             ,  b2MouseJointDef =  Box2D.b2MouseJointDef;
 
          var world = new b2World(
@@ -68,13 +69,16 @@
          }
 
          //setup debug draw
-         var debugDraw = new b2DebugDraw();
-			debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
+         var debugDraw = new b2DebugDrawCanvas();
+		console.log(b2DebugDraw);
+			debugDraw.SetCanvas(document.getElementById("canvas"));
 			debugDraw.SetDrawScale(30.0);
 			debugDraw.SetFillAlpha(0.5);
 			debugDraw.SetLineThickness(1.0);
 			debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
+			console.log(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 			world.SetDebugDraw(debugDraw);
+
 
 
          //mouse
@@ -153,6 +157,8 @@
             world.Step(1 / 60, 10, 10);
             world.DrawDebugData();
             world.ClearForces();
+            // setTimeout(update, 50);
+            console.log(world, world.GetBodyCount());
          }
          update();
 
