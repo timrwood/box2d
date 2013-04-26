@@ -70,13 +70,11 @@
 
          //setup debug draw
          var debugDraw = new b2DebugDrawCanvas();
-		console.log(b2DebugDraw);
 			debugDraw.SetCanvas(document.getElementById("canvas"));
 			debugDraw.SetDrawScale(30.0);
 			debugDraw.SetFillAlpha(0.5);
 			debugDraw.SetLineThickness(1.0);
 			debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
-			console.log(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 			world.SetDebugDraw(debugDraw);
 
 
@@ -157,8 +155,7 @@
             world.Step(1 / 60, 10, 10);
             world.DrawDebugData();
             world.ClearForces();
-            // setTimeout(update, 50);
-            console.log(world, world.GetBodyCount());
+            setTimeout(update, 1000 / 60);
          }
          update();
 

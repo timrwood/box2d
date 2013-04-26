@@ -19,37 +19,6 @@
 	b2DebugDraw.prototype._color = function (color, alpha) {
 		return "rgba(" + ((color & 0xFF0000) >> 16) + "," + ((color & 0xFF00) >> 8) + "," + (color & 0xFF) + "," + alpha + ")";
 	};
-	b2DebugDraw.prototype.b2DebugDraw = function () {
-		this.m_drawFlags = 0;
-	};
-	b2DebugDraw.prototype.SetFlags = function (flags) {
-		if (flags === undefined) flags = 0;
-		this.m_drawFlags = flags;
-	};
-	b2DebugDraw.prototype.GetFlags = function () {
-		return this.m_drawFlags;
-	};
-	b2DebugDraw.prototype.AppendFlags = function (flags) {
-		if (flags === undefined) flags = 0;
-		this.m_drawFlags |= flags;
-	};
-	b2DebugDraw.prototype.ClearFlags = function (flags) {
-		if (flags === undefined) flags = 0;
-		this.m_drawFlags &= ~flags;
-	};
-	b2DebugDraw.prototype.SetSprite = function (sprite) {
-		this.m_ctx = sprite;
-	};
-	b2DebugDraw.prototype.GetSprite = function () {
-		return this.m_ctx;
-	};
-	b2DebugDraw.prototype.SetDrawScale = function (drawScale) {
-		if (drawScale === undefined) drawScale = 0;
-		this.m_drawScale = drawScale;
-	};
-	b2DebugDraw.prototype.GetDrawScale = function () {
-		return this.m_drawScale;
-	};
 	b2DebugDraw.prototype.SetLineThickness = function (lineThickness) {
 		if (lineThickness === undefined) lineThickness = 0;
 		this.m_lineThickness = lineThickness;

@@ -1,5 +1,5 @@
 function b2DebugDraw() {
-
+	this.m_drawFlags = 0;
 }
 
 Box2D.b2DebugDraw = b2DebugDraw;
@@ -14,16 +14,29 @@ b2DebugDraw.e_centerOfMassBit = 32;
 b2DebugDraw.prototype = {
 	Clear : function () {},
 
-	SetFlags : function (flags) {},
-	GetFlags : function () {},
-	AppendFlags : function (flags) {},
-	ClearFlags : function (flags) {},
+	SetFlags : function (flags) {
+		this.m_drawFlags = flags || 0;
+	},
 
-	SetSprite : function (sprite) {},
-	GetSprite : function () {},
+	GetFlags : function () {
+		return this.m_drawFlags;
+	},
 
-	SetDrawScale : function (drawScale) {},
-	GetDrawScale : function () {},
+	AppendFlags : function (flags) {
+		this.m_drawFlags |= flags || 0;
+	},
+
+	ClearFlags : function (flags) {
+		this.m_drawFlags = 0;
+	},
+
+	SetDrawScale : function (drawScale) {
+		this.m_drawScale = drawScale || 0;
+	},
+
+	GetDrawScale : function () {
+		return this.m_drawScale;
+	},
 
 	SetLineThickness : function (lineThickness) {},
 	GetLineThickness : function () {},

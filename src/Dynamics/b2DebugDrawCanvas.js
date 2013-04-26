@@ -28,8 +28,6 @@ b2DebugDrawCanvas.prototype = {
 
 		s.lineTo(vertices[0].x * drawScale, vertices[0].y * drawScale);
 		s.stroke();
-
-		console.log('draw poly');
 	},
 	DrawCircle : function (center, radius, color) {
 		if (!radius) {
@@ -42,7 +40,21 @@ b2DebugDrawCanvas.prototype = {
 		s.arc(center.x * drawScale, center.y * drawScale, radius * drawScale, 0, Math.PI * 2, true);
 		s.closePath();
 		s.stroke();
-
-		console.log('draw circle');
+	},
+	DrawSolidCircle : function (center, radius, axis, color) {
+		var s = this.ctx,
+			drawScale = this.m_drawScale,
+			cx = center.x * drawScale,
+			cy = center.y * drawScale;
+		s.moveTo(0, 0);
+		s.beginPath();
+		// s.strokeStyle = this._color(color.color, this.m_alpha);
+		// s.fillStyle = this._color(color.color, this.m_fillAlpha);
+		s.arc(cx, cy, radius * drawScale, 0, Math.PI * 2, true);
+		s.moveTo(cx, cy);
+		s.lineTo((center.x + axis.x * radius) * drawScale, (center.y + axis.y * radius) * drawScale);
+		s.closePath();
+		s.fill();
+		s.stroke();
 	}
 };

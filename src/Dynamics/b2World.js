@@ -429,7 +429,6 @@ b2World.prototype = {
 
 	DrawDebugData : function () {
 		if (!this.m_debugDraw) {
-			console.log('no debug')
 			return;
 		}
 
@@ -459,8 +458,6 @@ b2World.prototype = {
 			aabb;
 
 		debugDraw.Clear();
-
-		console.log(flags);
 
 		if (flags & b2DebugDraw.e_shapeBit) {
 			while (b) {
@@ -1095,8 +1092,6 @@ b2World.prototype = {
 			localVertices,
 			vertices,
 			debugDraw = this.m_debugDraw;
-
-		console.log('draw');
 
 		switch (shape.m_type) {
 		case b2Shape.e_circleShape:
