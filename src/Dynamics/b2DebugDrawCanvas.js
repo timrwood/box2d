@@ -7,10 +7,16 @@ Box2D.b2DebugDrawCanvas = b2DebugDrawCanvas;
 inherit(b2DebugDraw, b2DebugDrawCanvas);
 
 b2DebugDrawCanvas.prototype = {
+	Clear : function () {
+		this.canvas.width = this.canvas.width;
+		this.canvas.height = this.canvas.height;
+	},
+
 	SetCanvas : function (canvas) {
 		this.ctx = canvas.getContext('2d');
 		this.canvas = canvas;
 	},
+
 	DrawPolygon : function (vertices, vertexCount, color) {
 		if (!vertexCount) {
 			return;
@@ -29,6 +35,26 @@ b2DebugDrawCanvas.prototype = {
 		s.lineTo(vertices[0].x * drawScale, vertices[0].y * drawScale);
 		s.stroke();
 	},
+
+	DrawSolidPolygon : function (vertices, vertexCount, color) {
+		if (!vertexCount) {
+			return;
+		}
+		var s = this.ctx,
+			i,
+			drawScale = this.m_drawScale;
+
+		s.beginPath();
+		s.moveTo(vertices[0].x * drawScale, vertices[0].y * drawScale);
+
+		for (i = 1; i < vertexCount; i++) {
+			s.lineTo(vertices[i].x * drawScale, vertices[i].y * drawScale);
+		}
+
+		s.lineTo(vertices[0].x * drawScale, vertices[0].y * drawScale);
+		s.stroke();
+	},
+
 	DrawCircle : function (center, radius, color) {
 		if (!radius) {
 			return;
@@ -41,6 +67,7 @@ b2DebugDrawCanvas.prototype = {
 		s.closePath();
 		s.stroke();
 	},
+
 	DrawSolidCircle : function (center, radius, axis, color) {
 		var s = this.ctx,
 			drawScale = this.m_drawScale,

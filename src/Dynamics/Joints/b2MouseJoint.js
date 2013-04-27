@@ -174,8 +174,8 @@ b2MouseJoint.prototype = {
 		tX = CdotX + this.m_beta * this.m_C.x + this.m_gamma * this.m_impulse.x;
 		tY = CdotY + this.m_beta * this.m_C.y + this.m_gamma * this.m_impulse.y;
 
-		impulseX = -tMat.col1.x * tX + tMat.col2.x * tY;
-		impulseY = -tMat.col1.y * tX + tMat.col2.y * tY;
+		impulseX = -(tMat.col1.x * tX + tMat.col2.x * tY);
+		impulseY = -(tMat.col1.y * tX + tMat.col2.y * tY);
 
 		oldImpulseX = this.m_impulse.x;
 		oldImpulseY = this.m_impulse.y;

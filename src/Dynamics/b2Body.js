@@ -461,7 +461,7 @@ b2Body.prototype = {
 
 		center = new b2Vec2();
 
-		while (f) {
+		for (f = this.m_fixtureList; f; f = f.m_next) {
 			if (!f.m_density) {
 				continue;
 			}
@@ -470,7 +470,6 @@ b2Body.prototype = {
 			center.x += massData.center.x * massData.mass;
 			center.y += massData.center.y * massData.mass;
 			this.m_I += massData.I;
-			f = f.m_next;
 		}
 
 		if (this.m_mass > 0) {
