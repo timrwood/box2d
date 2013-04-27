@@ -190,7 +190,6 @@ b2ContactManager.prototype = {
 	}
 };
 
-
 whenReady(function () {
 	b2ContactManager.s_evalCP = new b2ContactPoint();
 });

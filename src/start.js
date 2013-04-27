@@ -7,10 +7,21 @@ function generateCallback(context, cb) {
 	};
 }
 
+Box2D.generateCallback = generateCallback;
+
 // TODO: Remove in favor of proper getter/setter methods
 function defineProperty(obj, p, get, set) {
-	// obj.__defineGetter__(p, get);
-	// obj.__defineSetter__(p, set);
+	if (Object.defineProperty) {
+		Object.defineProperty(obj, p, {
+			get : get,
+			set : set,
+			enumerable : false,
+			configurable : true
+		});
+	} else {
+		obj.__defineGetter__(p, get);
+		obj.__defineSetter__(p, set);
+	}
 }
 
 function whenReady(cb) {

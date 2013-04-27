@@ -27,8 +27,6 @@ Remove b2Distance.b2_gjkCalls and b2Distance.b2_gjkIters and b2Distance.b2_gjkMa
 
 Replace b2Math.Max and b2Math.Min and b2Math.Abs
 
-Add extend method to merge objects
-
 See if we can remove b2PolygonShape.prototype.SetAsVector and b2PolygonShape.AsVector
 
 Find a better solution for b2ContactManager.FindNewContacts (function.bind) ?

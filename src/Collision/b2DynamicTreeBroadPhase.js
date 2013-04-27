@@ -85,11 +85,12 @@ b2DynamicTreeBroadPhase.prototype = {
 
 		m_moveBuffer.length = 0;
 
-		for (i = 0; i < this.m_pairCount; i++) {
+		for (i = 0; i < this.m_pairCount;) {
 			primaryPair = m_pairBuffer[i];
 			userDataA = m_tree.GetUserData(primaryPair.proxyA);
 			userDataB = m_tree.GetUserData(primaryPair.proxyB);
 			callback(userDataA, userDataB);
+			i++;
 			while (i < this.m_pairCount) {
 				pair = m_pairBuffer[i];
 				if (pair.proxyA !== primaryPair.proxyA || pair.proxyB !== primaryPair.proxyB) {

@@ -10,12 +10,15 @@ var b2Collision = {
 			vIn1 = vIn[1].v,
 			distance0 = normal.x * vIn0.x + normal.y * vIn0.y - offset,
 			distance1 = normal.x * vIn1.x + normal.y * vIn1.y - offset;
+
 		if (distance0 <= 0) {
 			vOut[numOut++].Set(vIn[0]);
 		}
+
 		if (distance1 <= 0) {
 			vOut[numOut++].Set(vIn[1]);
 		}
+
 		if (distance0 * distance1 < 0) {
 			interp = distance0 / (distance0 - distance1);
 			tVec = vOut[numOut].v;

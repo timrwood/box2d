@@ -43,9 +43,6 @@ b2ContactSolver.prototype = {
 			k11, k22, k12,
 			k_maxConditionNumber = 100;
 
-
-
-
 		this.m_step.Set(step);
 		this.m_constraintCount = contactCount = contactCount || 0;
 

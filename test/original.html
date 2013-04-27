@@ -5,40 +5,31 @@
 	canvas{background:#eee;border-bottom:1px solid #ccc;}
 </style>
 <canvas id="canvas" width="600" height="300"></canvas>
-<script src="../original.js"></script>
+<!--<script src="../dist/box2d.js"></script>-->
 <script>
    window.Box2DNew = window.Box2D;
 </script>
-<script src="../dist/box2d.js"></script>
+<script src="../original.js"></script>
    <script>
-   function c(a, b) {
-      var ap = a.prototype;
-      var bp = b.prototype;
-      for (var i in bp) {
-         ap[i] = bp[i];
-      }
-      window.reset();
-   }
    (function(){
-         var b2Vec2 = Box2D.b2Vec2,
-         	b2AABB = Box2D.b2AABB
-         	,	b2BodyDef = Box2D.b2BodyDef
-         	,	b2Body = Box2D.b2Body
-         	,	b2FixtureDef = Box2D.b2FixtureDef
-         	,	b2Fixture = Box2D.b2Fixture
-         	,	b2World = Box2D.b2World
-         	,	b2MassData = Box2D.b2MassData
-         	,	b2PolygonShape = Box2D.b2PolygonShape
-         	,	b2CircleShape = Box2D.b2CircleShape
-         	,	b2DebugDraw = Box2D.b2DebugDraw
-          ,	b2DebugDrawCanvas = Box2D.b2DebugDrawCanvas
-            ,  b2MouseJointDef = Box2D.b2MouseJointDef;
+         var b2Vec2 = Box2D.b2Vec2 || Box2D.Common.Math.b2Vec2,
+         	b2AABB = Box2D.b2AABB || Box2D.Collision.b2AABB
+         	,	b2BodyDef = Box2D.b2BodyDef || Box2D.Dynamics.b2BodyDef
+         	,	b2Body = Box2D.b2Body || Box2D.Dynamics.b2Body
+         	,	b2FixtureDef = Box2D.b2FixtureDef || Box2D.Dynamics.b2FixtureDef
+         	,	b2Fixture = Box2D.b2Fixture || Box2D.Dynamics.b2Fixture
+         	,	b2World = Box2D.b2World || Box2D.Dynamics.b2World
+         	,	b2MassData = Box2D.b2MassData || Box2D.Collision.Shapes.b2MassData
+         	,	b2PolygonShape = Box2D.b2PolygonShape || Box2D.Collision.Shapes.b2PolygonShape
+         	,	b2CircleShape = Box2D.b2CircleShape || Box2D.Collision.Shapes.b2CircleShape
+         	,	b2DebugDraw = Box2D.b2DebugDraw || Box2D.Dynamics.b2DebugDraw
+         	// ,	b2DebugDrawCanvas = Box2DNew.b2DebugDrawCanvas
+            ,  b2MouseJointDef =  Box2D.b2MouseJointDef || Box2D.Dynamics.Joints.b2MouseJointDef;
 
          var world = new b2World(
                new b2Vec2(0, 10)    //gravity
             ,  false                 //allow sleep
          );
-         window.world = world;
 
          var fixDef = new b2FixtureDef;
          fixDef.density = 1.0;
@@ -61,13 +52,11 @@
          bodyDef.position.Set(21.8, 13);
          world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-
-
          var bodies = [];
 
          function reset () {
             while (bodies.length) {
-               world.DestroyBody(bodies.pop());
+               world.removeBody(bodies.pop());
             }
 
             //create some objects
@@ -76,17 +65,16 @@
                // if(Math.random() > 0.5) {
                   fixDef.shape = new b2PolygonShape;
                   fixDef.shape.SetAsBox(
-                        0.8 //half width
-                     ,  0.5 //half height
+                        Math.random() + 0.1 //half width
+                     ,  Math.random() + 0.1 //half height
                   );
-               // } else {`
+               // } else {
                //    fixDef.shape = new b2CircleShape(
                //       Math.random() + 0.1 //radius
                //    );
                // }
-               bodyDef.position.x = 2;
-               bodyDef.position.y = i + 2;
-               bodyDef.angle = 0.001;
+               bodyDef.position.x = Math.random() * 20;
+               bodyDef.position.y = Math.random() * 10;
                var body = world.CreateBody(bodyDef)
 
                body.CreateFixture(fixDef);
@@ -94,11 +82,10 @@
             }
          }
          window.reset = reset;
-         reset();
 
          //setup debug draw
-         var debugDraw = new b2DebugDrawCanvas();
-			debugDraw.SetCanvas(document.getElementById("canvas"));
+         var debugDraw = new b2DebugDraw();
+			debugDraw.SetSprite(document.getElementById("canvas").getContext('2d'));
 			debugDraw.SetDrawScale(30.0);
 			debugDraw.SetFillAlpha(0.5);
 			debugDraw.SetLineThickness(1.0);

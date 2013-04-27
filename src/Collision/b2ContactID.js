@@ -1,14 +1,11 @@
 function b2ContactID() {
 	this.features = new Features();
+	this.features._m_id = this;
 }
 
 Box2D.b2ContactID = b2ContactID;
 
 b2ContactID.prototype = {
-	b2ContactID : function () {
-		this.features._m_id = this;
-	},
-
 	Set : function (id) {
 		this.key = id._key;
 	},

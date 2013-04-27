@@ -234,6 +234,6 @@ b2SeparationFunction.prototype = {
 	}
 };
 
-b2SeparationFunction.e_points = 0x01;
-b2SeparationFunction.e_faceA = 0x02;
-b2SeparationFunction.e_faceB = 0x04;
+b2SeparationFunction.e_points = 1;
+b2SeparationFunction.e_faceA  = 2;
+b2SeparationFunction.e_faceB  = 4;

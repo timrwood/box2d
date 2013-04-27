@@ -119,7 +119,6 @@ b2PositionSolverManifold.prototype = {
 	}
 };
 
-
 whenReady(function () {
 	b2PositionSolverManifold.circlePointA = new b2Vec2();
 	b2PositionSolverManifold.circlePointB = new b2Vec2();
