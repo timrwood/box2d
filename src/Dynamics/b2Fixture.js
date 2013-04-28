@@ -168,21 +168,27 @@ b2Fixture.prototype = {
 
 	Synchronize : function (broadPhase, transform1, transform2) {
 		var aabb1, aabb2,
-			displacement;
+			displacement = b2Fixture.t_vec2a;
 
 		if (!this.m_proxy) {
 			return;
 		}
 
-		aabb1 = new b2AABB();
-		aabb2 = new b2AABB();
+		aabb1 = b2Fixture.t_aabb1;
+		aabb2 = b2Fixture.t_aabb2;
 
 		this.m_shape.ComputeAABB(aabb1, transform1);
 		this.m_shape.ComputeAABB(aabb2, transform2);
 		this.m_aabb.Combine(aabb1, aabb2);
 
-		displacement = b2Math.SubtractVV(transform2.position, transform1.position);
+		displacement = b2Math.SubtractVV(transform2.position, transform1.position, displacement);
 
 		broadPhase.MoveProxy(this.m_proxy, this.m_aabb, displacement);
 	}
 };
+
+whenReady(function () {
+	b2Fixture.t_vec2a = new b2Vec2();
+	b2Fixture.t_aabb1 = new b2AABB();
+	b2Fixture.t_aabb2 = new b2AABB();
+});
