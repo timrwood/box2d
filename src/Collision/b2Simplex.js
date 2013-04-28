@@ -67,13 +67,15 @@ b2Simplex.prototype = {
 
 	GetSearchDirection : function (out) {
 		out = out || new b2Vec2();
-		var e12, sgn;
+		var e12, sgn,
+			tVecA = b2Simplex.t_vec2a,
+			tVecB = b2Simplex.t_vec2b;
 		switch (this.m_count) {
 		case 1:
 			return this.m_v1.w.GetNegative(out);
 		case 2:
-			e12 = b2Math.SubtractVV(this.m_v2.w, this.m_v1.w);
-			sgn = b2Math.CrossVV(e12, this.m_v1.w.GetNegative());
+			e12 = b2Math.SubtractVV(this.m_v2.w, this.m_v1.w, tVecA);
+			sgn = b2Math.CrossVV(e12, this.m_v1.w.GetNegative(tVecB), tVecB);
 			if (sgn > 0) {
 				return b2Math.CrossFV(1, e12, out);
 			}
@@ -174,17 +176,20 @@ b2Simplex.prototype = {
 		var w1 = this.m_v1.w,
 			w2 = this.m_v2.w,
 			w3 = this.m_v3.w,
-			e12 = b2Math.SubtractVV(w2, w1),
+			tVecA = b2Simplex.t_vec2a,
+			tVecB = b2Simplex.t_vec2b,
+			tVecC = b2Simplex.t_vec2c,
+			e12 = b2Math.SubtractVV(w2, w1, tVecA),
 			w1e12 = b2Math.Dot(w1, e12),
 			w2e12 = b2Math.Dot(w2, e12),
 			d12_1 = w2e12,
 			d12_2 = -w1e12,
-			e13 = b2Math.SubtractVV(w3, w1),
+			e13 = b2Math.SubtractVV(w3, w1, tVecB),
 			w1e13 = b2Math.Dot(w1, e13),
 			w3e13 = b2Math.Dot(w3, e13),
 			d13_1 = w3e13,
 			d13_2 = -w1e13,
-			e23 = b2Math.SubtractVV(w3, w2),
+			e23 = b2Math.SubtractVV(w3, w2, tVecC),
 			w2e23 = b2Math.Dot(w2, e23),
 			w3e23 = b2Math.Dot(w3, e23),
 			d23_1 = w3e23,
@@ -246,4 +251,5 @@ b2Simplex.prototype = {
 whenReady(function () {
 	b2Simplex.t_vec2a = new b2Vec2();
 	b2Simplex.t_vec2b = new b2Vec2();
+	b2Simplex.t_vec2c = new b2Vec2();
 });
