@@ -25,11 +25,11 @@ b2Simplex.prototype = {
 			v = vertices[i];
 			v.indexA = cache.indexA[i];
 			v.indexB = cache.indexB[i];
-			wALocal = proxyA.GetVertex(v.indexA); // TODO b2Vec2 reuse?
-			wBLocal = proxyB.GetVertex(v.indexB); // TODO b2Vec2 reuse?
-			v.wA = b2Math.MulX(transformA, wALocal); // TODO b2Vec2 reuse?
-			v.wB = b2Math.MulX(transformB, wBLocal); // TODO b2Vec2 reuse?
-			v.w = b2Math.SubtractVV(v.wB, v.wA); // TODO b2Vec2 reuse?
+			wALocal = proxyA.GetVertex(v.indexA);
+			wBLocal = proxyB.GetVertex(v.indexB);
+			v.wA = b2Math.MulX(transformA, wALocal, v.wA);
+			v.wB = b2Math.MulX(transformB, wBLocal, v.wB);
+			v.w = b2Math.SubtractVV(v.wB, v.wA, v.w);
 			v.a = 0;
 		}
 		if (this.m_count > 1) {
@@ -45,9 +45,9 @@ b2Simplex.prototype = {
 			v.indexB = 0;
 			wALocal = proxyA.GetVertex(0);
 			wBLocal = proxyB.GetVertex(0);
-			v.wA = b2Math.MulX(transformA, wALocal); // TODO b2Vec2 reuse?
-			v.wB = b2Math.MulX(transformB, wBLocal); // TODO b2Vec2 reuse?
-			v.w = b2Math.SubtractVV(v.wB, v.wA); // TODO b2Vec2 reuse?
+			v.wA = b2Math.MulX(transformA, wALocal, v.wA);
+			v.wB = b2Math.MulX(transformB, wBLocal, v.wB);
+			v.w = b2Math.SubtractVV(v.wB, v.wA, v.w);
 			this.m_count = 1;
 		}
 	},
@@ -126,19 +126,20 @@ b2Simplex.prototype = {
 	},
 
 	GetMetric : function () {
+		var tVec2a = b2Simplex.t_vec2a,
+			tVec2b = b2Simplex.t_vec2b;
 		switch (this.m_count) {
-		case 0:
-			b2Settings.b2Assert(false);
-			return 0.0;
 		case 1:
-			return 0.0;
+			return 0;
 		case 2:
-			return b2Math.SubtractVV(this.m_v1.w, this.m_v2.w).Length();
+			return b2Math.SubtractVV(this.m_v1.w, this.m_v2.w, tVec2a).Length();
 		case 3:
-			return b2Math.CrossVV(b2Math.SubtractVV(this.m_v2.w, this.m_v1.w), b2Math.SubtractVV(this.m_v3.w, this.m_v1.w));
+			b2Math.SubtractVV(this.m_v2.w, this.m_v1.w, tVec2a);
+			b2Math.SubtractVV(this.m_v3.w, this.m_v1.w, tVec2b);
+			return b2Math.CrossVV(tVec2a, tVec2b, tVec2a);
 		default:
 			b2Settings.b2Assert(false);
-			return 0.0;
+			return 0;
 		}
 	},
 
@@ -244,4 +245,5 @@ b2Simplex.prototype = {
 
 whenReady(function () {
 	b2Simplex.t_vec2a = new b2Vec2();
+	b2Simplex.t_vec2b = new b2Vec2();
 });
