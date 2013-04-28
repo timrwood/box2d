@@ -29,7 +29,7 @@ var b2Distance = {
 
 		simplex.ReadCache(cache, proxyA, transformA, proxyB, transformB);
 		vertices = simplex.m_vertices;
-		closestPoint = simplex.GetClosestPoint();
+		closestPoint = simplex.GetClosestPoint(tVecA);
 
 		distanceSqr1 = distanceSqr2 = closestPoint.LengthSquared();
 
@@ -60,13 +60,13 @@ var b2Distance = {
 
 			tVecA = simplex.GetClosestPoint(tVecA);
 			distanceSqr1 = distanceSqr2 = tVecA.LengthSquared();
-			d = simplex.GetSearchDirection();
+			d = simplex.GetSearchDirection(tVecA);
 			if (d.LengthSquared() < Number.MIN_VALUE * Number.MIN_VALUE) {
 				break;
 			}
 
 			vertex = vertices[simplex.m_count];
-			vertex.indexA = proxyA.GetSupport(b2Math.MulTMV(transformA.R, d.GetNegative(tVecA), tVecB));
+			vertex.indexA = proxyA.GetSupport(b2Math.MulTMV(transformA.R, d.GetNegative(tVecB), tVecB));
 			vertex.wA = b2Math.MulX(transformA, proxyA.GetVertex(vertex.indexA), vertex.wA);
 			vertex.indexB = proxyB.GetSupport(b2Math.MulTMV(transformB.R, d, tVecB));
 			vertex.wB = b2Math.MulX(transformB, proxyB.GetVertex(vertex.indexB), vertex.wB);

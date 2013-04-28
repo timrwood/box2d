@@ -65,18 +65,19 @@ b2Simplex.prototype = {
 		}
 	},
 
-	GetSearchDirection : function () {
+	GetSearchDirection : function (out) {
+		out = out || new b2Vec2();
 		var e12, sgn;
 		switch (this.m_count) {
 		case 1:
-			return this.m_v1.w.GetNegative();
+			return this.m_v1.w.GetNegative(out);
 		case 2:
 			e12 = b2Math.SubtractVV(this.m_v2.w, this.m_v1.w);
 			sgn = b2Math.CrossVV(e12, this.m_v1.w.GetNegative());
 			if (sgn > 0) {
-				return b2Math.CrossFV(1.0, e12);
+				return b2Math.CrossFV(1, e12, out);
 			}
-			return b2Math.CrossVF(e12, 1.0);
+			return b2Math.CrossVF(e12, 1, out);
 		default:
 			b2Settings.b2Assert(false);
 			return new b2Vec2();
