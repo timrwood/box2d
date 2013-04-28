@@ -17,6 +17,9 @@ b2SeparationFunction.prototype = {
 			normalX = 0,
 			normalY = 0,
 			tMat, tVec,
+			tVecA = b2SeparationFunction.t_vec2a,
+			tVecB = b2SeparationFunction.t_vec2b,
+			tVecC = b2SeparationFunction.t_vec2c,
 			s = 0,
 			sgn = 0,
 			pA, dA, pB, dB,
@@ -53,7 +56,7 @@ b2SeparationFunction.prototype = {
 
 			this.m_localPoint.x = 0.5 * (localPointA1.x + localPointA2.x);
 			this.m_localPoint.y = 0.5 * (localPointA1.y + localPointA2.y);
-			this.m_axis = b2Math.CrossVF(b2Math.SubtractVV(localPointA2, localPointA1), 1.0);
+			this.m_axis = b2Math.CrossVF(b2Math.SubtractVV(localPointA2, localPointA1, this.m_axis), 1, this.m_axis);
 			this.m_axis.Normalize();
 
 			tVec = this.m_axis;
@@ -83,7 +86,7 @@ b2SeparationFunction.prototype = {
 
 			this.m_localPoint.x = 0.5 * (localPointB1.x + localPointB2.x);
 			this.m_localPoint.y = 0.5 * (localPointB1.y + localPointB2.y);
-			this.m_axis = b2Math.CrossVF(b2Math.SubtractVV(localPointB2, localPointB1), 1.0);
+			this.m_axis = b2Math.CrossVF(b2Math.SubtractVV(localPointB2, localPointB1, this.m_axis), 1, this.m_axis);
 			this.m_axis.Normalize();
 
 			tVec = this.m_axis;
@@ -111,14 +114,12 @@ b2SeparationFunction.prototype = {
 			localPointB1 = this.m_proxyB.GetVertex(cache.indexB[0]);
 			localPointB2 = this.m_proxyB.GetVertex(cache.indexB[1]);
 
-			pA = b2Math.MulX(transformA, localPointA);
-			dA = b2Math.MulMV(transformA.R, b2Math.SubtractVV(localPointA2, localPointA1));
-			pB = b2Math.MulX(transformB, localPointB);
-			dB = b2Math.MulMV(transformB.R, b2Math.SubtractVV(localPointB2, localPointB1));
+			dA = b2Math.MulMV(transformA.R, b2Math.SubtractVV(localPointA2, localPointA1, tVecA), tVecA);
+			dB = b2Math.MulMV(transformB.R, b2Math.SubtractVV(localPointB2, localPointB1, tVecB), tVecB);
 
 			a = dA.x * dA.x + dA.y * dA.y;
 			e = dB.x * dB.x + dB.y * dB.y;
-			r = b2Math.SubtractVV(dB, dA);
+			r = b2Math.SubtractVV(dB, dA, tVecC);
 			c = dA.x * r.x + dA.y * r.y;
 			f = dB.x * r.x + dB.y * r.y;
 			b = dA.x * dB.x + dA.y * dB.y;
@@ -136,17 +137,17 @@ b2SeparationFunction.prototype = {
 				s = b2Math.Clamp((b - c) / a, 0, 1);
 			}
 
-			localPointA = new b2Vec2();
+			localPointA = tVecA;
 			localPointA.x = localPointA1.x + s * (localPointA2.x - localPointA1.x);
 			localPointA.y = localPointA1.y + s * (localPointA2.y - localPointA1.y);
 
-			localPointB = new b2Vec2();
+			localPointB = tVecB;
 			localPointB.x = localPointB1.x + s * (localPointB2.x - localPointB1.x);
 			localPointB.y = localPointB1.y + s * (localPointB2.y - localPointB1.y);
 
 			if (s === 0 || s === 1) {
 				this.m_type = b2SeparationFunction.e_faceB;
-				this.m_axis = b2Math.CrossVF(b2Math.SubtractVV(localPointB2, localPointB1), 1.0);
+				this.m_axis = b2Math.CrossVF(b2Math.SubtractVV(localPointB2, localPointB1, this.m_axis), 1, this.m_axis);
 				this.m_axis.Normalize();
 				this.m_localPoint = localPointB;
 
@@ -165,13 +166,13 @@ b2SeparationFunction.prototype = {
 				pointAX = transformA.position.x + (tMat.col1.x * tVec.x + tMat.col2.x * tVec.y);
 				pointAY = transformA.position.y + (tMat.col1.y * tVec.x + tMat.col2.y * tVec.y);
 
-				sgn = (pointAX - pointBX) * normalX + (pointAY - pointBY) * normalY; // TODO : Should be s?
+				s = (pointAX - pointBX) * normalX + (pointAY - pointBY) * normalY;
 				if (s < 0) {
 					this.m_axis.NegativeSelf();
 				}
 			} else {
 				this.m_type = b2SeparationFunction.e_faceA;
-				this.m_axis = b2Math.CrossVF(b2Math.SubtractVV(localPointA2, localPointA1), 1.0);
+				this.m_axis = b2Math.CrossVF(b2Math.SubtractVV(localPointA2, localPointA1, this.m_axis), 1, this.m_axis);
 				this.m_localPoint = localPointA;
 
 				tVec = this.m_axis;
@@ -189,7 +190,7 @@ b2SeparationFunction.prototype = {
 				pointBX = transformB.position.x + (tMat.col1.x * tVec.x + tMat.col2.x * tVec.y);
 				pointBY = transformB.position.y + (tMat.col1.y * tVec.x + tMat.col2.y * tVec.y);
 
-				sgn = (pointBX - pointAX) * normalX + (pointBY - pointAY) * normalY; // TODO : Should be s?
+				s = (pointBX - pointAX) * normalX + (pointBY - pointAY) * normalY;
 
 				if (s < 0) {
 					this.m_axis.NegativeSelf();
