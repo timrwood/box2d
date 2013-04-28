@@ -35,6 +35,7 @@ var b2Math = {
 	},
 
 	MulTMV : function (A, v, out) {
+		// if (!out) {console.error('no out')}
 		out = out || new b2Vec2();
 		out.x = b2Math.Dot(v, A.col1);
 		out.y = b2Math.Dot(v, A.col2);
@@ -42,6 +43,7 @@ var b2Math = {
 	},
 
 	MulX : function (T, v, out) {
+		// if (!out) {console.error('no out')}
 		var a = b2Math.MulMV(T.R, v, out);
 		a.x += T.position.x;
 		a.y += T.position.y;
@@ -66,6 +68,7 @@ var b2Math = {
 	},
 
 	SubtractVV : function (a, b, out) {
+		// if (!out) {console.error('no out')}
 		out = out || new b2Vec2();
 		out.x = a.x - b.x;
 		out.y = a.y - b.y;
