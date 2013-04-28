@@ -11,33 +11,45 @@ var b2Math = {
 		return a.x * b.y - a.y * b.x;
 	},
 
-	CrossVF : function (a, s) {
+	CrossVF : function (a, s, out) {
 		s = s || 0;
-		return new b2Vec2(s * a.y, -s * a.x);
+		out = out || new b2Vec2();
+		out.x = s * a.y;
+		out.y = -s * a.x;
+		return out;
 	},
 
-	CrossFV : function (s, a) {
+	CrossFV : function (s, a, out) {
 		s = s || 0;
-		return new b2Vec2(-s * a.y, s * a.x);
+		out = out || new b2Vec2();
+		out.x = -s * a.y;
+		out.y = s * a.x;
+		return out;
 	},
 
-	MulMV : function (A, v) {
-		return new b2Vec2(A.col1.x * v.x + A.col2.x * v.y, A.col1.y * v.x + A.col2.y * v.y);
+	MulMV : function (A, v, out) {
+		out = out || new b2Vec2();
+		out.x = A.col1.x * v.x + A.col2.x * v.y;
+		out.y = A.col1.y * v.x + A.col2.y * v.y;
+		return out;
 	},
 
-	MulTMV : function (A, v) {
-		return new b2Vec2(b2Math.Dot(v, A.col1), b2Math.Dot(v, A.col2));
+	MulTMV : function (A, v, out) {
+		out = out || new b2Vec2();
+		out.x = b2Math.Dot(v, A.col1);
+		out.y = b2Math.Dot(v, A.col2);
+		return out;
 	},
 
-	MulX : function (T, v) {
-		var a = b2Math.MulMV(T.R, v);
+	MulX : function (T, v, out) {
+		var a = b2Math.MulMV(T.R, v, out);
 		a.x += T.position.x;
 		a.y += T.position.y;
 		return a;
 	},
 
-	MulXT : function (T, v) {
-		var a = b2Math.SubtractVV(v, T.position),
+	MulXT : function (T, v, out) {
+		var a = b2Math.SubtractVV(v, T.position, out),
 			tX = (a.x * T.R.col1.x + a.y * T.R.col1.y);
 
 		a.y = (a.x * T.R.col2.x + a.y * T.R.col2.y);
@@ -46,12 +58,18 @@ var b2Math = {
 		return a;
 	},
 
-	AddVV : function (a, b) {
-		return new b2Vec2(a.x + b.x, a.y + b.y);
+	AddVV : function (a, b, out) {
+		out = out || new b2Vec2();
+		out.x = a.x + b.x;
+		out.y = a.y + b.y;
+		return out;
 	},
 
-	SubtractVV : function (a, b) {
-		return new b2Vec2(a.x - b.x, a.y - b.y);
+	SubtractVV : function (a, b, out) {
+		out = out || new b2Vec2();
+		out.x = a.x - b.x;
+		out.y = a.y - b.y;
+		return out;
 	},
 
 	Distance : function (a, b) {
@@ -66,9 +84,12 @@ var b2Math = {
 		return (cX * cX + cY * cY);
 	},
 
-	MulFV : function (s, a) {
+	MulFV : function (s, a, out) {
 		s = s || 0;
-		return new b2Vec2(s * a.x, s * a.y);
+		out = out || new b2Vec2();
+		out.x = s * a.x;
+		out.y = s * a.y;
+		return out;
 	},
 
 	AddMM : function (A, B) {
@@ -89,8 +110,11 @@ var b2Math = {
 		return Math.abs(a);
 	},
 
-	AbsV : function (a) {
-		return new b2Vec2(Math.abs(a.x), Math.abs(a.y));
+	AbsV : function (a, out) {
+		out = out || new b2Vec2();
+		out.x = Math.abs(a.x);
+		out.y = Math.abs(a.y);
+		return out;
 	},
 
 	AbsM : function (A) {
@@ -101,24 +125,31 @@ var b2Math = {
 		return Math.min(a, b);
 	},
 
-	MinV : function (a, b) {
-		return new b2Vec2(Math.min(a.x, b.x), Math.min(a.y, b.y));
+	MinV : function (a, b, out) {
+		out = out || new b2Vec2();
+		out.x = Math.min(a.x, b.x);
+		out.y = Math.min(a.y, b.y);
+		return out;
 	},
 
 	Max : function (a, b) {
 		return Math.max(a, b);
 	},
 
-	MaxV : function (a, b) {
-		return new b2Vec2(Math.max(a.x, b.x), Math.max(a.y, b.y));
+	MaxV : function (a, b, out) {
+		out = out || new b2Vec2();
+		out.x = Math.max(a.x, b.x);
+		out.y = Math.max(a.y, b.y);
+		return out;
 	},
 
 	Clamp : function (a, low, high) {
 		return Math.max(low, Math.min(a, high));
 	},
 
-	ClampV : function (a, low, high) {
-		return b2Math.MaxV(low, b2Math.MinV(a, high));
+	ClampV : function (a, low, high, out) {
+		var min = b2Math.MinV(a, high, out);
+		return b2Math.MaxV(low, min, min);
 	},
 
 	Swap : function (a, b) {

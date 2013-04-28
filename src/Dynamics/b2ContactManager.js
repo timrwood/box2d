@@ -5,7 +5,7 @@ function b2ContactManager() {
 	this.m_contactCount = 0;
 	this.m_contactFilter = b2ContactFilter.b2_defaultFilter;
 	this.m_contactListener = b2ContactListener.b2_defaultListener;
-	this.m_contactFactory = new b2ContactFactory(this.m_allocator);
+	this.m_contactFactory = new b2ContactFactory();
 	this.m_broadPhase = new b2DynamicTreeBroadPhase();
 
 	this.AddPair = function () {

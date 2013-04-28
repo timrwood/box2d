@@ -65,10 +65,10 @@ var b2Distance = {
 
 			vertex = vertices[simplex.m_count];
 			vertex.indexA = proxyA.GetSupport(b2Math.MulTMV(transformA.R, d.GetNegative()));
-			vertex.wA = b2Math.MulX(transformA, proxyA.GetVertex(vertex.indexA));
+			vertex.wA = b2Math.MulX(transformA, proxyA.GetVertex(vertex.indexA), vertex.wA);
 			vertex.indexB = proxyB.GetSupport(b2Math.MulTMV(transformB.R, d));
-			vertex.wB = b2Math.MulX(transformB, proxyB.GetVertex(vertex.indexB));
-			vertex.w = b2Math.SubtractVV(vertex.wB, vertex.wA);
+			vertex.wB = b2Math.MulX(transformB, proxyB.GetVertex(vertex.indexB), vertex.wB);
+			vertex.w = b2Math.SubtractVV(vertex.wB, vertex.wA, vertex.w);
 
 			iter++;
 			b2Distance.b2_gjkIters++; // TODO

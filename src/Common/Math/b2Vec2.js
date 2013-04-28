@@ -1,6 +1,7 @@
 function b2Vec2(x, y) {
 	this.x = x || 0;
 	this.y = y || 0;
+	b2Vec2.count = (b2Vec2.count || 0) + 1;
 }
 
 Box2D.b2Vec2 = b2Vec2;
@@ -20,8 +21,11 @@ b2Vec2.prototype = {
 		this.y = v.y;
 	},
 
-	GetNegative : function () {
-		return new b2Vec2(-this.x, -this.y);
+	GetNegative : function (out) {
+		out = out || new b2Vec2();
+		out.x = -this.x;
+		out.y = -this.y;
+		return out;
 	},
 
 	NegativeSelf : function () {
@@ -29,8 +33,11 @@ b2Vec2.prototype = {
 		this.y = -this.y;
 	},
 
-	Copy : function () {
-		return new b2Vec2(this.x, this.y);
+	Copy : function (out) {
+		out = out || new b2Vec2();
+		out.x = this.x;
+		out.y = this.y;
+		return out;
 	},
 
 	Add : function (v) {

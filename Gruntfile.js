@@ -26,6 +26,7 @@ module.exports = function (grunt) {
 					"src/Dynamics/Controllers/*.js",
 					"src/Dynamics/Joints/*.js",
 					// "src/rollback.js",
+					"src/profile.js",
 					"src/end.js"
 				],
 				dest: 'dist/<%= pkg.name %>.js'

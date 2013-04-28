@@ -72,7 +72,7 @@
 
             //create some objects
             bodyDef.type = b2Body.b2_dynamicBody;
-            for(var i = 0; i < 10; ++i) {
+            for(var i = 0; i < 5; ++i) {
                // if(Math.random() > 0.5) {
                   fixDef.shape = new b2PolygonShape;
                   fixDef.shape.SetAsBox(
@@ -85,7 +85,7 @@
                //    );
                // }
                bodyDef.position.x = 2;
-               bodyDef.position.y = i + 2;
+               bodyDef.position.y = 2;
                bodyDef.angle = 0.001;
                var body = world.CreateBody(bodyDef)
 
@@ -183,9 +183,16 @@
             world.Step(1 / 60, 10, 10);
             world.DrawDebugData();
             world.ClearForces();
-            setTimeout(update, 1000 / 60);
+            // setTimeout(update, 1000 / 60);
          }
          update();
+         Box2D.profile();
+
+         update();
+         Box2D.profile();
+
+         update();
+         Box2D.profile();
 
          //helpers
 
