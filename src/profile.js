@@ -60,6 +60,8 @@ Box2D.profile = function () {
 	for (i in counts) {
 		if (counts.hasOwnProperty(i)) {
 			c.push([i, counts[i], calls[i]]);
+			counts[i] = 0;
+			calls[i] = 0;
 		}
 	}
 	c.sort(function (a, b) {

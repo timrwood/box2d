@@ -21,7 +21,9 @@ var b2Distance = {
 			vertex,
 			duplicate,
 			rA, rB,
-			normal;
+			normal,
+			tVecA = b2Distance.t_vec2a,
+			tVecB = b2Distance.t_vec2b;
 
 		b2Distance.b2_gjkCalls++; // TODO
 
@@ -56,17 +58,17 @@ var b2Distance = {
 				break;
 			}
 
-			p = simplex.GetClosestPoint();
-			distanceSqr1 = distanceSqr2 = p.LengthSquared();
+			tVecA = simplex.GetClosestPoint(tVecA);
+			distanceSqr1 = distanceSqr2 = tVecA.LengthSquared();
 			d = simplex.GetSearchDirection();
 			if (d.LengthSquared() < Number.MIN_VALUE * Number.MIN_VALUE) {
 				break;
 			}
 
 			vertex = vertices[simplex.m_count];
-			vertex.indexA = proxyA.GetSupport(b2Math.MulTMV(transformA.R, d.GetNegative()));
+			vertex.indexA = proxyA.GetSupport(b2Math.MulTMV(transformA.R, d.GetNegative(tVecA), tVecB));
 			vertex.wA = b2Math.MulX(transformA, proxyA.GetVertex(vertex.indexA), vertex.wA);
-			vertex.indexB = proxyB.GetSupport(b2Math.MulTMV(transformB.R, d));
+			vertex.indexB = proxyB.GetSupport(b2Math.MulTMV(transformB.R, d, tVecB));
 			vertex.wB = b2Math.MulX(transformB, proxyB.GetVertex(vertex.indexB), vertex.wB);
 			vertex.w = b2Math.SubtractVV(vertex.wB, vertex.wA, vertex.w);
 
@@ -132,4 +134,6 @@ Box2D.b2Distance = b2Distance;
 
 whenReady(function () {
 	b2Distance.s_simplex = new b2Simplex();
+	b2Distance.t_vec2a = new b2Vec2();
+	b2Distance.t_vec2b = new b2Vec2();
 });

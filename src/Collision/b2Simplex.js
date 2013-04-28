@@ -83,19 +83,20 @@ b2Simplex.prototype = {
 		}
 	},
 
-	GetClosestPoint : function () {
+	GetClosestPoint : function (out) {
+		out = out || new b2Vec2();
 		switch (this.m_count) {
-		case 0:
-			b2Settings.b2Assert(false);
-			return new b2Vec2();
 		case 1:
 			return this.m_v1.w;
 		case 2:
-			return new b2Vec2(this.m_v1.a * this.m_v1.w.x + this.m_v2.a * this.m_v2.w.x, this.m_v1.a * this.m_v1.w.y + this.m_v2.a * this.m_v2.w.y);
+			out.x = this.m_v1.a * this.m_v1.w.x + this.m_v2.a * this.m_v2.w.x;
+			out.y = this.m_v1.a * this.m_v1.w.y + this.m_v2.a * this.m_v2.w.y;
+			break;
 		default:
 			b2Settings.b2Assert(false);
-			return new b2Vec2();
+			break;
 		}
+		return out;
 	},
 
 	GetWitnessPoints : function (pA, pB) {
