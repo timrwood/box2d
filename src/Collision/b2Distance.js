@@ -88,10 +88,10 @@ var b2Distance = {
 			simplex.m_count++;
 		}
 
-		b2Distance.b2_gjkMaxIters = b2Math.Max(b2Distance.b2_gjkMaxIters, iter); // TODO
+		b2Distance.b2_gjkMaxIters = Math.max(b2Distance.b2_gjkMaxIters, iter); // TODO
 
 		simplex.GetWitnessPoints(output.pointA, output.pointB);
-		output.distance = b2Math.SubtractVV(output.pointA, output.pointB).Length();
+		output.distance = b2Math.SubtractVV(output.pointA, output.pointB, tVecA).Length();
 		output.iterations = iter;
 		simplex.WriteCache(cache);
 
@@ -101,14 +101,14 @@ var b2Distance = {
 
 			if (output.distance > rA + rB && output.distance > Number.MIN_VALUE) {
 				output.distance -= rA + rB;
-				normal = b2Math.SubtractVV(output.pointB, output.pointA);
+				normal = b2Math.SubtractVV(output.pointB, output.pointA, tVecA);
 				normal.Normalize();
 				output.pointA.x += rA * normal.x;
 				output.pointA.y += rA * normal.y;
 				output.pointB.x -= rB * normal.x;
 				output.pointB.y -= rB * normal.y;
 			} else {
-				p = new b2Vec2();
+				p = tVecA;
 				p.x = 0.5 * (output.pointA.x + output.pointB.x);
 				p.y = 0.5 * (output.pointA.y + output.pointB.y);
 				output.pointA.x = output.pointB.x = p.x;

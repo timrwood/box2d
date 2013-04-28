@@ -202,30 +202,39 @@ b2SeparationFunction.prototype = {
 		var axisA, axisB,
 			localPointA, localPointB,
 			pointA, pointB,
-			normal;
+			normal,
+			tVecA = b2SeparationFunction.t_vec2a,
+			tVecB = b2SeparationFunction.t_vec2b,
+			tVecC = b2SeparationFunction.t_vec2c;
 		// TODO : Check for b2Vec2 reuse?
 		switch (this.m_type) {
 		case b2SeparationFunction.e_points:
-			axisA = b2Math.MulTMV(transformA.R, this.m_axis);
-			axisB = b2Math.MulTMV(transformB.R, this.m_axis.GetNegative());
+			axisA = b2Math.MulTMV(transformA.R, this.m_axis, tVecA);
+			axisB = b2Math.MulTMV(transformB.R, this.m_axis.GetNegative(tVecB), tVecB);
+
 			localPointA = this.m_proxyA.GetSupportVertex(axisA);
 			localPointB = this.m_proxyB.GetSupportVertex(axisB);
-			pointA = b2Math.MulX(transformA, localPointA);
-			pointB = b2Math.MulX(transformB, localPointB);
+
+			pointA = b2Math.MulX(transformA, localPointA, tVecA);
+			pointB = b2Math.MulX(transformB, localPointB, tVecB);
+
 			return (pointB.x - pointA.x) * this.m_axis.x + (pointB.y - pointA.y) * this.m_axis.y;
 		case b2SeparationFunction.e_faceA:
-			normal = b2Math.MulMV(transformA.R, this.m_axis);
-			pointA = b2Math.MulX(transformA, this.m_localPoint);
-			axisB = b2Math.MulTMV(transformB.R, normal.GetNegative());
+			normal = b2Math.MulMV(transformA.R, this.m_axis, tVecA);
+			pointA = b2Math.MulX(transformA, this.m_localPoint, tVecB);
+
+			axisB = b2Math.MulTMV(transformB.R, normal.GetNegative(tVecC), tVecC);
 			localPointB = this.m_proxyB.GetSupportVertex(axisB);
-			pointB = b2Math.MulX(transformB, localPointB);
+			pointB = b2Math.MulX(transformB, localPointB, tVecC);
+
 			return (pointB.x - pointA.x) * normal.x + (pointB.y - pointA.y) * normal.y;
 		case b2SeparationFunction.e_faceB:
-			normal = b2Math.MulMV(transformB.R, this.m_axis);
-			pointB = b2Math.MulX(transformB, this.m_localPoint);
-			axisA = b2Math.MulTMV(transformA.R, normal.GetNegative());
+			normal = b2Math.MulMV(transformB.R, this.m_axis, tVecA);
+			pointB = b2Math.MulX(transformB, this.m_localPoint, tVecB);
+
+			axisA = b2Math.MulTMV(transformA.R, normal.GetNegative(tVecC), tVecC);
 			localPointA = this.m_proxyA.GetSupportVertex(axisA);
-			pointA = b2Math.MulX(transformA, localPointA);
+			pointA = b2Math.MulX(transformA, localPointA, tVecC);
 			return (pointA.x - pointB.x) * normal.x + (pointA.y - pointB.y) * normal.y;
 		default:
 			b2Settings.b2Assert(false);
@@ -237,3 +246,10 @@ b2SeparationFunction.prototype = {
 b2SeparationFunction.e_points = 1;
 b2SeparationFunction.e_faceA  = 2;
 b2SeparationFunction.e_faceB  = 4;
+
+
+whenReady(function () {
+	b2SeparationFunction.t_vec2a = new b2Vec2();
+	b2SeparationFunction.t_vec2b = new b2Vec2();
+	b2SeparationFunction.t_vec2c = new b2Vec2();
+});

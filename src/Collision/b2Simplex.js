@@ -145,7 +145,7 @@ b2Simplex.prototype = {
 	Solve2 : function () {
 		var w1 = this.m_v1.w,
 			w2 = this.m_v2.w,
-			e12 = b2Math.SubtractVV(w2, w1),
+			e12 = b2Math.SubtractVV(w2, w1, b2Simplex.t_vec2a),
 			d12_2 = -(w1.x * e12.x + w1.y * e12.y),
 			d12_1,
 			inv_d12;
@@ -241,3 +241,7 @@ b2Simplex.prototype = {
 		this.m_count = 3;
 	}
 };
+
+whenReady(function () {
+	b2Simplex.t_vec2a = new b2Vec2();
+});
