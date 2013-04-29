@@ -40,7 +40,6 @@ var b2Settings = {
 b2Settings.b2_toiSlop = 8 * b2Settings.b2_linearSlop;
 b2Settings.b2_angularSlop = 2 / 180 * b2Settings.b2_pi;
 b2Settings.b2_maxRotation = b2Settings.b2_pi / 2;
-b2Settings.b2_polygonRadius = 2 * b2Settings.b2_linearSlop;
 b2Settings.b2_maxRotationSquared = b2Settings.b2_maxRotation * b2Settings.b2_maxRotation;
 b2Settings.b2_maxAngularCorrection = 8 / 180 * b2Settings.b2_pi;
 b2Settings.b2_angularSleepTolerance = 2 / 180 * b2Settings.b2_pi;

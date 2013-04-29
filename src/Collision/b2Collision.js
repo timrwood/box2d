@@ -173,6 +173,7 @@ var b2Collision = {
 			vertices2 = poly2.m_vertices,
 			normals2 = poly2.m_normals,
 			tMat, tVec,
+			tX,
 			normal1X, normal1Y,
 			index = 0,
 			minDot = Number.MAX_VALUE,
@@ -181,15 +182,15 @@ var b2Collision = {
 			tClip,
 			i1, i2;
 
-
 		tMat = xf1.R;
 		tVec = normals1[edge1];
 		normal1X = tMat.col1.x * tVec.x + tMat.col2.x * tVec.y;
 		normal1Y = tMat.col1.y * tVec.x + tMat.col2.y * tVec.y;
 
 		tMat = xf2.R;
+		tX = tMat.col1.x * normal1X + tMat.col1.y * normal1Y;
 		normal1Y = tMat.col2.x * normal1X + tMat.col2.y * normal1Y;
-		normal1X = tMat.col1.x * normal1X + tMat.col1.y * normal1Y;
+		normal1X = tX;
 
 		for (i = 0; i < count2; i++) {
 			tVec = normals2[i];
@@ -260,6 +261,8 @@ var b2Collision = {
 			tX,
 			tY;
 
+		manifold.m_pointCount = 0;
+
 		b2Collision.s_edgeAO[0] = b2Collision.s_edgeBO[0] = 0;
 
 		separationA = b2Collision.FindMaxSeparation(b2Collision.s_edgeAO, polyA, xfA, polyB, xfB);
@@ -275,8 +278,6 @@ var b2Collision = {
 		if (separationB > totalRadius) {
 			return;
 		}
-
-		manifold.m_pointCount = 0;
 
 		if (separationB > k_relativeTol * separationA + k_absoluteTol) {
 			poly1 = polyB;

@@ -188,7 +188,8 @@ b2DynamicTree.prototype = {
 	},
 
 	InsertLeaf : function (leaf) {
-		var center, sibling,
+		var center = b2DynamicTree.t_vec2a,
+			sibling,
 			child1, child2,
 			norm1, norm2,
 			node1, node2;
@@ -201,7 +202,7 @@ b2DynamicTree.prototype = {
 			return;
 		}
 
-		center = leaf.aabb.GetCenter();
+		center = leaf.aabb.GetCenter(center);
 		sibling = this.m_root;
 
 		while (!sibling.IsLeaf()) {
@@ -278,7 +279,7 @@ b2DynamicTree.prototype = {
 			this.FreeNode(node2);
 			while (node1) {
 				oldAABB = node1.aabb;
-				node1.aabb = b2AABB.Combine(node1.child1.aabb, node1.child2.aabb);
+				node1.aabb = b2AABB.Combine(node1.child1.aabb, node1.child2.aabb); // TODO: Check for b2AABB reuse?
 				if (oldAABB.Contains(node1.aabb)) {
 					break;
 				}
@@ -304,3 +305,8 @@ b2DynamicTreeNode.prototype = {
 };
 
 function b2DynamicTreePair() {}
+
+
+whenReady(function () {
+	b2DynamicTree.t_vec2a = new b2Vec2();
+});
