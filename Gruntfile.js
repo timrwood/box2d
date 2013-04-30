@@ -30,6 +30,13 @@ module.exports = function (grunt) {
 					"src/end.js"
 				],
 				dest: 'dist/<%= pkg.name %>.js'
+			},
+			tests: {
+				src: [
+					"test/start.js",
+					"test/tests/*.js"
+				],
+				dest: 'test/test.js'
 			}
 		},
 		uglify: {
@@ -51,7 +58,10 @@ module.exports = function (grunt) {
 		},
 		watch: {
 			concat: {
-				files: '<%= concat.dist.src %>',
+				files: [
+					'<%= concat.dist.src %>',
+					'<%= concat.tests.src %>'
+				],
 				tasks: ['concat']
 			},
 			src: {

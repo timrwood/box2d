@@ -9,6 +9,6 @@ b2FixtureDef.prototype = {
 	userData : null,
 	friction : 0.2,
 	restitution : 0,
-	density : 0,
+	density : 1,
 	isSensor : false
 };

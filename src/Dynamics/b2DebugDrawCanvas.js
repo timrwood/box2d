@@ -8,8 +8,10 @@ inherit(b2DebugDraw, b2DebugDrawCanvas);
 
 b2DebugDrawCanvas.prototype = {
 	Clear : function () {
-		this.canvas.width = this.canvas.width;
-		this.canvas.height = this.canvas.height;
+		this.ctx.save();
+		this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		this.ctx.restore();
 	},
 
 	Prepare : function () {
@@ -26,14 +28,14 @@ b2DebugDrawCanvas.prototype = {
 	},
 
 	_lineTo : function (x, y) {
-		x = Math.round(x) + 0.5;
-		y = Math.round(y) + 0.5;
+		x = Math.round(x);
+		y = Math.round(y);
 		this.ctx.lineTo(x, y);
 	},
 
 	_moveTo : function (x, y) {
-		x = Math.round(x) + 0.5;
-		y = Math.round(y) + 0.5;
+		x = Math.round(x);
+		y = Math.round(y);
 		this.ctx.moveTo(x, y);
 	},
 
@@ -47,13 +49,12 @@ b2DebugDrawCanvas.prototype = {
 			drawScale = this.m_drawScale;
 
 		ctx.beginPath();
-		ctx.strokeStyle = color;
 		this._moveTo(vertices[len - 1].x * drawScale, vertices[len - 1].y * drawScale);
-
 		for (i = 0; i < len; i++) {
 			this._lineTo(vertices[i].x * drawScale, vertices[i].y * drawScale);
 		}
 
+		ctx.strokeStyle = color;
 		ctx.stroke();
 	},
 
@@ -61,12 +62,20 @@ b2DebugDrawCanvas.prototype = {
 		if (!vertexCount) {
 			return;
 		}
-		var ctx = this.ctx;
+		var ctx = this.ctx,
+			i,
+			len = vertices.length,
+			drawScale = this.m_drawScale;
 
-		this.DrawPolygon(vertices, vertexCount, "rgba(0, 0, 0, 0.3)");
+		ctx.beginPath();
+		this._moveTo(vertices[len - 1].x * drawScale, vertices[len - 1].y * drawScale);
+		for (i = 0; i < len; i++) {
+			this._lineTo(vertices[i].x * drawScale, vertices[i].y * drawScale);
+		}
 
 		ctx.fillStyle = color;
 		ctx.fill();
+		ctx.strokeStyle = b2DebugDraw.c_outline;
 		ctx.stroke();
 	},
 
@@ -85,19 +94,22 @@ b2DebugDrawCanvas.prototype = {
 	},
 
 	DrawSolidCircle : function (center, radius, axis, color) {
-		var s = this.ctx,
+		var ctx = this.ctx,
 			drawScale = this.m_drawScale,
+			ax = axis.x * radius * drawScale,
+			ay = axis.y * radius * drawScale,
 			cx = center.x * drawScale,
 			cy = center.y * drawScale;
-		s.moveTo(0, 0);
-		s.beginPath();
-		s.strokeStyle = color;
-		s.arc(cx, cy, radius * drawScale, 0, Math.PI * 2, true);
-		s.moveTo(cx, cy);
-		s.lineTo((center.x + axis.x * radius) * drawScale, (center.y + axis.y * radius) * drawScale);
-		s.closePath();
-		s.fill();
-		s.stroke();
+
+		ctx.beginPath();
+		ctx.arc(cx, cy, radius * drawScale, 0, Math.PI * 2, true);
+		this._moveTo(cx, cy);
+		this._lineTo(cx + ax, cy + ay);
+
+		ctx.fillStyle = color;
+		ctx.fill();
+		ctx.strokeStyle = b2DebugDraw.c_outline;
+		ctx.stroke();
 	},
 
 	DrawSegment : function (p1, p2, color) {

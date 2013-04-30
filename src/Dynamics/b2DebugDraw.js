@@ -1,5 +1,5 @@
 function b2DebugDraw() {
-	this.m_drawFlags = 63;
+	this.m_drawFlags = b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit;
 	this.m_xformScale = 10;
 }
 
@@ -12,16 +12,17 @@ b2DebugDraw.e_jointBit        = 8;
 b2DebugDraw.e_controllerBit   = 16;
 b2DebugDraw.e_centerOfMassBit = 32;
 
+b2DebugDraw.c_outline    = "rgba(0, 0, 0, 0.4)";
 b2DebugDraw.c_inactive   = "rgba(0, 0, 0, 0.1)";
-b2DebugDraw.c_static     = "rgba(0, 0, 0, 0.1)";
+b2DebugDraw.c_static     = "#351330";
 b2DebugDraw.c_kinematic  = "rgba(0, 0, 0, 0.1)";
-b2DebugDraw.c_asleep     = "rgba(0, 0, 0, 0.1)";
-b2DebugDraw.c_active     = "rgba(0, 0, 0, 0.1)";
-b2DebugDraw.c_pair       = "#999";
+b2DebugDraw.c_asleep     = "#E8CAA4";
+b2DebugDraw.c_active     = "#64908A";
+b2DebugDraw.c_pair       = "#CC2A41";
 b2DebugDraw.c_aabb       = "#999";
-b2DebugDraw.c_joint      = "#999";
-b2DebugDraw.c_transformX = "#f00";
-b2DebugDraw.c_transformY = "#00f";
+b2DebugDraw.c_joint      = "#CC2A41";
+b2DebugDraw.c_transformX = "rgba(255, 255, 255, 0.4)";
+b2DebugDraw.c_transformY = "rgba(255, 255, 255, 0.2)";
 
 b2DebugDraw.prototype = {
 	Clear : function () {},
