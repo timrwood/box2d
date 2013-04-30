@@ -107,7 +107,7 @@ document.addEventListener("mousedown", function (e) {
 		jointDef.bodyB = body;
 		jointDef.target.Set(x, y);
 		jointDef.collideConnected = true;
-		jointDef.maxForce = 300 * body.GetMass();
+		jointDef.maxForce = 3000 * body.GetMass();
 		mouseJoint = world.CreateJoint(jointDef);
 		body.SetAwake(true);
 	}

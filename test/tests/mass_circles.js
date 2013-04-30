@@ -4,6 +4,7 @@ tests.push(function(world){
 		i;
 
 	fixDef.friction = 0.5;
+	fixDef.restitution = 0.9;
 
 	bodyDef.type = Box2D.b2Body.b2_dynamicBody;
 

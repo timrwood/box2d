@@ -108,7 +108,7 @@ document.addEventListener("mousedown", function (e) {
 		jointDef.bodyB = body;
 		jointDef.target.Set(x, y);
 		jointDef.collideConnected = true;
-		jointDef.maxForce = 300 * body.GetMass();
+		jointDef.maxForce = 3000 * body.GetMass();
 		mouseJoint = world.CreateJoint(jointDef);
 		body.SetAwake(true);
 	}
@@ -180,6 +180,7 @@ tests.push(function(world){
 		i;
 
 	fixDef.friction = 0.5;
+	fixDef.restitution = 0.9;
 
 	bodyDef.type = Box2D.b2Body.b2_dynamicBody;
 
