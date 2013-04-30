@@ -427,132 +427,6 @@ b2World.prototype = {
 		}
 	},
 
-	DrawDebugData : function () {
-		if (!this.m_debugDraw) {
-			return;
-		}
-
-		var debugDraw = this.m_debugDraw,
-			flags = debugDraw.GetFlags(),
-			i,
-			b = this.m_bodyList,
-			j = this.m_jointList,
-			c = this.m_controllerList,
-			f,
-			s,
-			bp = this.m_contactManager.m_broadPhase,
-			invQ = new b2Vec2(),
-			x1 = new b2Vec2(),
-			x2 = new b2Vec2(),
-			xf,
-			b1 = new b2AABB(),
-			b2 = new b2AABB(),
-			vs = [
-				new b2Vec2(),
-				new b2Vec2(),
-				new b2Vec2(),
-				new b2Vec2()
-			],
-			color = new b2Color(),
-			contact = this.m_contactManager.m_contactList,
-			aabb;
-
-		debugDraw.Clear();
-
-		if (flags & b2DebugDraw.e_shapeBit) {
-			while (b) {
-				xf = b.m_xf;
-				f = b.GetFixtureList();
-
-				while (f) {
-					s = f.GetShape();
-
-					if (!b.IsActive()) {
-						color.Set(0.5, 0.5, 0.3);
-						this.DrawShape(s, xf, color);
-					} else if (b.GetType() === b2Body.b2_staticBody) {
-						color.Set(0.5, 0.9, 0.5);
-						this.DrawShape(s, xf, color);
-					} else if (b.GetType() === b2Body.b2_kinematicBody) {
-						color.Set(0.5, 0.5, 0.9);
-						this.DrawShape(s, xf, color);
-					} else if (!b.IsAwake()) {
-						color.Set(0.6, 0.6, 0.6);
-						this.DrawShape(s, xf, color);
-					} else {
-						color.Set(0.9, 0.7, 0.7);
-						this.DrawShape(s, xf, color);
-					}
-
-					f = f.m_next;
-				}
-				b = b.m_next;
-			}
-		}
-
-		if (flags & b2DebugDraw.e_jointBit) {
-			while (j) {
-				this.DrawJoint(j);
-				j = j.m_next;
-			}
-		}
-
-		if (flags & b2DebugDraw.e_controllerBit) {
-			while (c) {
-				c.Draw(debugDraw);
-				c = c.m_next;
-			}
-		}
-
-		if (flags & b2DebugDraw.e_pairBit) {
-			color.Set(0.3, 0.9, 0.9);
-
-			while (contact) {
-				debugDraw.DrawSegment(
-					contact.GetFixtureA().GetAABB().GetCenter(),
-					contact.GetFixtureB().GetAABB().GetCenter(),
-				color);
-				contact = contact.GetNext();
-			}
-		}
-
-		if (flags & b2DebugDraw.e_aabbBit) {
-			for (b = this.m_bodyList; b; b = b.m_next) {
-				if (!b.IsActive()) {
-					continue;
-				}
-
-				f = b.GetFixtureList();
-
-				while (f) {
-					aabb = bp.GetFatAABB(f.m_proxy);
-
-					vs[0].Set(aabb.lowerBound.x, aabb.lowerBound.y);
-					vs[1].Set(aabb.upperBound.x, aabb.lowerBound.y);
-					vs[2].Set(aabb.upperBound.x, aabb.upperBound.y);
-					vs[3].Set(aabb.lowerBound.x, aabb.upperBound.y);
-
-					debugDraw.DrawPolygon(vs, 4, color);
-
-					f = f.m_next;
-				}
-			}
-		}
-
-		if (flags & b2DebugDraw.e_centerOfMassBit) {
-			b = this.m_bodyList;
-
-			while (b) {
-				xf = b2World.s_xf;
-				xf.R = b.m_xf.R;
-				xf.position = b.GetWorldCenter();
-				debugDraw.DrawTransform(xf);
-
-				b = b.m_next;
-			}
-		}
-	},
-
 	QueryAABB : function (callback, aabb) {
 		var broadPhase = this.m_contactManager.m_broadPhase;
 
@@ -1050,6 +924,127 @@ b2World.prototype = {
 		}
 	},
 
+	DrawDebugData : function () {
+		if (!this.m_debugDraw) {
+			return;
+		}
+
+		var debugDraw = this.m_debugDraw,
+			flags = debugDraw.GetFlags(),
+			i,
+			b = this.m_bodyList,
+			j = this.m_jointList,
+			c = this.m_controllerList,
+			f,
+			s,
+			bp = this.m_contactManager.m_broadPhase,
+			invQ = new b2Vec2(),
+			x1 = new b2Vec2(),
+			x2 = new b2Vec2(),
+			xf,
+			b1 = new b2AABB(),
+			b2 = new b2AABB(),
+			vs = [
+				new b2Vec2(),
+				new b2Vec2(),
+				new b2Vec2(),
+				new b2Vec2()
+			],
+			contact = this.m_contactList,
+			aabb;
+
+		debugDraw.Clear();
+		debugDraw.Prepare();
+
+		if (flags & b2DebugDraw.e_shapeBit) {
+			while (b) {
+				xf = b.m_xf;
+				f = b.GetFixtureList();
+
+				while (f) {
+					s = f.GetShape();
+
+					if (!b.IsActive()) {
+						this.DrawShape(s, xf, b2DebugDraw.c_inactive);
+					} else if (b.GetType() === b2Body.b2_staticBody) {
+						this.DrawShape(s, xf, b2DebugDraw.c_static);
+					} else if (b.GetType() === b2Body.b2_kinematicBody) {
+						this.DrawShape(s, xf, b2DebugDraw.c_kinematic);
+					} else if (!b.IsAwake()) {
+						this.DrawShape(s, xf, b2DebugDraw.c_asleep);
+					} else {
+						this.DrawShape(s, xf, b2DebugDraw.c_active);
+					}
+
+					f = f.m_next;
+				}
+				b = b.m_next;
+			}
+		}
+
+		if (flags & b2DebugDraw.e_jointBit) {
+			while (j) {
+				this.DrawJoint(j);
+				j = j.m_next;
+			}
+		}
+
+		if (flags & b2DebugDraw.e_controllerBit) {
+			while (c) {
+				c.Draw(debugDraw);
+				c = c.m_next;
+			}
+		}
+
+		if (flags & b2DebugDraw.e_pairBit) {
+			while (contact) {
+				debugDraw.DrawSegment(
+					contact.GetFixtureA().GetAABB().GetCenter(),
+					contact.GetFixtureB().GetAABB().GetCenter(),
+				b2DebugDraw.c_pair);
+				contact = contact.GetNext();
+			}
+		}
+
+		if (flags & b2DebugDraw.e_aabbBit) {
+			for (b = this.m_bodyList; b; b = b.m_next) {
+				if (!b.IsActive()) {
+					continue;
+				}
+
+				f = b.GetFixtureList();
+
+				while (f) {
+					aabb = bp.GetFatAABB(f.m_proxy);
+
+					vs[0].Set(aabb.lowerBound.x, aabb.lowerBound.y);
+					vs[1].Set(aabb.upperBound.x, aabb.lowerBound.y);
+					vs[2].Set(aabb.upperBound.x, aabb.upperBound.y);
+					vs[3].Set(aabb.lowerBound.x, aabb.upperBound.y);
+
+					debugDraw.DrawPolygon(vs, 4, b2DebugDraw.c_aabb);
+
+					f = f.m_next;
+				}
+			}
+		}
+
+		if (flags & b2DebugDraw.e_centerOfMassBit) {
+			b = this.m_bodyList;
+
+			while (b) {
+				xf = b2World.s_xf;
+				xf.R = b.m_xf.R;
+				xf.position = b.GetWorldCenter();
+				debugDraw.DrawTransform(xf);
+
+				b = b.m_next;
+			}
+		}
+
+		debugDraw.Cleanup();
+	},
+
 	DrawJoint : function (joint) {
 		var b1 = joint.GetBodyA(),
 			b2 = joint.GetBodyB(),
@@ -1059,7 +1054,7 @@ b2World.prototype = {
 			x2 = xf2.position,
 			p1 = joint.GetAnchorA(),
 			p2 = joint.GetAnchorB(),
-			color = b2World.s_jointColor,
+			color = b2DebugDraw.c_joint,
 			pulley,
 			s1, s2,
 			debugDraw = this.m_debugDraw;
@@ -1124,5 +1119,4 @@ whenReady(function () {
 	b2World.s_backupB = new b2Sweep();
 	b2World.s_timestep = new b2TimeStep();
 	b2World.s_queue = [];
-	b2World.s_jointColor = new b2Color(0.5, 0.8, 0.8);
 });

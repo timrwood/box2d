@@ -61,20 +61,21 @@
 
             //create some objects
             bodyDef.type = b2Body.b2_dynamicBody;
-            for(var i = 0; i < 10; ++i) {
+            for(var i = 0; i < 100; ++i) {
                // if(Math.random() > 0.5) {
                   fixDef.shape = new b2PolygonShape;
                   fixDef.shape.SetAsBox(
-                        Math.random() + 0.1 //half width
-                     ,  Math.random() + 0.1 //half height
+                        0.8 //half width
+                     ,  0.5 //half height
                   );
-               // } else {
+               // } else {`
                //    fixDef.shape = new b2CircleShape(
                //       Math.random() + 0.1 //radius
                //    );
                // }
-               bodyDef.position.x = Math.random() * 20;
-               bodyDef.position.y = Math.random() * 10;
+               bodyDef.position.x = 2;
+               bodyDef.position.y = 2;
+               bodyDef.angle = 0.001;
                var body = world.CreateBody(bodyDef)
 
                body.CreateFixture(fixDef);
@@ -82,6 +83,7 @@
             }
          }
          window.reset = reset;
+         reset();
 
          //setup debug draw
          var debugDraw = new b2DebugDraw();

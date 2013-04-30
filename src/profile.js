@@ -47,11 +47,11 @@ function profileClass(object, className) {
 	}
 }
 
-for (i in Box2D) {
-	if (Box2D.hasOwnProperty(i)) {
-		profileClass(Box2D[i], i);
-	}
-}
+// for (i in Box2D) {
+// 	if (Box2D.hasOwnProperty(i)) {
+// 		profileClass(Box2D[i], i);
+// 	}
+// }
 
 Box2D.profile = function () {
 	var i,

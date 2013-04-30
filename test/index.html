@@ -36,7 +36,7 @@
 
          var world = new b2World(
                new b2Vec2(0, 10)    //gravity
-            ,  false                 //allow sleep
+            ,  true                 //allow sleep
          );
          window.world = world;
 
@@ -72,7 +72,7 @@
 
             //create some objects
             bodyDef.type = b2Body.b2_dynamicBody;
-            for(var i = 0; i < 5; ++i) {
+            for(var i = 0; i < 10; ++i) {
                // if(Math.random() > 0.5) {
                   fixDef.shape = new b2PolygonShape;
                   fixDef.shape.SetAsBox(
@@ -102,7 +102,7 @@
 			debugDraw.SetDrawScale(30.0);
 			debugDraw.SetFillAlpha(0.5);
 			debugDraw.SetLineThickness(1.0);
-			debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
+			// debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 			world.SetDebugDraw(debugDraw);
 
 
@@ -181,19 +181,22 @@
             }
 
             world.Step(1 / 60, 10, 10);
-            console.log('\n\n--profile step--');
-            Box2D.profile();
+            // console.log('\n\n--profile step--');
+            // Box2D.profile();
             world.DrawDebugData();
-            console.log('\n\n--profile draw--');
-            Box2D.profile();
+            // console.log('\n\n--profile draw--');
+            // Box2D.profile();
             world.ClearForces();
-            // setTimeout(update, 1000 / 60);
+            setTimeout(update, 1000 / 60);
          }
          update();
+         // for (var i = 1; i < 10; i++) {
+         //    console.profile("Step " + i);
+         //    world.Step(1 / 60, 10, 10);
+         //    console.profileEnd();
+         // }
+         // world.DrawDebugData();
 
-         update();
-
-         update();
 
          //helpers
 
