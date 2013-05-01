@@ -63,6 +63,13 @@ function clearAll() {
 	}
 }
 
+$(window).resize(function(){
+	canvas.width = $(window).width();
+	canvas.height = canvas.width / 2;
+	debugDraw.SetDrawScale(canvas.width / 20);
+	restartCurrent();
+}).resize();
+
 function update() {
 	world.Step(1 / 60, 10, 10);
 	world.DrawDebugData();
@@ -71,23 +78,29 @@ function update() {
 }
 update();
 
-function next() {
+function restartCurrent() {
 	clearAll();
 	makeBounds();
-	testIndex = (testIndex + 1) % (tests.length || 1);
 	if (tests[testIndex]) {
 		tests[testIndex](world);
 	}
 }
-next();
 
-document.addEventListener("mousedown", function (e) {
-	var x = e.pageX / 30,
-		y = e.pageY / 30,
+function next() {
+	testIndex = (testIndex + 1) % (tests.length || 1);
+	restartCurrent();
+}
+
+$(document).on('mousedown', function (e) {
+	var scale = debugDraw.GetDrawScale(),
+		x = e.pageX / scale,
+		y = e.pageY / scale,
 		vec2 = new b2Vec2(x, y),
 		aabb = new b2AABB(),
 		body,
 		jointDef;
+
+	console.log(scale);
 
 	aabb.lowerBound.Set(x - 0.001, y - 0.001);
 	aabb.upperBound.Set(x + 0.001, y + 0.001);
@@ -111,20 +124,21 @@ document.addEventListener("mousedown", function (e) {
 		mouseJoint = world.CreateJoint(jointDef);
 		body.SetAwake(true);
 	}
-}, true);
+});
 
-document.addEventListener("mousemove", function (e) {
+$(document).on('mousemove', function (e) {
 	if (!mouseJoint) {
 		return;
 	}
-	mouseJoint.SetTarget(new b2Vec2(e.pageX / 30, e.pageY / 30));
-}, true);
+	var scale = debugDraw.GetDrawScale();
+	mouseJoint.SetTarget(new b2Vec2(e.pageX / scale, e.pageY / scale));
+});
 
-document.addEventListener("mouseup", function () {
+$(document).on('mouseup', function () {
 	if (mouseJoint) {
 		world.DestroyJoint(mouseJoint);
 		mouseJoint = null;
 	}
-}, true);
+});
 
 document.getElementById('next').addEventListener("click", next, true);

@@ -34,7 +34,8 @@ module.exports = function (grunt) {
 			tests: {
 				src: [
 					"test/start.js",
-					"test/tests/*.js"
+					"test/tests/*.js",
+					"test/end.js"
 				],
 				dest: 'test/test.js'
 			}

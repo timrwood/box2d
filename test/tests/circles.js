@@ -1,4 +1,4 @@
-tests.push(function(world){
+tests.push(function(world, width, height){
 	var fixDef = new Box2D.b2FixtureDef(),
 		bodyDef = new Box2D.b2BodyDef(),
 		i;
